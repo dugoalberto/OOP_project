@@ -1,7 +1,13 @@
 # Project exclude paths
 /cmake-build-debug/
+
 Makefile
 CMakeLists.txt
 CMakeCCompilerId.o
 CMakeCXXCompilerId.o
 .qmake.stash
+mocs_compilation.o
+
+# qtcreator generated files
+*.pro.user*
+CMakeLists.txt.user*
