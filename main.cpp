@@ -9,7 +9,8 @@ public:
     provaClass(QString &string) :string(string) {}
     QString get(){
         return string;
-    } //provaClassalberto
+    } //provaClass
+    //PRova
 };
 int main(int argc, char *argv[]) {
     QApplication a(argc, argv);
