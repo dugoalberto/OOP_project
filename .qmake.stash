@@ -1,5 +1,5 @@
 QMAKE_MAC_SDK.macosx.Path = /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk
-QMAKE_MAC_SDK.macosx.SDKVersion = 13.0
+QMAKE_MAC_SDK.macosx.SDKVersion = 13.1
 QMAKE_MAC_SDK.macx-clang.macosx.QMAKE_CC = /Library/Developer/CommandLineTools/usr/bin/clang
 QMAKE_MAC_SDK.macx-clang.macosx.QMAKE_CXX = /Library/Developer/CommandLineTools/usr/bin/clang++
 QMAKE_MAC_SDK.macx-clang.macosx.QMAKE_FIX_RPATH = \
