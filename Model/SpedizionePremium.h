@@ -10,10 +10,17 @@
 
 class SpedizionePremium: public Spedizione{
 private:
-    // ottieni l'orario corrente
-    std::time_t ordine = std::time(nullptr); //utilizzato per vedere in quanto tempo arriva il pacco, ordine è l'orario nel quale è stato ordinata la spedizione
+    // Ottieni l'orario di oggi per confronto
+    std::time_t tday = std::time(nullptr);
+    std::tm now_tm = *std::localtime(&tday);
+
+    // Inizializza l'ordine con l'orario corrente
+    std::time_t ordine = std::time(nullptr);
     std::tm ordine_tm = *std::localtime(&ordine);
-    std::time_t arrivo = std::time(nullptr); //orario è in secondi dall'epoch
+
+    // Inizializza l'orario di arrivo con il valore corrente, ma il pacchetto non arriva subito
+    // Il metodo setOrario permette di impostare il valore corretto
+    std::time_t arrivo = std::mktime(&now_tm);
     std::tm arrivo_tm = *std::localtime(&arrivo);
 
 public:

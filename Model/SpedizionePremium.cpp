@@ -8,24 +8,27 @@ SpedizionePremium::SpedizionePremium(int trakingNumber, const Address &mittente,
                                      const Package &pacco, int peso, double volume, const Stato &stato,
                                      const string &descrizione, double costo, int anno, int mese, int giorni, int ore, int minuti)
                                      :Spedizione(trakingNumber, mittente, destinatario, pacco, peso, volume, stato, descrizione, costo) {
-    arrivo_tm.tm_year = anno - 1900;
-    arrivo_tm.tm_mon = mese - 1;
+    arrivo_tm.tm_year = anno - 1900; //l'anno è "shiftato" di 1900 in tm struct
+    arrivo_tm.tm_mon = mese - 1; // partono da 0 in tm struct
     arrivo_tm.tm_mday = giorni;
     arrivo_tm.tm_hour = ore;
     arrivo_tm.tm_min = minuti;
 }
 
 void SpedizionePremium::setOrario(int year, int month, int day, int hours, int minuti) {
-    std::time_t tday = std::time(nullptr); //orario di oggi, mi serve per vedere se cambia l'orario e lo mette nel passato
-    //TODO provarlo con entrambe le versioni
-    /*
-    if( year < ordine_tm.tm_year || month < ordine_tm.tm_mon ||
-        ( month == ordine_tm.tm_mon &&  day < ordine_tm.tm_mday) ) throw;*/
-    if (std::difftime(std::mktime(&this->arrivo_tm), tday) < 0) {
+    //uso un target per simulare l'orario di arrivo senza modificare il precedente
+    std::tm target_tm = {0};
+    target_tm.tm_year = year - 1900;
+    target_tm.tm_mon = month - 1;
+    target_tm.tm_mday = day;
+    target_tm.tm_hour = hours;
+    target_tm.tm_min = minuti;
+    std::time_t target = std::mktime(&target_tm);
+
+    //lancio exc se orario di arrivo in passato
+    if (std::difftime(target, tday) < 0) {
         throw std::invalid_argument("Invalid arrival time: cannot be in the past.");
     }
-    this->arrivo_tm.tm_year = year;
-    this->arrivo_tm.tm_mon = month;
-    this->arrivo_tm.tm_mday= day;
-    this->arrivo_tm.tm_min = minuti;
+    //aggiorno l'orario di arrivo se non è stata lanciata exc
+    this->arrivo_tm = target_tm;
 }
