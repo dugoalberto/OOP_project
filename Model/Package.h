@@ -17,7 +17,7 @@ private:
 
 public:
     Package(const string &contenuto, double valore);
-    ~Package();
+    virtual ~Package();
 
     //getter
     const string &getContenuto() const;

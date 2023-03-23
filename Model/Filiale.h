@@ -18,7 +18,7 @@ private:
 
 public:
     Filiale(const string &citta, const string &provincia, const string &numeroTel);
-    ~Filiale();
+    virtual ~Filiale();
 
     //getter
     const string &getCitta() const;

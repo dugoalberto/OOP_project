@@ -9,7 +9,7 @@ const string &Address::getNomeCognome() const {
 }
 
 const string &Address::getIndirizzo() const {
-    return provincia;
+    return indirizzo;
 }
 
 const string &Address::getCitta() const {
