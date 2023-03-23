@@ -21,7 +21,7 @@ private:
 
 public:
     Address(const string &nomeCognome, const string &indirizzo, const string &citta, const string &provincia, const string &nazione, int cap);
-    ~Address();
+    virtual ~Address();
 
     //getter
     const string &getNomeCognome() const;
