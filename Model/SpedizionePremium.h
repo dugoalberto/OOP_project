@@ -24,6 +24,7 @@ private:
     std::tm arrivo_tm = *std::localtime(&arrivo);
 
 public:
+    //6.creazione, modifica e cancellazione
     SpedizionePremium(int trakingNumber, const Address &mittente, const Address &destinatario, const Package &pacco,
                       int peso, double volume, const Stato &stato, const string &descrizione, double costo,
                       int anno, int mese, int giorni, int ore, int minuti);
