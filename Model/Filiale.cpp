@@ -3,3 +3,31 @@
 //
 
 #include "Filiale.h"
+
+const string &Filiale::getCitta() const {
+    return citta;
+}
+
+const string &Filiale::getProvincia() const {
+    return provincia;
+}
+
+const string &Filiale::getNumeroTel() const {
+    return numeroTel;
+}
+
+void Filiale::setCitta(const string &citta) {
+    Filiale::citta = citta;
+}
+
+void Filiale::setProvincia(const string &provincia) {
+    Filiale::provincia = provincia;
+}
+
+void Filiale::setNumeroTel(const string &numeroTel) {
+    Filiale::numeroTel = numeroTel;
+}
+
+Filiale::Filiale(const string &citta, const string &provincia, const string &numeroTel): citta(citta), provincia(provincia), numeroTel(numeroTel) {}
+
+Filiale::~Filiale() {}
