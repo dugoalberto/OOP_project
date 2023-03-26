@@ -31,3 +31,8 @@ void Filiale::setNumeroTel(const string &numeroTel) {
 Filiale::Filiale(const string &citta, const string &provincia, const string &numeroTel): citta(citta), provincia(provincia), numeroTel(numeroTel) {}
 
 Filiale::~Filiale() {}
+
+ostream &operator<<(ostream &os, const Filiale &filiale) {
+    os << "citta: " << filiale.citta << " provincia: " << filiale.provincia << " numeroTel: " << filiale.numeroTel;
+    return os;
+}

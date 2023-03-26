@@ -6,6 +6,7 @@
 #define PROJECT_PACKAGE_H
 
 #include <string>
+#include <ostream>
 
 using namespace std;
 
@@ -29,6 +30,7 @@ public:
 
     void setValore(double valore);
 
+    friend ostream &operator<<(ostream &os, const Package &aPackage);
 };
 
 

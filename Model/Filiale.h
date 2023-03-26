@@ -6,6 +6,7 @@
 #define PROJECT_FILIALE_H
 
 #include <string>
+#include <ostream>
 
 using namespace std;
 
@@ -34,6 +35,7 @@ public:
 
     void setNumeroTel(const string &numeroTel);
 
+    friend ostream &operator<<(ostream &os, const Filiale &filiale);
 };
 
 

@@ -32,3 +32,13 @@ void SpedizionePremium::setOrario(int year, int month, int day, int hours, int m
     //aggiorno l'orario di arrivo se non è stata lanciata exc
     this->arrivo_tm = target_tm;
 }
+/*
+ * std::asctime` restituisce una stringa di caratteri terminata da un carattere di nuova linea,
+ * quindi potresti voler rimuovere il carattere di nuova linea aggiungendo `.substr(0,24)`
+ * alla fine della chiamata di `std::asctime` per ottenere solo la parte della stringa che rappresenta la data e l'ora.*/
+ostream &operator<<(ostream &os, const SpedizionePremium &premium) {
+    os << static_cast<const Spedizione &>(premium)
+    << "\noridine: " << std::asctime(&premium.ordine_tm)
+    << "arrivo: " <<std::asctime(&premium.arrivo_tm);
+    return os;
+}

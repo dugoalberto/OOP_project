@@ -6,6 +6,7 @@
 #define PROJECT_STATO_H
 
 #include <string>
+#include <ostream>
 #include "Filiale.h"
 
 using namespace std;
@@ -29,6 +30,7 @@ public:
 
     void setFiliale(const Filiale &filiale);
 
+    friend ostream &operator<<(ostream &os, const Stato &stato);
 };
 
 #endif //PROJECT_STATO_H

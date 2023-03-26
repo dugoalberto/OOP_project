@@ -6,6 +6,7 @@
 #define PROJECT_ADDRESS_H
 
 #include <string>
+#include <ostream>
 
 using namespace std;
 
@@ -49,6 +50,7 @@ public:
 
     void setCap(int cap);
 
+    friend ostream &operator<<(ostream &os, const Address &address);
 };
 
 

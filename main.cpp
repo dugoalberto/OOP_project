@@ -1,6 +1,8 @@
 #include <QApplication>
 #include <QPushButton>
 #include <iostream>
+#include "Model/Address.h"
+#include "Model/SpedizionePremium.h"
 
 
 int main(int argc, char *argv[]) {
@@ -15,7 +17,13 @@ int main(int argc, char *argv[]) {
     arrivo_tm.tm_min = ordine_tm.tm_min + min;
     arrivo_tm.tm_hour = ordine_tm.tm_hour + hour;
 
-    std::cout << std::asctime(&arrivo_tm);
-    std::cout << "il tuo pacco arriva tra: " << day<<" days , and " << hour <<':'<<min <<" hours";
+    Address addressMittente("nomeC","indirizzo", "città", "provincia", "nazione", 30030);
+    Address addressDestinatario("nomeC","indirizzo", "città", "provincia", "nazione", 313032);
+    Filiale filiale("citta", "provincia", "numerotel");
+    Package package("contenuto", 12); //Contenuto, valore
+    Stato stato("desctato", filiale);
+    Spedizione spedizione(12231, addressMittente, addressDestinatario, package, 12, 12,stato,"provaSpedione", 123);
+    SpedizionePremium spedizionePremium(12231, addressMittente, addressDestinatario, package, 12, 12,stato,"provaSpedione", 123, 2023,05,12,12,43);
 
+    cout << spedizionePremium;
 }

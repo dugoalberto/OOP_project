@@ -7,6 +7,7 @@
 #include "Spedizione.h"
 #include <chrono>
 #include <ctime>
+#include <ostream>
 
 class SpedizionePremium: public Spedizione{
 private:
@@ -30,6 +31,9 @@ public:
                       int anno, int mese, int giorni, int ore, int minuti);
 
     void setOrario(int year, int month, int day, int hours, int minuti);
+
+    friend ostream &operator<<(ostream &os, const SpedizionePremium &premium);
+
 };
 
 #endif //PROJECT_SPEDIZIONEPREMIUM_H

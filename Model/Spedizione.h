@@ -6,6 +6,7 @@
 #define PROJECT_SPEDIZIONE_H
 
 #include <string>
+#include <ostream>
 #include "Address.h"
 #include "Package.h"
 #include "Stato.h"
@@ -66,6 +67,7 @@ public:
 
     void setCosto(double costo);
 
+    friend ostream &operator<<(ostream &os, const Spedizione &spedizione);
 
 };
 
