@@ -6,6 +6,7 @@
 #define PROJECT_PACKAGE_H
 
 #include <string>
+#include <ostream>
 
 using namespace std;
 
@@ -16,6 +17,7 @@ private:
     double valore; //valore del conenuto del pacco
 
 public:
+    Package() = default;
     Package(const string &contenuto, double valore);
     virtual ~Package();
 
@@ -29,6 +31,7 @@ public:
 
     void setValore(double valore);
 
+    friend ostream &operator<<(ostream &os, const Package &aPackage);
 };
 
 

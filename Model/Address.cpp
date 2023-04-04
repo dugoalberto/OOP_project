@@ -53,6 +53,13 @@ void Address::setCap(int cap) {
 }
 
 Address::Address(const string &nomeCognome, const string &indirizzo, const string &citta, const string &provincia,
-                 const string &nazione, int cap) : nomeCognome(nomeCognome), indirizzo(indirizzo), citta(citta), provincia(provincia), nazione(nazione), cap(cap) {}
+                 const string &nazione, int cap) : nomeCognome(nomeCognome), indirizzo(indirizzo), citta(citta), provincia(provincia), nazione(nazione), cap(cap) {
+}
 
 Address::~Address() {}
+
+ostream &operator<<(ostream &os, const Address &address) {
+    os << "nomeCognome: " << address.nomeCognome << " indirizzo: " << address.indirizzo << " citta: " << address.citta
+       << " provincia: " << address.provincia << " nazione: " << address.nazione << " cap: " << address.cap;
+    return os;
+}

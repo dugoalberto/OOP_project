@@ -23,3 +23,8 @@ void Package::setValore(double valore) {
 Package::Package(const string &contenuto, double valore): contenuto(contenuto), valore(valore) {}
 
 Package::~Package() {}
+
+ostream &operator<<(ostream &os, const Package &aPackage) {
+    os << "contenuto: " << aPackage.contenuto << " valore: " << aPackage.valore;
+    return os;
+}

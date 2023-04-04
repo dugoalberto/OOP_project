@@ -1,8 +1,10 @@
 #include <QApplication>
 #include <QPushButton>
 #include <iostream>
-
-
+#include "Model/Address.h"
+#include "Model/SpedizionePremium.h"
+#include "Collection/ArrayList.h"
+#include "Collection/ArrayList.cpp"
 int main(int argc, char *argv[]) {
     std::time_t ordine = std::time(nullptr); //utilizzato per vedere in quanto tempo arriva il pacco, ordine è l'orario nel quale è stato ordinata la spedizione
     std::tm ordine_tm = *std::localtime(&ordine);
@@ -15,7 +17,16 @@ int main(int argc, char *argv[]) {
     arrivo_tm.tm_min = ordine_tm.tm_min + min;
     arrivo_tm.tm_hour = ordine_tm.tm_hour + hour;
 
-    std::cout << std::asctime(&arrivo_tm);
-    std::cout << "il tuo pacco arriva tra: " << day<<" days , and " << hour <<':'<<min <<" hours";
+    Address addressMittente("nomeC","indirizzo", "città", "provincia", "nazione", 30030);
+    Address addressDestinatario("nomeC","indirizzo", "città", "provincia", "nazione", 313032);
+    Filiale filiale("citta", "provincia", "numerotel");
+    Package package("contenuto", 12); //Contenuto, valore
+    Stato stato("desctato", filiale);
+    Spedizione spedizione(12231, addressMittente, addressDestinatario, package, 12, 12,stato,"provaSpedione", 123);
+    SpedizionePremium spedizionePremium(12231, addressMittente, addressDestinatario, package, 12, 12,stato,"provaSpedione", 123, 2023,05,12,12,43);
 
+    ArrayList<Spedizione> prova2(10);
+    prova2.add(spedizione);
+    prova2.add(spedizionePremium);
+    cout << prova2.toString();
 }

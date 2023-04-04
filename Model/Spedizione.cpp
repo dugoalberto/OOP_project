@@ -81,6 +81,12 @@ Spedizione::Spedizione(int trakingNumber, const Address &mittente, const Address
         : trakingNumber(trakingNumber), mittente(mittente), destinatario(destinatario), pacco(pacco), peso(peso),
           volume(volume), stato(stato), descrizione(descrizione), costo(costo) {}
 
-Spedizione::~Spedizione() {
+Spedizione::~Spedizione() {}
 
+ostream &operator<<(ostream &os, const Spedizione &spedizione) {
+    os << "trakingNumber: " << spedizione.trakingNumber << " \nmittente: " << spedizione.mittente << "\ndestinatario: "
+       << spedizione.destinatario << "\n pacco: " << spedizione.pacco << " peso: " << spedizione.peso << " volume: "
+       << spedizione.volume << " stato: " << spedizione.stato << " descrizione: " << spedizione.descrizione
+       << " costo: " << spedizione.costo;
+    return os;
 }

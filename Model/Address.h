@@ -6,7 +6,7 @@
 #define PROJECT_ADDRESS_H
 
 #include <string>
-
+#include <ostream>
 using namespace std;
 
 class Address {
@@ -18,8 +18,8 @@ private:
     string provincia;
     string nazione;
     int cap;
-
 public:
+    Address() = default;
     Address(const string &nomeCognome, const string &indirizzo, const string &citta, const string &provincia, const string &nazione, int cap);
     virtual ~Address();
 
@@ -49,6 +49,7 @@ public:
 
     void setCap(int cap);
 
+    friend ostream &operator<<(ostream &os, const Address &address);
 };
 
 

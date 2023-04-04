@@ -6,6 +6,7 @@
 #define PROJECT_FILIALE_H
 
 #include <string>
+#include <ostream>
 
 using namespace std;
 
@@ -17,6 +18,7 @@ private:
     string numeroTel; //telefono (assistenza) della filiale
 
 public:
+    Filiale() = default;
     Filiale(const string &citta, const string &provincia, const string &numeroTel);
     virtual ~Filiale();
 
@@ -34,6 +36,7 @@ public:
 
     void setNumeroTel(const string &numeroTel);
 
+    friend ostream &operator<<(ostream &os, const Filiale &filiale);
 };
 
 

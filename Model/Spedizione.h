@@ -6,6 +6,7 @@
 #define PROJECT_SPEDIZIONE_H
 
 #include <string>
+#include <ostream>
 #include "Address.h"
 #include "Package.h"
 #include "Stato.h"
@@ -23,6 +24,7 @@ private:
     string descrizione;
     double costo;
 public:
+    Spedizione() = default;
     Spedizione(int trakingNumber, const Address &mittente, const Address &destinatario, const Package &pacco, int peso,
                double volume, const Stato &stato, const string &descrizione, double costo);
     //TODO distruttore con address, package, stato!!
@@ -66,6 +68,7 @@ public:
 
     void setCosto(double costo);
 
+    friend ostream &operator<<(ostream &os, const Spedizione &spedizione);
 
 };
 

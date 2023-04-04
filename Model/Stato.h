@@ -6,6 +6,7 @@
 #define PROJECT_STATO_H
 
 #include <string>
+#include <ostream>
 #include "Filiale.h"
 
 using namespace std;
@@ -16,6 +17,7 @@ private:
     Filiale filiale; // filiale != null && in filiale stato -> stampa filiale::getCitta
 
 public:
+    Stato() = default;
     Stato(const string &descStato, const Filiale &filiale);
     virtual ~Stato();
 
@@ -29,6 +31,7 @@ public:
 
     void setFiliale(const Filiale &filiale);
 
+    friend ostream &operator<<(ostream &os, const Stato &stato);
 };
 
 #endif //PROJECT_STATO_H

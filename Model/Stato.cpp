@@ -23,3 +23,8 @@ void Stato::setFiliale(const Filiale &filiale) {
 Stato::Stato(const string &descStato, const Filiale &filiale): descStato(descStato), filiale(filiale) {}
 
 Stato::~Stato() {}
+
+ostream &operator<<(ostream &os, const Stato &stato) {
+    os << "descStato: " << stato.descStato << "\nfiliale: " << stato.filiale;
+    return os;
+}
