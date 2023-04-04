@@ -18,6 +18,7 @@ private:
     string numeroTel; //telefono (assistenza) della filiale
 
 public:
+    Filiale() = default;
     Filiale(const string &citta, const string &provincia, const string &numeroTel);
     virtual ~Filiale();
 

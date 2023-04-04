@@ -17,6 +17,7 @@ private:
     double valore; //valore del conenuto del pacco
 
 public:
+    Package() = default;
     Package(const string &contenuto, double valore);
     virtual ~Package();
 

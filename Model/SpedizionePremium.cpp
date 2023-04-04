@@ -42,3 +42,5 @@ ostream &operator<<(ostream &os, const SpedizionePremium &premium) {
     << "arrivo: " <<std::asctime(&premium.arrivo_tm);
     return os;
 }
+
+SpedizionePremium::~SpedizionePremium() {}

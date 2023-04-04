@@ -17,6 +17,7 @@ private:
     Filiale filiale; // filiale != null && in filiale stato -> stampa filiale::getCitta
 
 public:
+    Stato() = default;
     Stato(const string &descStato, const Filiale &filiale);
     virtual ~Stato();
 

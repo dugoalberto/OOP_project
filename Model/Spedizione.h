@@ -24,6 +24,7 @@ private:
     string descrizione;
     double costo;
 public:
+    Spedizione() = default;
     Spedizione(int trakingNumber, const Address &mittente, const Address &destinatario, const Package &pacco, int peso,
                double volume, const Stato &stato, const string &descrizione, double costo);
     //TODO distruttore con address, package, stato!!

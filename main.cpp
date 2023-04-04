@@ -3,8 +3,8 @@
 #include <iostream>
 #include "Model/Address.h"
 #include "Model/SpedizionePremium.h"
-
-
+#include "Collection/ArrayList.h"
+#include "Collection/ArrayList.cpp"
 int main(int argc, char *argv[]) {
     std::time_t ordine = std::time(nullptr); //utilizzato per vedere in quanto tempo arriva il pacco, ordine è l'orario nel quale è stato ordinata la spedizione
     std::tm ordine_tm = *std::localtime(&ordine);
@@ -25,5 +25,8 @@ int main(int argc, char *argv[]) {
     Spedizione spedizione(12231, addressMittente, addressDestinatario, package, 12, 12,stato,"provaSpedione", 123);
     SpedizionePremium spedizionePremium(12231, addressMittente, addressDestinatario, package, 12, 12,stato,"provaSpedione", 123, 2023,05,12,12,43);
 
-    cout << spedizionePremium;
+    ArrayList<Spedizione> prova2(10);
+    prova2.add(spedizione);
+    prova2.add(spedizionePremium);
+    cout << prova2.toString();
 }

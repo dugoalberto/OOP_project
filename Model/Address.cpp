@@ -53,7 +53,8 @@ void Address::setCap(int cap) {
 }
 
 Address::Address(const string &nomeCognome, const string &indirizzo, const string &citta, const string &provincia,
-                 const string &nazione, int cap) : nomeCognome(nomeCognome), indirizzo(indirizzo), citta(citta), provincia(provincia), nazione(nazione), cap(cap) {}
+                 const string &nazione, int cap) : nomeCognome(nomeCognome), indirizzo(indirizzo), citta(citta), provincia(provincia), nazione(nazione), cap(cap) {
+}
 
 Address::~Address() {}
 

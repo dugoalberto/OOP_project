@@ -14,10 +14,10 @@ EQ            = =
 
 CC            = /Library/Developer/CommandLineTools/usr/bin/clang
 CXX           = /Library/Developer/CommandLineTools/usr/bin/clang++
-DEFINES       = -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_CORE_LIB
+DEFINES       = -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -O2 $(EXPORT_ARCH_ARGS) -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -mmacosx-version-min=10.14 -Wall -Wextra -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -stdlib=libc++ -O2 -std=gnu++1z $(EXPORT_ARCH_ARGS) -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -mmacosx-version-min=10.14 -Wall -Wextra -fPIC $(DEFINES)
-INCPATH       = -I. -I. -I../../Qt/6.2.4/macos/lib/QtGui.framework/Headers -I../../Qt/6.2.4/macos/lib/QtCore.framework/Headers -I. -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/AGL.framework/Headers -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/AGL.framework/Headers -I../../Qt/6.2.4/macos/mkspecs/macx-clang -F/Users/albertodugo/Qt/6.2.4/macos/lib
+INCPATH       = -I. -I. -I../../Qt/6.2.4/macos/lib/QtWidgets.framework/Headers -I../../Qt/6.2.4/macos/lib/QtGui.framework/Headers -I../../Qt/6.2.4/macos/lib/QtCore.framework/Headers -I. -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/AGL.framework/Headers -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/AGL.framework/Headers -I../../Qt/6.2.4/macos/mkspecs/macx-clang -F/Users/albertodugo/Qt/6.2.4/macos/lib
 QMAKE         = /Users/albertodugo/Qt/6.2.4/macos/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -40,7 +40,7 @@ DISTNAME      = Project1.0.0
 DISTDIR = /Users/albertodugo/Desktop/Project/.tmp/Project1.0.0
 LINK          = /Library/Developer/CommandLineTools/usr/bin/clang++
 LFLAGS        = -stdlib=libc++ -headerpad_max_install_names $(EXPORT_ARCH_ARGS) -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -mmacosx-version-min=10.14 -Wl,-rpath,@executable_path/../Frameworks -Wl,-rpath,/Users/albertodugo/Qt/6.2.4/macos/lib
-LIBS          = $(SUBLIBS) -F/Users/albertodugo/Qt/6.2.4/macos/lib -framework QtGui -framework AppKit -framework ImageIO -framework Metal -framework QtCore -framework DiskArbitration -framework IOKit -framework AGL -framework OpenGL   
+LIBS          = $(SUBLIBS) -F/Users/albertodugo/Qt/6.2.4/macos/lib -framework QtWidgets -framework QtGui -framework AppKit -framework ImageIO -framework Metal -framework QtCore -framework DiskArbitration -framework IOKit -framework AGL -framework OpenGL   
 AR            = /Library/Developer/CommandLineTools/usr/bin/ar cq
 RANLIB        = /Library/Developer/CommandLineTools/usr/bin/ranlib -s
 SED           = sed
@@ -299,6 +299,7 @@ DIST          = ../../Qt/6.2.4/macos/mkspecs/features/spec_pre.prf \
 		../../Qt/6.2.4/macos/mkspecs/features/resources.prf \
 		../../Qt/6.2.4/macos/mkspecs/features/moc.prf \
 		../../Qt/6.2.4/macos/mkspecs/features/unix/opengl.prf \
+		../../Qt/6.2.4/macos/mkspecs/features/uic.prf \
 		../../Qt/6.2.4/macos/mkspecs/features/unix/thread.prf \
 		../../Qt/6.2.4/macos/mkspecs/features/qmake_use.prf \
 		../../Qt/6.2.4/macos/mkspecs/features/file_copies.prf \
@@ -318,7 +319,7 @@ TARGET        = Project.app/Contents/MacOS/Project
 
 ####### Custom Variables
 EXPORT_QMAKE_MAC_SDK = macosx
-EXPORT_QMAKE_MAC_SDK_VERSION = 13.0
+EXPORT_QMAKE_MAC_SDK_VERSION = 13.1
 EXPORT_QMAKE_XCODE_DEVELOPER_PATH = /Library/Developer/CommandLineTools
 EXPORT__QMAKE_STASH_ = /Users/albertodugo/Desktop/Project/.qmake.stash
 EXPORT_VALID_ARCHS = x86_64 arm64
@@ -575,6 +576,7 @@ Makefile: Project.pro ../../Qt/6.2.4/macos/mkspecs/macx-clang/qmake.conf ../../Q
 		../../Qt/6.2.4/macos/mkspecs/features/resources.prf \
 		../../Qt/6.2.4/macos/mkspecs/features/moc.prf \
 		../../Qt/6.2.4/macos/mkspecs/features/unix/opengl.prf \
+		../../Qt/6.2.4/macos/mkspecs/features/uic.prf \
 		../../Qt/6.2.4/macos/mkspecs/features/unix/thread.prf \
 		../../Qt/6.2.4/macos/mkspecs/features/qmake_use.prf \
 		../../Qt/6.2.4/macos/mkspecs/features/file_copies.prf \
@@ -585,6 +587,7 @@ Makefile: Project.pro ../../Qt/6.2.4/macos/mkspecs/macx-clang/qmake.conf ../../Q
 		../../Qt/6.2.4/macos/mkspecs/features/yacc.prf \
 		../../Qt/6.2.4/macos/mkspecs/features/lex.prf \
 		Project.pro \
+		../../Qt/6.2.4/macos/lib/QtWidgets.framework/Resources/QtWidgets.prl \
 		../../Qt/6.2.4/macos/lib/QtGui.framework/Resources/QtGui.prl \
 		../../Qt/6.2.4/macos/lib/QtCore.framework/Resources/QtCore.prl
 	$(QMAKE) -o Makefile Project.pro
@@ -827,6 +830,7 @@ Makefile: Project.pro ../../Qt/6.2.4/macos/mkspecs/macx-clang/qmake.conf ../../Q
 ../../Qt/6.2.4/macos/mkspecs/features/resources.prf:
 ../../Qt/6.2.4/macos/mkspecs/features/moc.prf:
 ../../Qt/6.2.4/macos/mkspecs/features/unix/opengl.prf:
+../../Qt/6.2.4/macos/mkspecs/features/uic.prf:
 ../../Qt/6.2.4/macos/mkspecs/features/unix/thread.prf:
 ../../Qt/6.2.4/macos/mkspecs/features/qmake_use.prf:
 ../../Qt/6.2.4/macos/mkspecs/features/file_copies.prf:
@@ -837,6 +841,7 @@ Makefile: Project.pro ../../Qt/6.2.4/macos/mkspecs/macx-clang/qmake.conf ../../Q
 ../../Qt/6.2.4/macos/mkspecs/features/yacc.prf:
 ../../Qt/6.2.4/macos/mkspecs/features/lex.prf:
 Project.pro:
+../../Qt/6.2.4/macos/lib/QtWidgets.framework/Resources/QtWidgets.prl:
 ../../Qt/6.2.4/macos/lib/QtGui.framework/Resources/QtGui.prl:
 ../../Qt/6.2.4/macos/lib/QtCore.framework/Resources/QtCore.prl:
 qmake: FORCE
@@ -903,6 +908,8 @@ compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
+compiler_uic_make_all:
+compiler_uic_clean:
 compiler_rez_source_make_all:
 compiler_rez_source_clean:
 compiler_yacc_decl_make_all:
@@ -915,7 +922,17 @@ compiler_clean:
 
 ####### Compile
 
-main.o: main.cpp 
+main.o: main.cpp ../../Qt/6.2.4/macos/lib/QtWidgets.framework/Headers/QApplication \
+		../../Qt/6.2.4/macos/lib/QtWidgets.framework/Headers/qapplication.h \
+		../../Qt/6.2.4/macos/lib/QtWidgets.framework/Headers/QPushButton \
+		../../Qt/6.2.4/macos/lib/QtWidgets.framework/Headers/qpushbutton.h \
+		Model/Address.h \
+		Model/SpedizionePremium.h \
+		Model/Spedizione.h \
+		Model/Package.h \
+		Model/Stato.h \
+		Model/Filiale.h \
+		Model/ArrayList.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
 mocs_compilation.o: cmake-build-debug/Project_autogen/mocs_compilation.cpp 
