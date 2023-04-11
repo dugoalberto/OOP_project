@@ -36,3 +36,16 @@ ostream &operator<<(ostream &os, const Filiale &filiale) {
     os << "citta: " << filiale.citta << " provincia: " << filiale.provincia << " numeroTel: " << filiale.numeroTel;
     return os;
 }
+
+json Filiale::objectToJson() {
+    json j;
+    j["citta"] = Filiale::citta;
+    j["provincia"] = Filiale::provincia;
+    j["numeroTel"] = Filiale::numeroTel;
+    return j;
+}
+
+Filiale Filiale::jsonToObject(const json &dati) {
+     Filiale f(dati["citta"], dati["provincia"], dati["numeroTel"]);
+     return f;
+}

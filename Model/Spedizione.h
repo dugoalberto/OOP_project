@@ -10,8 +10,11 @@
 #include "Address.h"
 #include "Package.h"
 #include "Stato.h"
+#include "../Librerie/json.hpp"
 
 using namespace std;
+using json = nlohmann::json;
+
 class Spedizione {
 private:
     int trakingNumber; //ID number per identificare il pacco
@@ -69,6 +72,10 @@ public:
     void setCosto(double costo);
 
     friend ostream &operator<<(ostream &os, const Spedizione &spedizione);
+
+    //json
+    json objectToJson();
+    static Spedizione jsonToObject(const json &dati);
 
 };
 

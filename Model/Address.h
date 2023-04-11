@@ -7,7 +7,10 @@
 
 #include <string>
 #include <ostream>
+#include "../Librerie/json.hpp"
+
 using namespace std;
+using json = nlohmann::json;
 
 class Address {
 
@@ -50,6 +53,10 @@ public:
     void setCap(int cap);
 
     friend ostream &operator<<(ostream &os, const Address &address);
+
+    //json
+    json objectToJson();
+    static Address jsonToObject(const json &dati);
 };
 
 

@@ -44,3 +44,19 @@ ostream &operator<<(ostream &os, const SpedizionePremium &premium) {
 }
 
 SpedizionePremium::~SpedizionePremium() {}
+
+json SpedizionePremium::objectToJson() {
+    json j;
+    j.merge_patch(Spedizione::objectToJson()) ;
+
+    std::stringstream buffer;
+    buffer << std::put_time(&arrivo_tm, "%Y-%m-%d %H:%M:%S");
+    std::string str = buffer.str();
+    j["arrivo"] = str;
+    return j;
+}
+
+SpedizionePremium SpedizionePremium::jsonToObject(const json &dati) {
+    SpedizionePremium s(dati["trakingNumber"], Address::jsonToObject(dati["mittente"]), Address::jsonToObject(dati["destinatario"]), Package::jsonToObject(dati["pacco"]), dati["peso"], dati["volume"], Stato::jsonToObject(dati["stato"]), dati["descrizione"], dati["costo"], std::stoi(dati["arrivo"].get<std::string>().substr(0,4)),std::stoi(dati["arrivo"].get<std::string>().substr(5,2)),std::stoi(dati["arrivo"].get<std::string>().substr(8,2)),std::stoi(dati["arrivo"].get<std::string>().substr(11,2)),std::stoi(dati["arrivo"].get<std::string>().substr(14,2)));
+    return s;
+}

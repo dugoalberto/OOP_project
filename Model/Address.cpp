@@ -63,3 +63,19 @@ ostream &operator<<(ostream &os, const Address &address) {
        << " provincia: " << address.provincia << " nazione: " << address.nazione << " cap: " << address.cap;
     return os;
 }
+
+json Address::objectToJson() {
+    json j;
+    j["nomeCognome"] = Address::nomeCognome;
+    j["indirizzo"] = Address::indirizzo;
+    j["citta"] = Address::citta;
+    j["provincia"] = Address::provincia;
+    j["nazione"] = Address::nazione;
+    j["cap"] = Address::cap;
+    return j;
+}
+
+Address Address::jsonToObject(const json &dati) {
+    Address a(dati["nomeCognome"], dati["indirizzo"], dati["citta"], dati["provincia"], dati["nazione"], dati["cap"]);
+    return a;
+}

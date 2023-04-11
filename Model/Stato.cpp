@@ -28,3 +28,15 @@ ostream &operator<<(ostream &os, const Stato &stato) {
     os << "descStato: " << stato.descStato << "\nfiliale: " << stato.filiale;
     return os;
 }
+
+json Stato::objectToJson() {
+    json j;
+    j["descStato"] = Stato::descStato;
+    j["filiale"] = Stato::filiale.objectToJson();
+    return j;
+}
+
+Stato Stato::jsonToObject(const json &dati) {
+    Stato s(dati["descStato"], Filiale::jsonToObject(dati["filiale"]));
+    return s;
+}
