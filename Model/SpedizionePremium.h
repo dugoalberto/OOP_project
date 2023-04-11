@@ -8,6 +8,7 @@
 #include <chrono>
 #include <ctime>
 #include <ostream>
+#include <sstream>
 #include "../Librerie/json.hpp"
 
 using json = nlohmann::json;
