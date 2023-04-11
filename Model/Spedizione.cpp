@@ -90,3 +90,22 @@ ostream &operator<<(ostream &os, const Spedizione &spedizione) {
        << " costo: " << spedizione.costo;
     return os;
 }
+
+json Spedizione::objectToJson() {
+    json j;
+    j["trakingNumber"] = Spedizione::trakingNumber;
+    j["mittente"] = Spedizione::mittente.objectToJson();
+    j["destinatario"] = Spedizione::destinatario.objectToJson();
+    j["pacco"] = Spedizione::pacco.objectToJson();
+    j["peso"] = Spedizione::peso;
+    j["volume"] = Spedizione::volume;
+    j["stato"] = Spedizione::stato.objectToJson();
+    j["descrizione"] = Spedizione::descrizione;
+    j["costo"] = Spedizione::costo;
+    return j;
+}
+
+Spedizione Spedizione::jsonToObject(const json &dati) {
+    Spedizione s(dati["trakingNumber"], Address::jsonToObject(dati["mittente"]), Address::jsonToObject(dati["destinatario"]), Package::jsonToObject(dati["pacco"]), dati["peso"], dati["volume"], Stato::jsonToObject(dati["stato"]), dati["descrizione"], dati["costo"]);
+    return s;
+}

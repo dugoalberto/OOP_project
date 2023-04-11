@@ -8,6 +8,9 @@
 #include <chrono>
 #include <ctime>
 #include <ostream>
+#include "../Librerie/json.hpp"
+
+using json = nlohmann::json;
 
 class SpedizionePremium: public Spedizione{
 private:
@@ -34,6 +37,10 @@ public:
     void setOrario(int year, int month, int day, int hours, int minuti);
 
     friend ostream &operator<<(ostream &os, const SpedizionePremium &premium);
+
+    //json
+    json objectToJson();
+    static SpedizionePremium jsonToObject(const json &dati);
 
 };
 

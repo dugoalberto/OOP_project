@@ -28,3 +28,15 @@ ostream &operator<<(ostream &os, const Package &aPackage) {
     os << "contenuto: " << aPackage.contenuto << " valore: " << aPackage.valore;
     return os;
 }
+
+json Package::objectToJson() {
+    json j;
+    j["contenuto"] = Package::contenuto;
+    j["valore"] = Package::valore;
+    return j;
+}
+
+Package Package::jsonToObject(const json &dati) {
+    Package p(dati["contenuto"], dati["valore"]);
+    return p;
+}

@@ -13,7 +13,7 @@ find_package(Qt6 COMPONENTS
         Widgets
         REQUIRED)
 
-add_executable(Project main.cpp Model/Spedizione.cpp Model/Spedizione.h Model/Address.cpp Model/Address.h Model/Package.cpp Model/Package.h Model/Stato.cpp Model/Stato.h Model/Filiale.cpp Model/Filiale.h Model/SpedizionePremium.cpp Model/SpedizionePremium.h Collection/ArrayList.cpp Collection/ArrayList.h)
+add_executable(Project main.cpp Model/Spedizione.cpp Model/Spedizione.h Model/Address.cpp Model/Address.h Model/Package.cpp Model/Package.h Model/Stato.cpp Model/Stato.h Model/Filiale.cpp Model/Filiale.h Model/SpedizionePremium.cpp Model/SpedizionePremium.h Collection/ArrayList.cpp Collection/ArrayList.h Librerie/DataPersistence.cpp Librerie/DataPersistence.h)
 target_link_libraries(Project
         Qt::Core
         Qt::Gui
