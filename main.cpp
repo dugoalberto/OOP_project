@@ -5,8 +5,10 @@
 #include "Model/SpedizionePremium.h"
 #include "Collection/ArrayList.h"
 #include "Collection/ArrayList.cpp"
+#include "App/Home.h"
 int main(int argc, char *argv[]) {
-    std::time_t ordine = std::time(nullptr); //utilizzato per vedere in quanto tempo arriva il pacco, ordine è l'orario nel quale è stato ordinata la spedizione
+
+    /*std::time_t ordine = std::time(nullptr); //utilizzato per vedere in quanto tempo arriva il pacco, ordine è l'orario nel quale è stato ordinata la spedizione
     std::tm ordine_tm = *std::localtime(&ordine);
     std::time_t arrivo = std::time(nullptr); //orario è in secondi dall'epoch, con localtime lo trasformo in un formato più user-friendly
     std::tm arrivo_tm = *std::localtime(&arrivo);
@@ -28,5 +30,12 @@ int main(int argc, char *argv[]) {
     ArrayList<Spedizione> prova2(10);
     prova2.add(spedizione);
     prova2.add(spedizionePremium);
-    cout << prova2.toString();
+    cout << prova2.toString();*/
+    QApplication app(argc, argv);
+
+    Home home(nullptr, Qt::WindowFlags());
+    home.show();
+
+    return app.exec();
+
 }
