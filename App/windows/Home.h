@@ -12,31 +12,21 @@
 #include "../widgets/CreaSpedizione.h"
 #include "../widgets/SpedizioniTotali.h"
 
-class Home : public QMainWindow{
+class Home : public QWidget{
 Q_OBJECT
 private:
     myButton *spedizioneButton;
     myButton *statoSpedizioneButton;
     myButton *filiere;
-    myButton *backHomeButton;
-
-    CreaSpedizione *creaSpedizioneWidget;
-    SpedizioniTotali *spedizioniTotali;
 
 
 public:
-    explicit Home(QMainWindow *parent = nullptr, Qt::WindowFlags flags = Qt::WindowFlags());
+    explicit Home(QWidget *parent = nullptr);
     void creaLayout();
     void creaButton();
-
-    //widgets
-    void SpedizioneWidget();
-    void SpedizioniTotaliWidget();
-
-
-    private slots:
-        void onSpedizioneButtonClicked();
-        void onSpedizioniTotaliClicked();
+    myButton* getSpedizioneButton();
+    myButton* getstatoSpedizioneButton();
+    myButton* getFiliere();
 
 };
 

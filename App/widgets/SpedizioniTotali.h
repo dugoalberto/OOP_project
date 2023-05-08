@@ -15,9 +15,11 @@ class SpedizioniTotali  : public QWidget{
     Q_OBJECT
 private:
     QLineEdit *m_lineEdit;
-    myButton *backhome;
+    myButton *backHomeButton;
 public:
     explicit SpedizioniTotali(QWidget *parent = nullptr);
+    myButton* getHomePageButton();
+
 };
 
 
