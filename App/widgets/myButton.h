@@ -43,5 +43,9 @@ public:
                       "border-style: inset;"
                       "}");
     }
+
+    //TODO costruttore di copia profonda per bottone
+
+
 };
 #endif //PROJECT_MYBUTTON_H

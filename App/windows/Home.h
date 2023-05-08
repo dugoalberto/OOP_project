@@ -18,7 +18,8 @@ private:
     myButton *spedizioneButton;
     myButton *statoSpedizioneButton;
     myButton *filiere;
-    myButton *backHomeButtone;
+    myButton *backHomeButton;
+
     CreaSpedizione *creaSpedizioneWidget;
     SpedizioniTotali *spedizioniTotali;
 
@@ -27,17 +28,16 @@ public:
     explicit Home(QMainWindow *parent = nullptr, Qt::WindowFlags flags = Qt::WindowFlags());
     void creaLayout();
     void creaButton();
-    void SpedizioneWidget();
 
-    signals:
+    //widgets
+    void SpedizioneWidget();
+    void SpedizioniTotaliWidget();
+
 
     private slots:
         void onSpedizioneButtonClicked();
-        void backToHome();
+        void onSpedizioniTotaliClicked();
 
-    void SpedizioniTotaliWidget();
-
-    void onSpedizioniTotaliButton();
 };
 
 

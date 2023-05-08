@@ -16,9 +16,14 @@ class CreaSpedizione : public QWidget{
     Q_OBJECT
 private:
     QLineEdit *m_lineEdit;
-    myButton *backhome;
+    myButton *backHomeButtone;
+private slots:
+    void backToHomeClicked();
 public:
+    //TODO da modificare backHome, fargli il suo costruttore al posto di nullptr
     CreaSpedizione(QWidget *parent = nullptr);
+
+
 };
 
 
