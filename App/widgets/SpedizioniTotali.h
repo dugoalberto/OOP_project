@@ -9,7 +9,7 @@
 #include <QLineEdit>
 #include "myButton.h"
 #include "../../Collection/ArrayList.h"
-#include "../../Model/Spedizione.h"
+#include "../../Model/hierarchy/Spedizione.h"
 #include "SpedizioneWidget.h"
 #include <QDialog>
 #include <QLabel>

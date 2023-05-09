@@ -7,9 +7,14 @@
 #include <fstream>
 #include "json.hpp"
 #include "DataPersistence.h"
+#include "../Collection/ArrayList.h"
 
 using json = nlohmann::json;
 using namespace std;
+
+DataPersistence::DataPersistence(const string &nomeFile) {
+    this->nomeFile = nomeFile;
+}
 
 void DataPersistence::scriviDati(const json &dati) {
     ofstream file(DataPersistence::nomeFile);

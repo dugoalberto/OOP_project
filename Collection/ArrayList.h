@@ -13,7 +13,7 @@ private:
     void realloc(int dim = 0);
 public:
     ArrayList();
-    explicit ArrayList(int _capacity);
+    ArrayList(int _capacity);
     ArrayList(const ArrayList& _al);
     ~ArrayList();
 
@@ -26,6 +26,25 @@ public:
     void removeAll();
     bool exchange(int _index1, int _index2);
     std::string toString() const;
+
+    class Iterator {
+    private:
+        T* objPtr;
+    public:
+        Iterator operator++();
+        Iterator operator++(int);
+        Iterator operator--();
+        Iterator operator--(int);
+        T& operator*();
+        T* operator->();
+        bool operator==(const Iterator&);
+        bool operator!=(const Iterator&);
+
+        Iterator(T* ptr = nullptr);
+    };
+
+    Iterator begin();
+    Iterator end();
 };
 
 

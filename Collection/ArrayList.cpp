@@ -5,9 +5,10 @@
 #include <iostream>
 #include <sstream>
 #include "ArrayList.h"
-#include "../Model/SpedizionePremium.h"
+#include "../Model/hierarchy/SpedizionePremium.h"
 
-template<class T> ArrayList<T>::ArrayList() {
+template<class T>
+ArrayList<T>::ArrayList() {
     _dimensione = 0;
     _capacita = 1;
     _head = new T[_capacita];
@@ -33,12 +34,12 @@ ArrayList<T>::ArrayList(const ArrayList &_al) {
 
 template<class T>
 ArrayList<T>::~ArrayList() {
-    delete [] _head;
+    //delete [] _head;
 }
 
 template<class T>
 T *ArrayList<T>::get(int _index) const {
-    return nullptr;
+    return _head+_index;
 }
 
 template<class T>
@@ -55,18 +56,17 @@ int ArrayList<T>::getCapacity() const {
  * */
 template<class T>
 void ArrayList<T>::realloc(int dim) {
-    _capacita = (dim != 0) ? dim : _capacita * 2;
+    _capacita = dim;
     T *t = new T[_capacita];
     for (int i = 0; i < _dimensione; i++){
         t[i] = _head[i];
     }
-    if (_capacita == 0) delete _head;
-    else delete[] _head;
+    delete[] _head;
     _head = t;
 }
 template<class T>
 void ArrayList<T>::add(const T &_obj) {
-    if((_dimensione - 1) == _capacita && _dimensione != 0) realloc(_capacita);
+    if((_dimensione - 1) == _capacita && _dimensione != 0) realloc(_capacita*2);
     _head[_dimensione] = _obj;
     _dimensione++;
 }
@@ -136,5 +136,59 @@ std::string ArrayList<T>::toString() const {
     return returnString;
 }
 
+template<class T>
+ArrayList<T>::Iterator::Iterator(T* ptr) : objPtr(ptr) {}
 
+template<class T>
+ArrayList<T>::Iterator ArrayList<T>::Iterator::operator++() {
+    objPtr++;
+    return objPtr;
+}
+template<class T>
+ArrayList<T>::Iterator ArrayList<T>::Iterator::operator++(int i) {
+    ArrayList<T>::Iterator temp = *this;
+    objPtr++;
+    return temp;
+}
+
+template<class T>
+ArrayList<T>::Iterator  ArrayList<T>::Iterator::operator--() {
+    objPtr--;
+    return objPtr;
+}
+template<class T>
+ArrayList<T>::Iterator  ArrayList<T>::Iterator::operator--(int) {
+    ArrayList<T>::Iterator temp = *this;
+    objPtr--;
+    return temp;
+}
+template<class T>
+T& ArrayList<T>::Iterator::operator*() {
+    return *objPtr;
+}
+template<class T>
+T* ArrayList<T>::Iterator::operator->() {
+    return objPtr;
+}
+template<class T>
+bool ArrayList<T>::Iterator::operator==(const ArrayList<T>::Iterator& other) {
+    return objPtr == other.objPtr;
+}
+template<class T>
+bool ArrayList<T>::Iterator::operator!=(const ArrayList<T>::Iterator& other) {
+    return objPtr != other.objPtr;
+}
+
+template<class T>
+ArrayList<T>::Iterator ArrayList<T>::begin() {
+    return Iterator(_head);
+}
+template<class T>
+ArrayList<T>::Iterator ArrayList<T>::end() {
+    return Iterator(_head+_dimensione);
+}
+
+
+template class ArrayList<Spedizione*>;
+template class ArrayList<int>;
 

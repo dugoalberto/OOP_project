@@ -7,10 +7,10 @@
 
 #include <string>
 #include <ostream>
-#include "Address.h"
-#include "Package.h"
-#include "Stato.h"
-#include "../Librerie/json.hpp"
+#include "../SupportClasses/Address.h"
+#include "../SupportClasses/Package.h"
+#include "../SupportClasses/Stato.h"
+#include "../../Librerie/json.hpp"
 
 using namespace std;
 using json = nlohmann::json;
@@ -25,14 +25,18 @@ private:
     double volume; //volume occupata in m^3
     Stato stato; //tipologia(arrivato, filiale->PD, ..)
     string descrizione;
-    double costo;
+
+protected:
+    static std::string SEPARATOR;
 public:
     Spedizione() = default;
     Spedizione(int trakingNumber, const Address &mittente, const Address &destinatario, const Package &pacco, int peso,
-               double volume, const Stato &stato, const string &descrizione, double costo);
+               double volume, const Stato &stato, const string &descrizione);
     //TODO distruttore con address, package, stato!!
     Spedizione(const Spedizione& other);
     virtual ~Spedizione();
+
+    virtual float getCosto() = 0;
 
     //getter
     int getTrakingNumber() const;
@@ -51,8 +55,6 @@ public:
 
     const string &getDescrizione() const;
 
-    double getCosto() const;
-
     //setter
     void setTrakingNumber(int trakingNumber);
 
@@ -70,14 +72,14 @@ public:
 
     void setDescrizione(const string &descrizione);
 
-    void setCosto(double costo);
-
     friend ostream &operator<<(ostream &os, const Spedizione &spedizione);
 
     //json
     json objectToJson();
-    static Spedizione jsonToObject(const json &dati);
+    virtual Spedizione* jsonToObject(const json &dati) = 0;
 
+    virtual std::string toSaveFormat() const;
+    static std::vector<string> ScomposeAttribute(const std::string&);
 };
 
 #endif //PROJECT_SPEDIZIONE_H

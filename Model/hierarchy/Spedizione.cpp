@@ -36,10 +36,6 @@ const string &Spedizione::getDescrizione() const {
     return descrizione;
 }
 
-double Spedizione::getCosto() const {
-    return costo;
-}
-
 void Spedizione::setTrakingNumber(int trakingNumber) {
     Spedizione::trakingNumber = trakingNumber;
 }
@@ -72,22 +68,17 @@ void Spedizione::setDescrizione(const string &descrizione) {
     Spedizione::descrizione = descrizione;
 }
 
-void Spedizione::setCosto(double costo) {
-    Spedizione::costo = costo;
-}
-
 Spedizione::Spedizione(int trakingNumber, const Address &mittente, const Address &destinatario, const Package &pacco,
-                       int peso, double volume, const Stato &stato, const string &descrizione, double costo)
+                       int peso, double volume, const Stato &stato, const string &descrizione)
         : trakingNumber(trakingNumber), mittente(mittente), destinatario(destinatario), pacco(pacco), peso(peso),
-          volume(volume), stato(stato), descrizione(descrizione), costo(costo) {}
+          volume(volume), stato(stato), descrizione(descrizione) {}
 
 Spedizione::~Spedizione() {}
 
 ostream &operator<<(ostream &os, const Spedizione &spedizione) {
     os << "trakingNumber: " << spedizione.trakingNumber << " \nmittente: " << spedizione.mittente << "\ndestinatario: "
        << spedizione.destinatario << "\n pacco: " << spedizione.pacco << " peso: " << spedizione.peso << " volume: "
-       << spedizione.volume << " stato: " << spedizione.stato << " descrizione: " << spedizione.descrizione
-       << " costo: " << spedizione.costo;
+       << spedizione.volume << " stato: " << spedizione.stato << " descrizione: " << spedizione.descrizione;
     return os;
 }
 
@@ -101,14 +92,9 @@ json Spedizione::objectToJson() {
     j["volume"] = Spedizione::volume;
     j["stato"] = Spedizione::stato.objectToJson();
     j["descrizione"] = Spedizione::descrizione;
-    j["costo"] = Spedizione::costo;
     return j;
 }
 
-Spedizione Spedizione::jsonToObject(const json &dati) {
-    Spedizione s(dati["trakingNumber"], Address::jsonToObject(dati["mittente"]), Address::jsonToObject(dati["destinatario"]), Package::jsonToObject(dati["pacco"]), dati["peso"], dati["volume"], Stato::jsonToObject(dati["stato"]), dati["descrizione"], dati["costo"]);
-    return s;
-}
 Spedizione::Spedizione(const Spedizione& other)
         : trakingNumber(other.trakingNumber),
           mittente(other.mittente),
@@ -117,6 +103,49 @@ Spedizione::Spedizione(const Spedizione& other)
           peso(other.peso),
           volume(other.volume),
           stato(other.stato),
-          descrizione(other.descrizione),
-          costo(other.costo)
+          descrizione(other.descrizione)
 {}
+
+std::string Spedizione::SEPARATOR = "/";
+
+std::string Spedizione::toSaveFormat() const{
+    return
+    std::to_string(trakingNumber) + SEPARATOR +
+    mittente.getNomeCognome() + SEPARATOR +
+    mittente.getIndirizzo() + SEPARATOR +
+    mittente.getCitta() + SEPARATOR +
+    mittente.getProvincia() + SEPARATOR +
+    mittente.getNazione() + SEPARATOR +
+    std::to_string(mittente.getCap()) + SEPARATOR +
+    destinatario.getNomeCognome() + SEPARATOR +
+    destinatario.getIndirizzo() + SEPARATOR +
+    destinatario.getCitta() + SEPARATOR +
+    destinatario.getProvincia() + SEPARATOR +
+    destinatario.getNazione() + SEPARATOR +
+    std::to_string(destinatario.getCap()) + SEPARATOR +
+    pacco.getContenuto() + SEPARATOR +
+    std::to_string(pacco.getValore()) + SEPARATOR +
+    std::to_string(peso) + SEPARATOR +
+    std::to_string(volume) + SEPARATOR +
+    stato.getDescStato() + SEPARATOR +
+    stato.getFiliale().getCitta() + SEPARATOR +
+    stato.getFiliale().getProvincia() + SEPARATOR +
+    stato.getFiliale().getNumeroTel() + SEPARATOR +
+    descrizione;
+}
+
+std::vector<std::string> Spedizione::ScomposeAttribute(const std::string &str) {
+    std::vector<std::string> res;
+
+    string current = "";
+    for(int i = 0; i < str.size(); i++){
+        while(str[i] != SEPARATOR[0] && str[i] != '\0'){
+            current += str[i];
+            ++i;
+        }
+        res.push_back(current);
+        current = "";
+    }
+
+    return res;
+}
