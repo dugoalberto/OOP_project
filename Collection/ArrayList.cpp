@@ -5,6 +5,8 @@
 #include <iostream>
 #include <sstream>
 #include "ArrayList.h"
+#include "../Model/SpedizionePremium.h"
+
 template<class T> ArrayList<T>::ArrayList() {
     _dimensione = 0;
     _capacita = 1;
@@ -31,7 +33,6 @@ ArrayList<T>::ArrayList(const ArrayList &_al) {
 
 template<class T>
 ArrayList<T>::~ArrayList() {
-    if(_head)
     delete [] _head;
 }
 
@@ -134,4 +135,6 @@ std::string ArrayList<T>::toString() const {
     std::string returnString = streamOut.str();
     return returnString;
 }
+
+
 
