@@ -8,7 +8,7 @@
 
 #include <QStackedWidget>
 #include "CreaSpedizione.h"
-#include "../windows/Home.h"
+#include "Home.h"
 #include "Filiali.h"
 
 class StackTracer : public QStackedWidget{

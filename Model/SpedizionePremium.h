@@ -34,7 +34,7 @@ public:
     SpedizionePremium(int trakingNumber, const Address &mittente, const Address &destinatario, const Package &pacco,
                       int peso, double volume, const Stato &stato, const string &descrizione, double costo,
                       int anno, int mese, int giorni, int ore, int minuti);
-    ~SpedizionePremium();
+    ~SpedizionePremium() override;
     void setOrario(int year, int month, int day, int hours, int minuti);
 
     friend ostream &operator<<(ostream &os, const SpedizionePremium &premium);

@@ -109,3 +109,14 @@ Spedizione Spedizione::jsonToObject(const json &dati) {
     Spedizione s(dati["trakingNumber"], Address::jsonToObject(dati["mittente"]), Address::jsonToObject(dati["destinatario"]), Package::jsonToObject(dati["pacco"]), dati["peso"], dati["volume"], Stato::jsonToObject(dati["stato"]), dati["descrizione"], dati["costo"]);
     return s;
 }
+Spedizione::Spedizione(const Spedizione& other)
+        : trakingNumber(other.trakingNumber),
+          mittente(other.mittente),
+          destinatario(other.destinatario),
+          pacco(other.pacco),
+          peso(other.peso),
+          volume(other.volume),
+          stato(other.stato),
+          descrizione(other.descrizione),
+          costo(other.costo)
+{}

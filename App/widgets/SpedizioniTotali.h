@@ -8,18 +8,19 @@
 #include <Qt>
 #include <QLineEdit>
 #include "myButton.h"
+#include "../../Collection/ArrayList.h"
+#include "../../Model/Spedizione.h"
+#include "SpedizioneWidget.h"
 #include <QDialog>
 #include <QLabel>
-
 class SpedizioniTotali  : public QWidget{
     Q_OBJECT
 private:
-    QLineEdit *m_lineEdit;
+    //ArrayList<SpedizionePremium> spedizioniTot;
     myButton *backHomeButton;
 public:
     explicit SpedizioniTotali(QWidget *parent = nullptr);
     myButton* getHomePageButton();
-
 };
 
 

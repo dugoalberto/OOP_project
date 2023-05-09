@@ -6,7 +6,7 @@
 #include <QtWidgets>
 #include <QMainWindow>
 #include "Home.h"
-#include "../widgets/StackTracer.h"
+#include "StackTracer.h"
 
 Home::Home(QWidget *parents) : QWidget(parents){
     creaButton();

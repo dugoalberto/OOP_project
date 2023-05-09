@@ -8,9 +8,9 @@
 
 #include <QMainWindow>
 #include <QVBoxLayout>
-#include "../widgets/myButton.h"
-#include "../widgets/CreaSpedizione.h"
-#include "../widgets/SpedizioniTotali.h"
+#include "myButton.h"
+#include "CreaSpedizione.h"
+#include "SpedizioniTotali.h"
 
 class Home : public QWidget{
 Q_OBJECT
@@ -27,7 +27,6 @@ public:
     myButton* getSpedizioneButton();
     myButton* getstatoSpedizioneButton();
     myButton* getFiliere();
-
 };
 
 
