@@ -28,6 +28,7 @@ private:
     std::time_t arrivo = std::mktime(&now_tm);
     std::tm arrivo_tm = *std::localtime(&arrivo);
 
+    static std::string typeName;
 public:
     SpedizionePremium() = default;
     //6.creazione, modifica e cancellazione
@@ -43,6 +44,7 @@ public:
     json objectToJson();
     SpedizionePremium* jsonToObject(const json &dati);
 
+    std::string getTypeName() const;
     float getCosto() override;
     std::string toSaveFormat() const;
 

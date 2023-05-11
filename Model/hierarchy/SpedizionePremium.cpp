@@ -3,6 +3,7 @@
 //
 
 #include "SpedizionePremium.h"
+std::string SpedizionePremium::typeName = "SPEDIZIONEPREMIUM";
 
 SpedizionePremium::SpedizionePremium(int trakingNumber, const Address &mittente, const Address &destinatario,
                                      const Package &pacco, int peso, double volume, const Stato &stato,
@@ -78,7 +79,7 @@ float SpedizionePremium::getCosto() {
 
 std::string SpedizionePremium::toSaveFormat() const {
     std::string res =
-    "SPEDIZIONEPREMIUM" + Spedizione::SEPARATOR +
+    typeName + Spedizione::SEPARATOR +
     Spedizione::toSaveFormat() + SEPARATOR +
     std::to_string(ordine_tm.tm_year) + SEPARATOR +
     std::to_string(ordine_tm.tm_mon) + SEPARATOR +
@@ -92,4 +93,8 @@ std::string SpedizionePremium::toSaveFormat() const {
     std::to_string(arrivo_tm.tm_min)
     ;
     return res;
+}
+
+std::string SpedizionePremium::getTypeName() const {
+    return typeName;
 }

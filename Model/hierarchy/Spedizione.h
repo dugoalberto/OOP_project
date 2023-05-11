@@ -32,7 +32,6 @@ public:
     Spedizione() = default;
     Spedizione(int trakingNumber, const Address &mittente, const Address &destinatario, const Package &pacco, int peso,
                double volume, const Stato &stato, const string &descrizione);
-    //TODO distruttore con address, package, stato!!
     Spedizione(const Spedizione& other);
     virtual ~Spedizione();
 
@@ -78,8 +77,10 @@ public:
     json objectToJson();
     virtual Spedizione* jsonToObject(const json &dati) = 0;
 
+    virtual std::string getTypeName() const = 0;
     virtual std::string toSaveFormat() const;
     static std::vector<string> ScomposeAttribute(const std::string&);
+
 };
 
 #endif //PROJECT_SPEDIZIONE_H
