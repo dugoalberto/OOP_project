@@ -2,14 +2,14 @@
 // Created by utente on 11/05/2023.
 //
 
-#include "ListViewItemWidget.h"
+#include "ListViewSpedizioniItemWidget.h"
 
-ListViewItemWidget::ListViewItemWidget(Spedizione *s, QWidget *parent) : QWidget(parent), obj(s){
+ListViewSpedizioniItemWidget::ListViewSpedizioniItemWidget(Spedizione *s, QWidget *parent) : QWidget(parent), obj(s){
 
     QHBoxLayout* lytMain = new QHBoxLayout(this);
 
     QLabel* lblSprite = new QLabel();
-    //TODO verificare che la spedizione sia di tipo cargo essendoci aereo e barca come sprite
+
     lblSprite->setPixmap((new QPixmap(QString::fromStdString("../Assets/Sprite/"+obj->getTypeName()+".png")))->scaled(60,60));
     lblSprite->setObjectName("lblSprite");
 
@@ -31,18 +31,18 @@ ListViewItemWidget::ListViewItemWidget(Spedizione *s, QWidget *parent) : QWidget
     lytMain->addWidget(btnEdit);
     lytMain->addWidget(btnDelete);
 
-    connect(btnEdit, &QPushButton::clicked, this, &ListViewItemWidget::ModificaSlot);
-    connect(btnDelete, &QPushButton::clicked, this, &ListViewItemWidget::EliminaSlot);
+    connect(btnEdit, &QPushButton::clicked, this, &ListViewSpedizioniItemWidget::ModificaSlot);
+    connect(btnDelete, &QPushButton::clicked, this, &ListViewSpedizioniItemWidget::EliminaSlot);
 }
 
-void ListViewItemWidget::ModificaSlot() {
+void ListViewSpedizioniItemWidget::ModificaSlot() {
     emit ModificaSignal(obj);
 }
 
-void ListViewItemWidget::EliminaSlot() {
+void ListViewSpedizioniItemWidget::EliminaSlot() {
     emit EliminaSignal(obj);
 }
 
-void ListViewItemWidget::mouseDoubleClickEvent(QMouseEvent *event) {
+void ListViewSpedizioniItemWidget::mouseDoubleClickEvent(QMouseEvent *event) {
     emit VisualizzaSignal(obj);
 }

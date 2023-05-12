@@ -32,21 +32,23 @@ private:
 public:
     SpedizionePremium() = default;
     //6.creazione, modifica e cancellazione
-    SpedizionePremium(int trakingNumber, const Address &mittente, const Address &destinatario, const Package &pacco,
-                      int peso, double volume, const Stato &stato, const string &descrizione,
-                      int anno = -1, int meseanno = -1, int giornianno = -1, int oreanno = -1, int minutianno = -1);
+    SpedizionePremium(int trakingNumber, const Address &mittente, const Address &destinatario,
+                      const Package &pacco, const Stato &stato, const string &descrizione, int anno = -1,
+                      int meseanno= -1, int giornianno= -1, int oreanno= -1, int minutianno= -1);
     ~SpedizionePremium() override;
     void setOrario(int year, int month, int day, int hours, int minuti);
 
-    friend ostream &operator<<(ostream &os, const SpedizionePremium &premium);
+    //friend ostream &operator<<(ostream &os, const SpedizionePremium &premium);
 
     //json
-    json objectToJson();
-    SpedizionePremium* jsonToObject(const json &dati);
+    //json objectToJson();
+    //SpedizionePremium* jsonToObject(const json &dati);
 
     std::string getTypeName() const;
-    float getCosto() override;
+    float getCosto() const override;
     std::string toSaveFormat() const;
+
+    void Accept(Visitor *visitor, bool toEdit);
 
 };
 

@@ -16,22 +16,33 @@ class Package {
 
 private:
     string contenuto; //contenuto del pacco
-    double valore; //valore del conenuto del pacco
+    float valore; //valore del conenuto del pacco
+    float volume;
+    float peso;
 
 public:
     Package() = default;
-    Package(const string &contenuto, double valore);
+    Package(const string &contenuto, float valore, float vol, float peso);
     virtual ~Package();
 
     //getter
     const string &getContenuto() const;
 
-    double getValore() const;
+    float getValore() const;
+
+    float getVolume() const;
+
+
+    float getPeso() const;
 
     //setter
     void setContenuto(const string &contenuto);
 
-    void setValore(double valore);
+    void setValore(float valore);
+
+    void setPeso(float peso);
+
+    void setVolume(float volume);
 
     friend ostream &operator<<(ostream &os, const Package &aPackage);
 

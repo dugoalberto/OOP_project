@@ -2,8 +2,8 @@
 // Created by utente on 11/05/2023.
 //
 
-#ifndef DUGO_PROGETTO_LISTVIEWITEMWIDGET_H
-#define DUGO_PROGETTO_LISTVIEWITEMWIDGET_H
+#ifndef DUGO_PROGETTO_LISTVIEWSPEDIZIONIITEMWIDGET_H
+#define DUGO_PROGETTO_LISTVIEWSPEDIZIONIITEMWIDGET_H
 
 #include <QWidget>
 #include <QLabel>
@@ -11,7 +11,7 @@
 #include "../../../Model/hierarchy/Spedizione.h"
 #include "myButton.h"
 
-class ListViewItemWidget : public QWidget {
+class ListViewSpedizioniItemWidget : public QWidget {
     Q_OBJECT
 private:
     Spedizione* obj;
@@ -22,7 +22,7 @@ private:
     myButton* btnEdit;
     myButton* btnDelete;
 public:
-    ListViewItemWidget(Spedizione*, QWidget* = nullptr);
+    ListViewSpedizioniItemWidget(Spedizione*, QWidget* = nullptr);
     void mouseDoubleClickEvent(QMouseEvent *event);
 public slots:
     void ModificaSlot();
@@ -34,4 +34,4 @@ signals:
 };
 
 
-#endif //DUGO_PROGETTO_LISTVIEWITEMWIDGET_H
+#endif //DUGO_PROGETTO_LISTVIEWSPEDIZIONIITEMWIDGET_H

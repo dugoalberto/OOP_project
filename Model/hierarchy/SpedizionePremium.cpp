@@ -6,9 +6,9 @@
 std::string SpedizionePremium::typeName = "SPEDIZIONEPREMIUM";
 
 SpedizionePremium::SpedizionePremium(int trakingNumber, const Address &mittente, const Address &destinatario,
-                                     const Package &pacco, int peso, double volume, const Stato &stato,
-                                     const string &descrizione, int anno, int mese, int giorni, int ore, int minuti)
-                                     :Spedizione(trakingNumber, mittente, destinatario, pacco, peso, volume, stato, descrizione) {
+                                     const Package &pacco, const Stato &stato, const string &descrizione, int anno,
+                                     int mese, int giorni, int ore, int minuti)
+                                     : Spedizione(trakingNumber, mittente, destinatario, pacco, stato, descrizione) {
     if(anno != -1){
         ordine_tm.tm_year = anno; //l'anno è "shiftato" di 1900 in tm struct
         ordine_tm.tm_mon = mese; // partono da 0 in tm struct
@@ -49,15 +49,17 @@ void SpedizionePremium::setOrario(int year, int month, int day, int hours, int m
  * std::asctime` restituisce una stringa di caratteri terminata da un carattere di nuova linea,
  * quindi potresti voler rimuovere il carattere di nuova linea aggiungendo `.substr(0,24)`
  * alla fine della chiamata di `std::asctime` per ottenere solo la parte della stringa che rappresenta la data e l'ora.*/
+
+/*
 ostream &operator<<(ostream &os, const SpedizionePremium &premium) {
     os << static_cast<const Spedizione &>(premium)
     << "\noridine: " << std::asctime(&premium.ordine_tm)
     << "arrivo: " <<std::asctime(&premium.arrivo_tm);
     return os;
-}
+}*/
 
 SpedizionePremium::~SpedizionePremium() {}
-
+/*
 json SpedizionePremium::objectToJson() {
     json j;
     j.merge_patch(Spedizione::objectToJson()) ;
@@ -71,9 +73,9 @@ json SpedizionePremium::objectToJson() {
 
 SpedizionePremium* SpedizionePremium::jsonToObject(const json &dati) {
     return new SpedizionePremium(dati["trakingNumber"], Address::jsonToObject(dati["mittente"]), Address::jsonToObject(dati["destinatario"]), Package::jsonToObject(dati["pacco"]), dati["peso"], dati["volume"], Stato::jsonToObject(dati["stato"]), dati["descrizione"],std::stoi(dati["arrivo"].get<std::string>().substr(0,4)),std::stoi(dati["arrivo"].get<std::string>().substr(5,2)),std::stoi(dati["arrivo"].get<std::string>().substr(8,2)),std::stoi(dati["arrivo"].get<std::string>().substr(11,2)),std::stoi(dati["arrivo"].get<std::string>().substr(14,2)));
-}
+}*/
 
-float SpedizionePremium::getCosto() {
+float SpedizionePremium::getCosto() const {
     return 50;
 }
 
@@ -97,4 +99,8 @@ std::string SpedizionePremium::toSaveFormat() const {
 
 std::string SpedizionePremium::getTypeName() const {
     return typeName;
+}
+
+void SpedizionePremium::Accept(Visitor *visitor, bool toEdit) {
+    visitor->visit(this, toEdit);
 }

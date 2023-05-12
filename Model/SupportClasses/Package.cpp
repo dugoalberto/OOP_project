@@ -8,7 +8,7 @@ const string &Package::getContenuto() const {
     return contenuto;
 }
 
-double Package::getValore() const {
+float Package::getValore() const {
     return valore;
 }
 
@@ -16,11 +16,11 @@ void Package::setContenuto(const string &contenuto) {
     Package::contenuto = contenuto;
 }
 
-void Package::setValore(double valore) {
+void Package::setValore(float valore) {
     Package::valore = valore;
 }
 
-Package::Package(const string &contenuto, double valore): contenuto(contenuto), valore(valore) {}
+Package::Package(const string &contenuto, float valore, float vol, float pes) : contenuto(contenuto), valore(valore), volume(vol), peso(pes) {}
 
 Package::~Package() {}
 
@@ -37,6 +37,22 @@ json Package::objectToJson() {
 }
 
 Package Package::jsonToObject(const json &dati) {
-    Package p(dati["contenuto"], dati["valore"]);
+    Package p(dati["contenuto"], dati["valore"], 0, 0);
     return p;
+}
+
+float Package::getVolume() const {
+    return volume;
+}
+
+void Package::setVolume(float volume) {
+    Package::volume = volume;
+}
+
+float Package::getPeso() const {
+    return peso;
+}
+
+void Package::setPeso(float peso) {
+    Package::peso = peso;
 }

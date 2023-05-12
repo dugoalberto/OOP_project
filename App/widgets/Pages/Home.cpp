@@ -9,7 +9,7 @@
 #include "../StackTracer.h"
 #include "../CustomWidgets/QLabelTitle.h"
 #include "../../../Model/hierarchy/Spedizione.h"
-#include "../CustomWidgets/ListViewItemWidget.h"
+#include "../CustomWidgets/ListViewSpedizioniItemWidget.h"
 
 #include <iostream>
 Home::Home(ArrayList<Spedizione*>& lstDb, QWidget *parents) : QWidget(parents), lstElements(lstDb){
@@ -84,7 +84,8 @@ void Home::loadListView() {
     for(auto it = lstElements.begin(); it != lstElements.end(); ++it){
         bool toBeInsert = false;
         for(int j = 0; j < 5; j++)
-            if(CbTypesArray[j]->isChecked() && (*it)->getTypeName() == "SPEDIZIONE" + CbTypesArray[j]->text().toUpper().toStdString())
+            if(CbTypesArray[j]->isChecked() && ((*it)->getTypeName() == "SPEDIZIONE" + CbTypesArray[j]->text().toUpper().toStdString() || (*it)->getTypeName() == "SPEDIZIONE" + CbTypesArray[j]->text().toUpper().toStdString() + "A"
+                                                                                                                                      || (*it)->getTypeName() == "SPEDIZIONE" + CbTypesArray[j]->text().toUpper().toStdString() + "B"))
                 for(int k = 0; k < 5; k++)
                     if(CbStatoArray[k]->isChecked() && (*it)->getStato().getDescStato() == CbStatoArray[k]->text().toStdString())
                         if(QString::fromStdString(std::to_string((*it)->getTrakingNumber())).contains(txtSearchBar->text()))
@@ -92,7 +93,7 @@ void Home::loadListView() {
 
         if(toBeInsert) {
             QListWidgetItem *item = new QListWidgetItem();
-            ListViewItemWidget *widget = new ListViewItemWidget(*it);
+            ListViewSpedizioniItemWidget *widget = new ListViewSpedizioniItemWidget(*it);
             item->setSizeHint(widget->sizeHint());
             lstSpedizioni->addItem(item);
             lstSpedizioni->setItemWidget(item, widget);
@@ -101,7 +102,7 @@ void Home::loadListView() {
 }
 
 myButton* Home::getSpedizioneButton() {
-    return spedizioneButton;
+    return btnNewSpedizione;
 }
 
 myButton *Home::getstatoSpedizioneButton() {

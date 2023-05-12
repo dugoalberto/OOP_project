@@ -23,7 +23,8 @@ private:
     int cap;
 public:
     Address() = default;
-    Address(const string &nomeCognome, const string &indirizzo, const string &citta, const string &provincia, const string &nazione, int cap);
+    Address(const string &nomeCognome, const string &indirizzo, const string &citta, const string &provincia, int cap,
+            const string &nazione = "IT");
     virtual ~Address();
 
     //getter

@@ -6,6 +6,7 @@
 #define DUGO_PROGETTO_FILEMANAGER_H
 #include "../Collection/ArrayList.h"
 #include "../Model/hierarchy/Spedizione.h"
+#include "../Model/SupportClasses/Assicurazione.h"
 #include <fstream>
 
 class FileManager {
@@ -16,7 +17,12 @@ private:
 public:
     explicit FileManager(const std::string&);
     void saveData(ArrayList<Spedizione *> &vettore) const;
-    ArrayList<Spedizione*> readFromFile() const;
+    ArrayList<Spedizione*> readSpedizioni() const;
+
+    static void saveAssicurazioni(ArrayList<Assicurazione*>);
+    static void saveFiliali(ArrayList<Filiale*>);
+    static std::vector<Assicurazione> readAssicurazioni();
+    static std::vector<Filiale> readFiliali();
 };
 
 

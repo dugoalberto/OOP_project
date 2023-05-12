@@ -44,6 +44,8 @@ public:
     json objectToJson();
     static Filiale jsonToObject(const json &dati);
 
+    std::string toString() const;
+
 };
 
 

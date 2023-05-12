@@ -49,3 +49,7 @@ Filiale Filiale::jsonToObject(const json &dati) {
      Filiale f(dati["citta"], dati["provincia"], dati["numeroTel"]);
      return f;
 }
+
+std::string Filiale::toString() const {
+    return citta + "|" + provincia + "|" + numeroTel;
+}

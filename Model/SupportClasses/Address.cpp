@@ -53,7 +53,9 @@ void Address::setCap(int cap) {
 }
 
 Address::Address(const string &nomeCognome, const string &indirizzo, const string &citta, const string &provincia,
-                 const string &nazione, int cap) : nomeCognome(nomeCognome), indirizzo(indirizzo), citta(citta), provincia(provincia), nazione(nazione), cap(cap) {
+                 int cap,
+                 const string &nazione)
+        : nomeCognome(nomeCognome), indirizzo(indirizzo), citta(citta), provincia(provincia), nazione(nazione), cap(cap) {
 }
 
 Address::~Address() {}
@@ -76,6 +78,6 @@ json Address::objectToJson() {
 }
 
 Address Address::jsonToObject(const json &dati) {
-    Address a(dati["nomeCognome"], dati["indirizzo"], dati["citta"], dati["provincia"], dati["nazione"], dati["cap"]);
+    Address a(dati["nomeCognome"], dati["indirizzo"], dati["citta"], dati["provincia"], dati["cap"], dati["nazione"]);
     return a;
 }

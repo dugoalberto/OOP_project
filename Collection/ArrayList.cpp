@@ -6,6 +6,7 @@
 #include <sstream>
 #include "ArrayList.h"
 #include "../Model/hierarchy/SpedizionePremium.h"
+#include "../Model/SupportClasses/Assicurazione.h"
 
 template<class T>
 ArrayList<T>::ArrayList() {
@@ -61,7 +62,7 @@ void ArrayList<T>::realloc(int dim) {
     for (int i = 0; i < _dimensione; i++){
         t[i] = _head[i];
     }
-    delete[] _head;
+    //delete[] _head;
     _head = t;
 }
 template<class T>
@@ -190,5 +191,7 @@ ArrayList<T>::Iterator ArrayList<T>::end() {
 
 
 template class ArrayList<Spedizione*>;
+template class ArrayList<Filiale*>;
+template class ArrayList<Assicurazione*>;
 template class ArrayList<int>;
 
