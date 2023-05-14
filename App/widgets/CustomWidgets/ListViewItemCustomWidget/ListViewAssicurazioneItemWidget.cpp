@@ -5,7 +5,7 @@
 #include <QHBoxLayout>
 #include <QLabel>
 #include "ListViewAssicurazioneItemWidget.h"
-#include "myButton.h"
+#include "../MyButton.h"
 
 ListViewAssicurazioneItemWidget::ListViewAssicurazioneItemWidget(Assicurazione *ass, QWidget *parent) : QWidget(parent), obj(ass){
     QHBoxLayout* lytMain = new QHBoxLayout(this);
@@ -16,8 +16,8 @@ ListViewAssicurazioneItemWidget::ListViewAssicurazioneItemWidget(Assicurazione *
     QLabel* lblPrezzo = new QLabel(QString::number(obj->getPrezzo(), 'f', 2));
     lblPrezzo->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
-    myButton* btnEdit = new myButton("Modifica");
-    myButton* btnDelete = new myButton("Elimina");
+    MyButton* btnEdit = new MyButton("Modifica");
+    MyButton* btnDelete = new MyButton("Elimina");
 
     lytMain->addWidget(lblNome);
     lytMain->addWidget(lblPrezzo);

@@ -71,10 +71,10 @@ SpedizioneAssicurataPage::SpedizioneAssicurataPage(SpedizioneAssicurata *spe, bo
 
     //parte pulsanti
     QVBoxLayout* lytPulsanti = new QVBoxLayout();
-    btnAnnulla = new myButton("Annulla");
+    btnAnnulla = new MyButton("Annulla");
     btnAnnulla->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
     btnAnnulla->setFixedWidth(180);
-    btnConferma = new myButton("Conferma");
+    btnConferma = new MyButton("Conferma");
     btnConferma->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
     btnConferma->setFixedWidth(180);
     lytPulsanti->addWidget(btnAnnulla);

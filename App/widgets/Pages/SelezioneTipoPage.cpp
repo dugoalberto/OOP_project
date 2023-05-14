@@ -8,8 +8,8 @@
 #include "../CustomWidgets/QLabelTitle.h"
 #include "../../../Model/SupportClasses/Filiale.h"
 #include "../../../Librerie/FileManager.h"
-#include "../CustomWidgets/ListViewFilialeItemWidget.h"
-#include "../CustomWidgets/ListViewAssicurazioneItemWidget.h"
+#include "../CustomWidgets/ListViewItemCustomWidget/ListViewFilialeItemWidget.h"
+#include "../CustomWidgets/ListViewItemCustomWidget/ListViewAssicurazioneItemWidget.h"
 #include "HierachyPages/SpedizioneAssicurataPage.h"
 
 SelezioneTipoPage::SelezioneTipoPage(QWidget *parent) : QWidget(parent){
@@ -18,7 +18,7 @@ SelezioneTipoPage::SelezioneTipoPage(QWidget *parent) : QWidget(parent){
     QGroupBox* grpSpedizione = new QGroupBox();
     QVBoxLayout* lytSpedizioni = new QVBoxLayout();
     QGridLayout* firstRow = new QGridLayout();
-    myButton* btnback = new myButton("<<");
+    MyButton* btnback = new MyButton("<<");
     connect(btnback, &QPushButton::clicked, this, &SelezioneTipoPage::btnBackSlot);
     btnback->setFixedSize(50,50);
     firstRow->addWidget(btnback,0,0);
@@ -28,19 +28,19 @@ SelezioneTipoPage::SelezioneTipoPage(QWidget *parent) : QWidget(parent){
     firstRow->addWidget(vuoto,0,2);
 
     QHBoxLayout* secondRow = new QHBoxLayout();
-    myButton* btnEconomica = new myButton("Economica");
+    MyButton* btnEconomica = new MyButton("Economica");
     connect(btnEconomica, &QPushButton::clicked, this, &SelezioneTipoPage::btnEconomicaPressedSlot);
     secondRow->addWidget(btnEconomica);
-    myButton* btnPremium = new myButton("Premium");
+    MyButton* btnPremium = new MyButton("Premium");
     connect(btnPremium, &QPushButton::clicked, this, &SelezioneTipoPage::btnPremiumPressedSlot);
     secondRow->addWidget(btnPremium);
-    myButton* btnCargo = new myButton("Cargo (anche internazionale)");
+    MyButton* btnCargo = new MyButton("Cargo (anche internazionale)");
     connect(btnCargo, &QPushButton::clicked, this, &SelezioneTipoPage::btnCargoPressedSlot);
     secondRow->addWidget(btnCargo);
-    myButton* btnInternazionale = new myButton("Internazionale");
+    MyButton* btnInternazionale = new MyButton("Internazionale");
     connect(btnInternazionale, &QPushButton::clicked, this, &SelezioneTipoPage::btnInternazionalePressedSlot);
     secondRow->addWidget(btnInternazionale);
-    myButton* btnAssicurata = new myButton("Assicurata");
+    MyButton* btnAssicurata = new MyButton("Assicurata");
     connect(btnAssicurata, &QPushButton::clicked, this, &SelezioneTipoPage::btnAssicurataPressedSlot);
     secondRow->addWidget(btnAssicurata);
 
@@ -59,7 +59,7 @@ SelezioneTipoPage::SelezioneTipoPage(QWidget *parent) : QWidget(parent){
 
     QGroupBox* grpFiliali = new QGroupBox();
     QHBoxLayout* firstRowFiliali = new QHBoxLayout();
-    myButton* btnAddFiliale = new myButton("+");
+    MyButton* btnAddFiliale = new MyButton("+");
     connect(btnAddFiliale, &QPushButton::clicked, this, &SelezioneTipoPage::btnAddFilialePressedSlot);
     firstRowFiliali->addWidget(new QLabelTitle("Filiali"));
     firstRowFiliali->addWidget(btnAddFiliale);
@@ -79,7 +79,7 @@ SelezioneTipoPage::SelezioneTipoPage(QWidget *parent) : QWidget(parent){
 
     QGroupBox* grpAssicurazioni = new QGroupBox();
     QHBoxLayout* firstRowAssicurazioni = new QHBoxLayout();
-    myButton* btnAddAssicurazione = new myButton("+");
+    MyButton* btnAddAssicurazione = new MyButton("+");
     connect(btnAddAssicurazione, &QPushButton::clicked, this, &SelezioneTipoPage::btnAddAssicurazioneSlot);
     firstRowAssicurazioni->addWidget(new QLabelTitle("Assicurazioni"));
     firstRowAssicurazioni->addWidget(btnAddAssicurazione);

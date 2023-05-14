@@ -17,8 +17,8 @@ ListViewFilialeItemWidget::ListViewFilialeItemWidget(Filiale* fil, QWidget* pare
     QLabel* lblTelefono = new QLabel(QString::fromStdString(obj->getNumeroTel()));
     lblTelefono->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
-    myButton* btnEdit = new myButton("Modifica");
-    myButton* btnDelete = new myButton("Elimina");
+    MyButton* btnEdit = new MyButton("Modifica");
+    MyButton* btnDelete = new MyButton("Elimina");
 
     lytMain->addWidget(lblCitta);
     lytMain->addWidget(lblProvincia);

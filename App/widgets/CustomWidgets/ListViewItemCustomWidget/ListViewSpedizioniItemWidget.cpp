@@ -25,8 +25,8 @@ ListViewSpedizioniItemWidget::ListViewSpedizioniItemWidget(Spedizione *s, QWidge
     lytMain->addWidget(lblStato);
     lytMain->addWidget(lblPrezzo);
 
-    btnEdit = new myButton("Modifica");
-    btnDelete = new myButton("Elimina");
+    btnEdit = new MyButton("Modifica");
+    btnDelete = new MyButton("Elimina");
 
     lytMain->addWidget(btnEdit);
     lytMain->addWidget(btnDelete);

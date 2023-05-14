@@ -11,7 +11,7 @@
 #include <QCheckBox>
 #include <QListWidget>
 #include <QListWidgetItem>
-#include "../CustomWidgets/myButton.h"
+#include "../CustomWidgets/MyButton.h"
 #include "../../../Model/hierarchy/Spedizione.h"
 #include "../../../Collection/ArrayList.h"
 //#include "CreaSpedizione.h"
@@ -20,24 +20,24 @@
 class Home : public QWidget{
 Q_OBJECT
 private:
-    myButton *spedizioneButton;
-    myButton *statoSpedizioneButton;
-    myButton *filiere;
+    MyButton *spedizioneButton;
+    MyButton *statoSpedizioneButton;
+    MyButton *filiere;
 
     ArrayList<Spedizione*> lstElements;
 public:
     explicit Home(ArrayList<Spedizione*>&, QWidget *parent = nullptr);
 
     QLineEdit* txtSearchBar;
-    myButton* btnOrderButton;
-    myButton* btnNewSpedizione;
+    MyButton* btnOrderButton;
+    MyButton* btnNewSpedizione;
     QListWidget* lstSpedizioni;
     QCheckBox* CbTypesArray[5];
     QCheckBox* CbStatoArray[5];
 
-    myButton *getSpedizioneButton();
-    myButton *getstatoSpedizioneButton();
-    myButton *getFiliere();
+    MyButton *getSpedizioneButton();
+    MyButton *getstatoSpedizioneButton();
+    MyButton *getFiliere();
 
     void loadListView();
 public

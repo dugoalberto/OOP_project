@@ -60,7 +60,7 @@ QLineEdit#searchBar:focus {
     border-color: #0078d7;
     outline: none;
 }
-myButton {
+MyButton {
     background-color: #0078d7;
     color: #f2f2f2;
     border: 2px solid #0078d7;
@@ -69,12 +69,12 @@ myButton {
     font-size: 16px;
 }
 
-myButton:hover {
+MyButton:hover {
     background-color: #005a9e;
     border-color: #005a9e;
 }
 
-myButton:pressed {
+MyButton:pressed {
     background-color: #004b80;
     border-color: #004b80;
 }

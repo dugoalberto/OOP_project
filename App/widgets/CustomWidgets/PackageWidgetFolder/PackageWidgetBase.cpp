@@ -2,6 +2,7 @@
 // Created by utente on 12/05/2023.
 //
 
+#include <QDoubleValidator>
 #include "PackageWidgetBase.h"
 #include "../QLabelTitle.h"
 
@@ -19,6 +20,7 @@ PackageWidgetBase::PackageWidgetBase(Package *pkg, bool toEdit, QWidget* parent)
 
     txtValore = new QLineEdit((pkg)?QString::fromStdString(to_string((pkg)->getValore())):"");
     txtValore->setPlaceholderText("Valore in €");
+    txtValore->setValidator(new QRegularExpressionValidator(QRegularExpression("[0-9]{1,6}+(\\.[0-9]{1,2})"), this));
 
     secondRow->addWidget(txtContenuto);
     secondRow->addWidget(txtValore);

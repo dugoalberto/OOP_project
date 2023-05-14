@@ -5,6 +5,7 @@
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QLabel>
+#include <QRegularExpressionValidator>
 #include "AddressWidget.h"
 AddressWidget::AddressWidget(Address *obj, bool toEdit, Sender sender, bool international, QWidget* parent) : QWidget(parent), address(obj) {
     QVBoxLayout* mainLayout = new QVBoxLayout(this);
@@ -30,6 +31,7 @@ AddressWidget::AddressWidget(Address *obj, bool toEdit, Sender sender, bool inte
 
     txtCap = new QLineEdit(QString::fromStdString((obj)? to_string(obj->getCap()):""));
     txtCap->setPlaceholderText("Cap");
+    txtCap->setValidator(new QRegularExpressionValidator(QRegularExpression("[0-9]{5}"), this));
 
     txtStato = new QLineEdit(QString::fromStdString((obj)? obj->getNazione():""));
     txtStato->setPlaceholderText("Stato");

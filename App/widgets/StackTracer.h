@@ -16,7 +16,6 @@
 class StackTracer : public QStackedWidget{
 private:
     Home *homePage;
-    SpedizioneAssicurataPage* spedizioneAssicurataPage;
     SelezioneTipoPage* selezioneTipoPage;
     ArrayList<Spedizione*> lstSpedizioni;
     //CreaSpedizione *creaSpedizionePage;
@@ -25,7 +24,6 @@ private:
 public:
     explicit StackTracer(ArrayList<Spedizione*> lstS, QWidget *parent = nullptr) : QStackedWidget(parent), lstSpedizioni(lstS) {
             homePage = new Home(lstSpedizioni, this);
-            spedizioneAssicurataPage = new SpedizioneAssicurataPage();
             selezioneTipoPage = new SelezioneTipoPage();
             //creaSpedizionePage = new CreaSpedizione(this);
             //spedizioniTotali = new SpedizioniTotali(this);
@@ -33,7 +31,6 @@ public:
 
             addWidget(homePage);
             addWidget(selezioneTipoPage);
-            addWidget(spedizioneAssicurataPage);
             //addWidget(creaSpedizionePage);
             //addWidget(spedizioniTotali);
             //addWidget(filiali);
@@ -63,7 +60,6 @@ public slots:
         setCurrentWidget(homePage);
     }
     void switchToSelezioneTipoPage() {
-        std::cout << "sei tornato indietro\n";
         setCurrentWidget(selezioneTipoPage);
     }
     void switchToSelectedCreatingPage(HierachyPageInterface* nuovaPagina){

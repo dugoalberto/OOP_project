@@ -7,7 +7,7 @@
 
 
 #include <QWidget>
-#include "../CustomWidgets/myButton.h"
+#include "../CustomWidgets/MyButton.h"
 #include "HierachyPages/HierachyPageInterface.h"
 
 class SelezioneTipoPage : public QWidget {

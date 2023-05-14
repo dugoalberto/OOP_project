@@ -7,7 +7,7 @@
 
 
 #include <QWidget>
-#include "../../../Model/SupportClasses/Assicurazione.h"
+#include "../../../../Model/SupportClasses/Assicurazione.h"
 
 class ListViewAssicurazioneItemWidget : public QWidget{
     Q_OBJECT

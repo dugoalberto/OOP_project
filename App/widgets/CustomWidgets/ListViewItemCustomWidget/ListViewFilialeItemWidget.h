@@ -7,8 +7,8 @@
 
 
 #include <QWidget>
-#include "../../../Model/SupportClasses/Filiale.h"
-#include "myButton.h"
+#include "../../../../Model/SupportClasses/Filiale.h"
+#include "../MyButton.h"
 
 class ListViewFilialeItemWidget : public QWidget{
 Q_OBJECT

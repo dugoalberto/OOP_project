@@ -8,8 +8,8 @@
 #include <QWidget>
 #include <QLabel>
 #include <QPushButton>
-#include "../../../Model/hierarchy/Spedizione.h"
-#include "myButton.h"
+#include "../../../../Model/hierarchy/Spedizione.h"
+#include "../MyButton.h"
 
 class ListViewSpedizioniItemWidget : public QWidget {
     Q_OBJECT
@@ -19,8 +19,8 @@ private:
     QLabel* lblStato;
     QLabel* lblPrezzo;
 
-    myButton* btnEdit;
-    myButton* btnDelete;
+    MyButton* btnEdit;
+    MyButton* btnDelete;
 public:
     ListViewSpedizioniItemWidget(Spedizione*, QWidget* = nullptr);
     void mouseDoubleClickEvent(QMouseEvent *event);

@@ -12,7 +12,7 @@
 #include "HierachyPageInterface.h"
 #include "../../../../Model/SupportClasses/Filiale.h"
 #include "../../../../Collection/ArrayList.h"
-#include "../../CustomWidgets/myButton.h"
+#include "../../CustomWidgets/MyButton.h"
 #include "../../../../Model/hierarchy/SpedizioneAssicurata.h"
 
 class SpedizioneAssicurataPage : public HierachyPageInterface {
@@ -21,8 +21,8 @@ private:
     QComboBox* possibiliFiliali;
     QComboBox* possibiliStati;
     QTextEdit* txtDescrizione;
-    myButton* btnAnnulla;
-    myButton* btnConferma;
+    MyButton* btnAnnulla;
+    MyButton* btnConferma;
     std::vector<Filiale> filiali;
 public:
     SpedizioneAssicurataPage(SpedizioneAssicurata * = nullptr, bool toEdit = false, QWidget *parent = nullptr);

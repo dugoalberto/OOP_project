@@ -9,7 +9,7 @@
 #include "../StackTracer.h"
 #include "../CustomWidgets/QLabelTitle.h"
 #include "../../../Model/hierarchy/Spedizione.h"
-#include "../CustomWidgets/ListViewSpedizioniItemWidget.h"
+#include "../CustomWidgets/ListViewItemCustomWidget/ListViewSpedizioniItemWidget.h"
 
 #include <iostream>
 Home::Home(ArrayList<Spedizione*>& lstDb, QWidget *parents) : QWidget(parents), lstElements(lstDb){
@@ -58,7 +58,7 @@ Home::Home(ArrayList<Spedizione*>& lstDb, QWidget *parents) : QWidget(parents), 
     txtSearchBar->setObjectName("searchBar");
     connect(txtSearchBar, &QLineEdit::textChanged, this, &Home::SearchbarModifiedSlot);
 
-    btnNewSpedizione = new myButton(QString::fromStdString("+"));
+    btnNewSpedizione = new MyButton(QString::fromStdString("+"));
     btnNewSpedizione->setMinimumWidth(100);
 
     lytRowSearch->addWidget(txtSearchBar);
@@ -101,15 +101,15 @@ void Home::loadListView() {
     }
 }
 
-myButton* Home::getSpedizioneButton() {
+MyButton* Home::getSpedizioneButton() {
     return btnNewSpedizione;
 }
 
-myButton *Home::getstatoSpedizioneButton() {
+MyButton *Home::getstatoSpedizioneButton() {
     return statoSpedizioneButton;
 }
 
-myButton *Home::getFiliere() {
+MyButton *Home::getFiliere() {
     return filiere;
 }
 

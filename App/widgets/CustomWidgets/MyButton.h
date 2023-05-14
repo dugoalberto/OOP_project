@@ -10,14 +10,14 @@
 #include <QVBoxLayout>
 #include <QFrame>
 
-class myButton: public QPushButton{
+class MyButton: public QPushButton{
     Q_OBJECT
 private:
     QVBoxLayout *layout;
     QFrame *frame;
     QVBoxLayout *frameLayout;
 public:
-    explicit myButton(const QString &text = nullptr, QWidget *parent = nullptr) {
+    explicit MyButton(const QString &text = nullptr, QWidget *parent = nullptr) {
         setText(text);
     }
 

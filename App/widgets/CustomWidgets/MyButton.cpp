@@ -4,4 +4,4 @@
 #include <QPushButton>
 #include <QVBoxLayout>
 #include <QFrame>
-#include "myButton.h"
+#include "MyButton.h"
