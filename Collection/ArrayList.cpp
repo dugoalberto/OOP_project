@@ -138,6 +138,11 @@ std::string ArrayList<T>::toString() const {
 }
 
 template<class T>
+T ArrayList<T>::operator[](int _index){
+    return _head[_index];
+}
+
+template<class T>
 ArrayList<T>::Iterator::Iterator(T* ptr) : objPtr(ptr) {}
 
 template<class T>
@@ -188,7 +193,6 @@ template<class T>
 ArrayList<T>::Iterator ArrayList<T>::end() {
     return Iterator(_head+_dimensione);
 }
-
 
 template class ArrayList<Spedizione*>;
 template class ArrayList<Filiale*>;

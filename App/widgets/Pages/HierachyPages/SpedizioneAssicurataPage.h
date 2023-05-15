@@ -14,23 +14,28 @@
 #include "../../../../Collection/ArrayList.h"
 #include "../../CustomWidgets/MyButton.h"
 #include "../../../../Model/hierarchy/SpedizioneAssicurata.h"
+#include "../../CustomWidgets/AddressWidget.h"
+#include "../../CustomWidgets/PackageWidgetFolder/PackageWidgetAssicurata.h"
 
 class SpedizioneAssicurataPage : public HierachyPageInterface {
 Q_OBJECT
 private:
+    AddressWidget* mittente;
+    AddressWidget* destinatario;
+    PackageWidgetAssicurata* package;
+
     QComboBox* possibiliFiliali;
     QComboBox* possibiliStati;
     QTextEdit* txtDescrizione;
     MyButton* btnAnnulla;
     MyButton* btnConferma;
     std::vector<Filiale> filiali;
+
+    bool ConvalidaInput() const;
 public:
     SpedizioneAssicurataPage(SpedizioneAssicurata * = nullptr, bool toEdit = false, QWidget *parent = nullptr);
-public
-slots:
-    void btnAnnullaPressedSlot();
-signals:
-    void backToSelezioneTipoPageSignal();
+public slots:
+    void CreaSlot() override;
 };
 
 

@@ -3,14 +3,13 @@
 //
 #include <iostream>
 #include "HierachyPageInterface.h"
-HierachyPageInterface::HierachyPageInterface(const Spedizione *s, QWidget *parent) : QWidget(parent), obj(s){}
+HierachyPageInterface::HierachyPageInterface(Spedizione *s, QWidget *parent) : QWidget(parent), obj(s){}
 
 void HierachyPageInterface::BackSlot() {
     emit BackSignal();
 }
 
 void HierachyPageInterface::ModificaSlot() {
-    std::cout << "Damn modifica Slot" << std::endl;
     emit ModificaSignal(obj);
 }
 

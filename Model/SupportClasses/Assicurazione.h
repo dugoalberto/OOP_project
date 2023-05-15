@@ -10,6 +10,7 @@ class Assicurazione {
 private:
     std::string nomeAssicurazione;
     float prezzo;
+    int numeroServizi;
 public:
     Assicurazione(const std::string &nomeAssicurazione, float prezzo);
     std::string toString() const;
@@ -19,8 +20,10 @@ public:
     void setNomeAssicurazione(const std::string &nomeAssicurazione);
 
     float getPrezzo() const;
+    int getNumeroServizi() const;
 
     void setPrezzo(float prezzo);
+    void setNumeroServizi(float numero);
     virtual ~Assicurazione() {}
 
 };

@@ -120,3 +120,20 @@ void Home::FilterSelectedSlot() {
 void Home::SearchbarModifiedSlot() {
     loadListView();
 }
+
+void Home::AddNewSpedizioneSlot(Spedizione* spedizione) {
+
+    int n = rand() % (9999-1000+1)+1000;
+    while(SearchSpedizioneById(n) != -1){
+        n = rand() % (9999-1000+1)+1000;
+    }
+    spedizione->setTrakingNumber(n);
+    lstElements.add(spedizione);
+}
+
+int Home::SearchSpedizioneById(int id) {
+    for(int i = 0; i < lstElements.getDim(); ++i)
+        if(lstElements[i]->getTrakingNumber() == id)
+            return i;
+    return -1;
+}

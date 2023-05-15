@@ -40,10 +40,12 @@ public:
     MyButton *getFiliere();
 
     void loadListView();
+    int SearchSpedizioneById(int id);
 public
 slots:
     void FilterSelectedSlot();
     void SearchbarModifiedSlot();
+    void AddNewSpedizioneSlot(Spedizione*);
 };
 
 

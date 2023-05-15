@@ -26,6 +26,7 @@ public:
     void removeAll();
     bool exchange(int _index1, int _index2);
     std::string toString() const;
+    T operator[](int _index);
 
     class Iterator {
     private:

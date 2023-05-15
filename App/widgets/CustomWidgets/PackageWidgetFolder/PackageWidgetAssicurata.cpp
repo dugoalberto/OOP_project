@@ -58,10 +58,32 @@ float PackageWidgetAssicurata::addedCost() const {
     return totServizi*assicurazione->getPrezzo();
 }
 
-Assicurazione* PackageWidgetAssicurata::getAssicurazione() const {
-    return assicurazione;
+Assicurazione* PackageWidgetAssicurata::getAssicurazione() {
+    if(assicurazione)
+        return assicurazione;
+    else return &lstAssicurazioni[cmbAssicurazioniPossibili->currentIndex()];
 }
 
 void PackageWidgetAssicurata::AssicurazioneChosenChangedSlot() {
     txtCostoPerServizio->setText(QString::number(lstAssicurazioni[cmbAssicurazioniPossibili->currentIndex()].getPrezzo(), 'f', 2));
 }
+
+float PackageWidgetAssicurata::PrezzoTotaleAssicurazione() const {
+    int tot = 0;
+    for(int i = 0; i < 3; i++)
+        if(checkBoxs[i]->isChecked())
+            tot+=assicurazione->getPrezzo();
+    return tot;
+}
+
+int PackageWidgetAssicurata::getNumeroServiziSelezionati() const {
+    int selezionate = 0;
+    for(int i = 0; i < 3; i++)
+        if(checkBoxs[i]->isChecked()) selezionate++;
+    return selezionate;
+}
+
+bool PackageWidgetAssicurata::ConvalidaInput() const {
+    return PackageWidgetBase::ConvalidaInput() && getNumeroServiziSelezionati() > 0;
+}
+

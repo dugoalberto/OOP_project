@@ -10,10 +10,10 @@
 #include "PackageWidgetBase.h"
 #include "../../../../Model/SupportClasses/Assicurazione.h"
 #include "../../../../Collection/ArrayList.h"
+#include "../../CustomWidgets/AddressWidget.h"
 
 class PackageWidgetAssicurata : public PackageWidgetBase{
 private:
-    //std::vector<Assicurazione> assicurazioniPossibili;
     Assicurazione* assicurazione;
     QCheckBox *checkBoxs[3];
     std::vector<Assicurazione> lstAssicurazioni;
@@ -22,7 +22,10 @@ private:
 public:
     PackageWidgetAssicurata(Package* = nullptr, bool toEdit = false, QWidget* = nullptr);
     float addedCost() const;
-    Assicurazione* getAssicurazione() const;
+    Assicurazione* getAssicurazione();
+    bool ConvalidaInput() const override;
+    float PrezzoTotaleAssicurazione() const;
+    int getNumeroServiziSelezionati() const;
 public slots:
     void AssicurazioneChosenChangedSlot();
 };

@@ -13,7 +13,7 @@ SpedizioneAssicurata::SpedizioneAssicurata(int trakingNumber, const Address &mit
 }
 
 float SpedizioneAssicurata::getCosto() const {
-    return 70+assicurazione.getPrezzo();
+    return 70+assicurazione.getPrezzo()*assicurazione.getNumeroServizi();
 }
 
 std::string SpedizioneAssicurata::getTypeName() const {

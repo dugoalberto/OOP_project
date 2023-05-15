@@ -65,8 +65,15 @@ public slots:
     void switchToSelectedCreatingPage(HierachyPageInterface* nuovaPagina){
         addWidget(nuovaPagina);
         connect(nuovaPagina, &HierachyPageInterface::BackSignal, this, &StackTracer::switchToSelezioneTipoPage);
+        connect(nuovaPagina, &HierachyPageInterface::CreaSignal, this, &StackTracer::addNewSpedizioneSlot);
         //TODO FARLO ANCHE PER L'ALTRO PULSANTE DENTRO LE SCHERMATE
         setCurrentWidget(nuovaPagina);
+    }
+    void addNewSpedizioneSlot(Spedizione* spedizione){
+        cout << "Nuova spedizione arrivata e aggiunta" << endl;
+        homePage->AddNewSpedizioneSlot(spedizione);
+        homePage->loadListView();
+        switchToHomePage();
     }
     /*
     void switchToSpedizioniTotali() {

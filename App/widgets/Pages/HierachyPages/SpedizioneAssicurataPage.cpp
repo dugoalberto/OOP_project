@@ -6,16 +6,16 @@
 #include <QGroupBox>
 #include <QComboBox>
 #include "SpedizioneAssicurataPage.h"
-#include "../../CustomWidgets/AddressWidget.h"
-#include "../../CustomWidgets/PackageWidgetFolder/PackageWidgetAssicurata.h"
 #include "../../../../Librerie/FileManager.h"
 
 SpedizioneAssicurataPage::SpedizioneAssicurataPage(SpedizioneAssicurata *spe, bool toEdit, QWidget *parent): HierachyPageInterface(spe, parent) {
     QVBoxLayout* lytMain = new QVBoxLayout(this);
 
     QVBoxLayout* lytIndirizzi = new QVBoxLayout();
-    lytIndirizzi->addWidget(new AddressWidget());
-    lytIndirizzi->addWidget(new AddressWidget(nullptr, false, AddressWidget::Sender::DESTINATARIO));
+    mittente = new AddressWidget();
+    lytIndirizzi->addWidget(mittente);
+    destinatario = new AddressWidget(nullptr, false, AddressWidget::Sender::DESTINATARIO);
+    lytIndirizzi->addWidget(destinatario);
     QGroupBox* grpAddress = new QGroupBox();
     grpAddress->setLayout(lytIndirizzi);
 
@@ -24,7 +24,8 @@ SpedizioneAssicurataPage::SpedizioneAssicurataPage(SpedizioneAssicurata *spe, bo
     QHBoxLayout* lowerRow = new QHBoxLayout();
 
     QVBoxLayout* lytPackage = new QVBoxLayout();
-    lytPackage->addWidget(new PackageWidgetAssicurata());
+    package = new PackageWidgetAssicurata();
+    lytPackage->addWidget(package);
     QGroupBox* grpPackage = new QGroupBox();
     grpPackage->setLayout(lytPackage);
     lowerRow->addWidget(grpPackage);
@@ -61,7 +62,7 @@ SpedizioneAssicurataPage::SpedizioneAssicurataPage(SpedizioneAssicurata *spe, bo
     lytFilialiDescrizioni->addLayout(lytFilialiStato);
 
     txtDescrizione = new QTextEdit();
-    txtDescrizione->setPlaceholderText("Inserire descrizione");
+    txtDescrizione->setPlaceholderText("Inserire descrizione (opzionale)");
     txtDescrizione->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     lytFilialiDescrizioni->addWidget(txtDescrizione);
 
@@ -85,10 +86,27 @@ SpedizioneAssicurataPage::SpedizioneAssicurataPage(SpedizioneAssicurata *spe, bo
     lowerRow->addWidget(grpPulsanti);
 
     connect(btnAnnulla, &QPushButton::clicked, this, &HierachyPageInterface::BackSlot);
+    connect(btnConferma, &QPushButton::clicked, this, &HierachyPageInterface::CreaSlot);
 
     lytMain->addLayout(lowerRow);
 }
 
-void SpedizioneAssicurataPage::btnAnnullaPressedSlot() {
-    emit backToSelezioneTipoPageSignal();
+void SpedizioneAssicurataPage::CreaSlot() {
+    if( mittente->ConvalidaInput() &&
+        destinatario->ConvalidaInput() &&
+        package->ConvalidaInput()){
+
+        Assicurazione* toSet = package->getAssicurazione();
+        toSet->setNumeroServizi(package->getNumeroServiziSelezionati());
+        SpedizioneAssicurata* nuova = new SpedizioneAssicurata(-1,
+                                                               *mittente->getAddress(),
+                                                               *mittente->getAddress(),
+                                                               *package->getPackage(),
+                                                               Stato(possibiliStati->currentText().toStdString(), filiali[possibiliFiliali->currentIndex()]),
+                                                               txtDescrizione->toPlainText().toStdString(),
+                                                               *toSet);
+        emit HierachyPageInterface::CreaSignal(nuova);
+
+    }
+
 }

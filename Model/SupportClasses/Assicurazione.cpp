@@ -5,7 +5,7 @@
 #include "Assicurazione.h"
 
 Assicurazione::Assicurazione(const std::string &nomeAssicurazione, float prezzo) : nomeAssicurazione(nomeAssicurazione),
-                                                                                   prezzo(prezzo) {
+                                                                                   prezzo(prezzo), numeroServizi(0){
 
 }
 
@@ -28,3 +28,12 @@ void Assicurazione::setPrezzo(float prezzo) {
 std::string Assicurazione::toString() const {
     return nomeAssicurazione + "|" + std::to_string(prezzo);
 }
+
+int Assicurazione::getNumeroServizi() const {
+    return numeroServizi;
+}
+
+void Assicurazione::setNumeroServizi(float numero) {
+    Assicurazione::numeroServizi = numero;
+}
+

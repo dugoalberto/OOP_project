@@ -7,6 +7,8 @@
 #include <QLabel>
 #include <QRegularExpressionValidator>
 #include "AddressWidget.h"
+#include <iostream>
+
 AddressWidget::AddressWidget(Address *obj, bool toEdit, Sender sender, bool international, QWidget* parent) : QWidget(parent), address(obj) {
     QVBoxLayout* mainLayout = new QVBoxLayout(this);
 
@@ -35,6 +37,7 @@ AddressWidget::AddressWidget(Address *obj, bool toEdit, Sender sender, bool inte
 
     txtStato = new QLineEdit(QString::fromStdString((obj)? obj->getNazione():""));
     txtStato->setPlaceholderText("Stato");
+    txtStato->setInputMask("[A-Z]{2}");
 
     setField(toEdit);
 
@@ -45,6 +48,7 @@ AddressWidget::AddressWidget(Address *obj, bool toEdit, Sender sender, bool inte
     secondRow->addWidget(txtCap);
     if(international)
         secondRow->addWidget(txtStato);
+    else txtStato->setText("IT");
 
     mainLayout->addLayout(secondRow);
 }
@@ -56,4 +60,23 @@ void AddressWidget::setField(bool toBeEdited){
     txtProvincia->setReadOnly(address && !toBeEdited);
     txtCap->setReadOnly(address && !toBeEdited);
     txtStato->setReadOnly(address && !toBeEdited);
+}
+
+Address* AddressWidget::getAddress() const {
+    if(address != nullptr)
+        return address;
+    else if(ConvalidaInput()) return new Address(txtNome->text().toStdString(),
+                            txtIndirizzo->text().toStdString(),
+                            txtCitta->text().toStdString(),
+                            txtProvincia->text().toStdString(),
+                            std::stoi(txtCap->text().toStdString()),
+                            txtStato->text().toStdString());
+    else return nullptr;
+}
+
+bool AddressWidget::ConvalidaInput() const {
+    return  !txtNome->text().isEmpty() &&
+            !txtIndirizzo->text().isEmpty() &&
+            !txtCitta->text().isEmpty() &&
+            txtCap->hasAcceptableInput();
 }

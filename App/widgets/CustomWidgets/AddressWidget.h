@@ -33,6 +33,7 @@ public:
     Address* getAddress() const;
 
     void setField(bool toBeEdited);
+    bool ConvalidaInput() const;
 };
 
 
