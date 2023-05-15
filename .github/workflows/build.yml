@@ -17,10 +17,7 @@ jobs:
       run: sudo apt-get install gcc-11
 
     - name: Install Qt
-      run: |
-        sudo apt install -y qt6-base-dev
-        qtchooser -install qt6 $qt6
-        export QT_SELECT=qt6
+      uses: jurplel/install-qt-action@v2
 
     - name: Configure build
       run: qmake -o Makefile ./project.pro
