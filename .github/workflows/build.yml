@@ -23,11 +23,11 @@ jobs:
       run: ls
 
     - name: Configure build
-      run: qmake -o Makefile ./OOP_project/project.pro
+      run: qmake -o Makefile Project.pro
 
     - name: Build project
       run: make
 
     - name: Run project
-      run: ./OOP_project/project
+      run: ./Project
 
