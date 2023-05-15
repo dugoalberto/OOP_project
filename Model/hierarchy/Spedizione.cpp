@@ -119,7 +119,7 @@ std::vector<std::string> Spedizione::ScomposeAttribute(const std::string &str) {
     std::vector<std::string> res;
 
     string current = "";
-    for(int i = 0; i < str.size(); i++){
+    for(unsigned int i = 0; i < str.size(); i++){
         while(str[i] != SEPARATOR[0] && str[i] != '\0'){
             current += str[i];
             ++i;

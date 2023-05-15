@@ -7,8 +7,16 @@
 
 
 #include <QWidget>
+#include <QListWidget>
+#include <QGroupBox>
 #include "../CustomWidgets/MyButton.h"
 #include "HierachyPages/HierachyPageInterface.h"
+#include "../CustomWidgets/QLabelTitle.h"
+#include "../../../Model/SupportClasses/Filiale.h"
+#include "../../../Librerie/FileManager.h"
+#include "../CustomWidgets/ListViewItemCustomWidget/ListViewFilialeItemWidget.h"
+#include "../CustomWidgets/ListViewItemCustomWidget/ListViewAssicurazioneItemWidget.h"
+#include "HierachyPages/SpedizioneAssicurataPage.h"
 
 class SelezioneTipoPage : public QWidget {
     Q_OBJECT

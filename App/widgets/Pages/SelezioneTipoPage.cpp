@@ -1,16 +1,7 @@
 //
 // Created by utente on 12/05/2023.
 //
-
-#include <QGroupBox>
-#include <QListWidget>
 #include "SelezioneTipoPage.h"
-#include "../CustomWidgets/QLabelTitle.h"
-#include "../../../Model/SupportClasses/Filiale.h"
-#include "../../../Librerie/FileManager.h"
-#include "../CustomWidgets/ListViewItemCustomWidget/ListViewFilialeItemWidget.h"
-#include "../CustomWidgets/ListViewItemCustomWidget/ListViewAssicurazioneItemWidget.h"
-#include "HierachyPages/SpedizioneAssicurataPage.h"
 
 SelezioneTipoPage::SelezioneTipoPage(QWidget *parent) : QWidget(parent){
     QVBoxLayout* lytMain = new QVBoxLayout(this);
@@ -100,7 +91,7 @@ template<class T>
 void SelezioneTipoPage::loadView(std::vector<T> &lst, QListWidget *wiew) const {
     for(auto it = lst.begin(); it != lst.end(); ++it) {
         QListWidgetItem *item = new QListWidgetItem();
-        QWidget* widget;
+        QWidget* widget = nullptr;
         if (dynamic_cast<Filiale*>(&(*it))){
             widget = new ListViewFilialeItemWidget(dynamic_cast<Filiale *>(&(*it)));
         }

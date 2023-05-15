@@ -97,7 +97,7 @@ std::vector<Assicurazione> FileManager::readAssicurazioni() {
     while (linea != ""){
         std::vector<std::string> attAssicurazione;
         string current = "";
-        for(int i = 0; i < linea.size(); i++){
+        for(unsigned int i = 0; i < linea.size(); i++){
             while(linea[i] != '|' && linea[i] != '\0'){
                 current += linea[i];
                 ++i;
@@ -127,7 +127,7 @@ std::vector<Filiale> FileManager::readFiliali() {
     while (linea != ""){
         std::vector<std::string> attFiliale;
         string current = "";
-        for(int i = 0; i < linea.size(); i++){
+        for(unsigned int i = 0; i < linea.size(); i++){
             while(linea[i] != '|' && linea[i] != '\0'){
                 current += linea[i];
                 ++i;
