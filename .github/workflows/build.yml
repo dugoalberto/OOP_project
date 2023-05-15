@@ -18,6 +18,9 @@ jobs:
 
     - name: Install Qt
       uses: jurplel/install-qt-action@v2
+      
+    - name: Watching folder
+      run: ls
 
     - name: Configure build
       run: qmake -o Makefile ./OOP_project/project.pro
