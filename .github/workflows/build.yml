@@ -18,7 +18,7 @@ jobs:
 
     - name: Install Qt
       run: |
-        sudo apt-get install -y qt6-qmake
+        sudo apt-get install -y qt6-qmake-bin
 
     - name: Configure build
       run: qmake -o Makefile ./project.pro
