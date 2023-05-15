@@ -20,11 +20,11 @@ jobs:
       uses: jurplel/install-qt-action@v2
 
     - name: Configure build
-      run: qmake -o Makefile ./project.pro
+      run: qmake -o Makefile ./OOP_project/project.pro
 
     - name: Build project
       run: make
 
     - name: Run project
-      run: ./project
+      run: ./OOP_project/project
 
