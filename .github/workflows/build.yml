@@ -13,21 +13,21 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Set up Qt
-      uses: qt-actions/setup-qt@v1
-      with:
-        qt-version: '6.2.4'
+    - name: Install GCC
+      run: sudo apt-get install gcc-11
 
-    - name: Set up GCC
-      uses: actions/setup-gcc@v2
-      with:
-        gcc-version: '11'
+    - name: Install Qt
+      uses: jurplel/install-qt-action@v2
+      
+    - name: Watching folder
+      run: ls
 
     - name: Configure build
-      run: qmake -o Makefile ./project.pro
+      run: qmake -o Makefile Project.pro
 
     - name: Build project
       run: make
 
     - name: Run project
-      run: ./project
+      run: ./Project
+
