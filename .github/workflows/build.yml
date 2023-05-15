@@ -17,7 +17,7 @@ jobs:
       run: sudo apt-get install gcc-11
 
     - name: Install Qt
-      uses: jurplel/install-qt-action@v2
+      uses: jurplel/install-qt-action@v3
       
     - name: Watching folder
       run: ls
