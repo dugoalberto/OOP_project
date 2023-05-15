@@ -73,9 +73,6 @@ HEADERS += \
     App/widgets/CustomWidgets/ListViewItemCustomWidget/ListViewAssicurazioneItemWidget.h \
     App/widgets/CustomWidgets/ListViewItemCustomWidget/ListViewFilialeItemWidget.h
 
-RESOURCES += \
-    my_resources.qrc
-
 LIBS += \
     -lQt6Core \
     -lQt6Gui \
