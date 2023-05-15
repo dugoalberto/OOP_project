@@ -146,24 +146,24 @@ template<class T>
 ArrayList<T>::Iterator::Iterator(T* ptr) : objPtr(ptr) {}
 
 template<class T>
-ArrayList<T>::Iterator ArrayList<T>::Iterator::operator++() {
+typename ArrayList<T>::Iterator ArrayList<T>::Iterator::operator++() {
     objPtr++;
     return objPtr;
 }
 template<class T>
-ArrayList<T>::Iterator ArrayList<T>::Iterator::operator++(int i) {
+typename ArrayList<T>::Iterator ArrayList<T>::Iterator::operator++(int i) {
     ArrayList<T>::Iterator temp = *this;
     objPtr++;
     return temp;
 }
 
 template<class T>
-ArrayList<T>::Iterator  ArrayList<T>::Iterator::operator--() {
+typename ArrayList<T>::Iterator  ArrayList<T>::Iterator::operator--() {
     objPtr--;
     return objPtr;
 }
 template<class T>
-ArrayList<T>::Iterator  ArrayList<T>::Iterator::operator--(int) {
+typename ArrayList<T>::Iterator  ArrayList<T>::Iterator::operator--(int) {
     ArrayList<T>::Iterator temp = *this;
     objPtr--;
     return temp;
@@ -186,11 +186,11 @@ bool ArrayList<T>::Iterator::operator!=(const ArrayList<T>::Iterator& other) {
 }
 
 template<class T>
-ArrayList<T>::Iterator ArrayList<T>::begin() {
+typename ArrayList<T>::Iterator ArrayList<T>::begin() {
     return Iterator(_head);
 }
 template<class T>
-ArrayList<T>::Iterator ArrayList<T>::end() {
+typename ArrayList<T>::Iterator ArrayList<T>::end() {
     return Iterator(_head+_dimensione);
 }
 

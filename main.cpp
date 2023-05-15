@@ -12,7 +12,7 @@
 #include <cstdlib>
 #include <ctime>
 
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[]) {/*
     srand(time(0));
     int n = rand() % (9999-1000+1)+1000;
     SpedizionePremium *sp1 = new SpedizionePremium(n,
@@ -104,7 +104,7 @@ int main(int argc, char *argv[]) {
                                                          "descrizione",
                                                          Assicurazione("Assicurazione Economica", 53)
     );
-
+*/
     FileManager* fm = new FileManager("fileDiProva");
     ArrayList<Spedizione*> nuovo = fm->readSpedizioni();
     /*nuovo.add(sp1);
