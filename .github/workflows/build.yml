@@ -19,7 +19,7 @@ jobs:
     - name: Install Qt
       run: |
         sudo apt install -y qt6-base-dev
-        qtchooser -install qt6 qt6-base-dev
+        qtchooser -install qt6 $qt6-base-dev
         export QT_SELECT=qt6
 
     - name: Configure build
