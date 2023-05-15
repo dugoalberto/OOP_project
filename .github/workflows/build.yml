@@ -21,6 +21,9 @@ jobs:
       
     - name: Watching folder
       run: ls
+      
+    - name: Check Qt version
+      run: qmake --version
 
     - name: Configure build
       run: qmake -o Makefile Project.pro
