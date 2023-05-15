@@ -73,7 +73,4 @@ HEADERS += \
     App/widgets/CustomWidgets/ListViewItemCustomWidget/ListViewAssicurazioneItemWidget.h \
     App/widgets/CustomWidgets/ListViewItemCustomWidget/ListViewFilialeItemWidget.h
 
-LIBS += \
-    -lQt6Core \
-    -lQt6Gui \
-    -lQt6Widgets
+LIBS += -L$$[QT_INSTALL_LIBS] -lQt6Core -lQt6Gui -lQt6Widgets
