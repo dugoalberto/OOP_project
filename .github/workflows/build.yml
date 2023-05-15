@@ -18,10 +18,7 @@ jobs:
 
     - name: Install Qt
       run: |
-        sudo apt-get install -y qt6-default
         sudo apt-get install -y qt6-qmake
-        sudo apt-get install -y qt6-base
-        sudo apt-get install -y qt6-x11extras
 
     - name: Configure build
       run: qmake -o Makefile ./project.pro
