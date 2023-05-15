@@ -1,9 +1,7 @@
-name: Build on Ubuntu with Qt
+name: My GitHub Action
+
 on:
   push:
-    branches:
-      - main
-  pull_request:
     branches:
       - main
 
@@ -12,25 +10,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
-      - name: Set up Qt
-        uses: qt-actions/setup-qt@v3
-        with:
-          qt-version: '6.2.4'
+    - name: Set up Qt
+      uses: qt-actions/setup-qt@v1
+      with:
+        qt-version: '6.2.4'
 
-      - name: Set up qmake
-        run: sudo apt-get install -y qttools5-dev-tools
+    - name: Set up GCC
+      uses: actions/setup-gcc@v2
+      with:
+        gcc-version: '11'
 
-      - name: Set up GCC
-        uses: actions/setup-gcc@v2
-        with:
-          gcc-version: '11.3'
+    - name: Configure build
+      run: qmake -o Makefile ./project.pro
 
-      - name: Build project
-        run: |
-          mkdir build
-          cd build
-          qmake ..
-          make
+    - name: Build project
+      run: make
+
+    - name: Run project
+      run: ./project
