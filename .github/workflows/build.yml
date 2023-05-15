@@ -19,7 +19,7 @@ jobs:
         qt-version: '6.2.4'
 
     - name: Set up GCC
-      uses: actions/setup-gcc@v2
+      uses: actions/setup-gcc-toolchain@v2
       with:
         gcc-version: '11'
 
