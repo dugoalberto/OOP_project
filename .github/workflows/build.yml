@@ -20,6 +20,7 @@ jobs:
       uses: jurplel/install-qt-action@v3
       with:
         version: '6.2.4'
+        cache: 'true'
       
     - name: Watching folder
       run: ls
