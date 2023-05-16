@@ -10,7 +10,7 @@ ListViewSpedizioniItemWidget::ListViewSpedizioniItemWidget(Spedizione *s, QWidge
 
     QLabel* lblSprite = new QLabel();
 
-    lblSprite->setPixmap((new QPixmap(QString::fromStdString("../Assets/Sprite/"+obj->getTypeName()+".png")))->scaled(60,60));
+    lblSprite->setPixmap((new QPixmap(QString::fromStdString("../src/Assets/Sprite/"+obj->getTypeName()+".png")))->scaled(60,60));
     lblSprite->setObjectName("lblSprite");
 
     lblTrackingNumber = new QLabel(QString::number(obj->getTrakingNumber()));

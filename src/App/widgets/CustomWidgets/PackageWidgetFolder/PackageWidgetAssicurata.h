@@ -10,7 +10,7 @@
 #include "PackageWidgetBase.h"
 #include "../../../../Model/SupportClasses/Assicurazione.h"
 #include "../../../../Collection/ArrayList.h"
-#include "../../CustomWidgets/AddressWidget.h"
+#include "../AddressWidget.h"
 
 class PackageWidgetAssicurata : public PackageWidgetBase{
 private:

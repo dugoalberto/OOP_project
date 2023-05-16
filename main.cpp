@@ -1,13 +1,12 @@
 #include <QApplication>
 #include <QFile>
-#include "Collection/ArrayList.cpp"
-#include "App/widgets/StackTracer.h"
-//#include "Librerie/DataPersistence.h"
-#include "Librerie/FileManager.h"
-#include "Model/hierarchy/SpedizioneEconomica.h"
-#include "Model/hierarchy/SpedizioneCargo.h"
-#include "Model/hierarchy/SpedizioneInternazionale.h"
-#include "Model/hierarchy/SpedizioneAssicurata.h"
+#include "src/Collection/ArrayList.cpp"
+#include "src/App/widgets/StackTracer.h"
+#include "src/Librerie/FileManager.h"
+#include "src/Model/hierarchy/SpedizioneEconomica.h"
+#include "src/Model/hierarchy/SpedizioneCargo.h"
+#include "src/Model/hierarchy/SpedizioneInternazionale.h"
+#include "src/Model/hierarchy/SpedizioneAssicurata.h"
 
 #include <cstdlib>
 #include <ctime>
