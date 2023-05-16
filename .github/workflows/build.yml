@@ -33,6 +33,3 @@ jobs:
     - name: Build project
       run: make
 
-    - name: Run project
-      run: ./Project
-
