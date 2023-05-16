@@ -12,12 +12,12 @@
 
 FileManager::FileManager(const std::string &fn) : fileName(fn+".txt"){
     file = new fstream;
-    file->open("../src/SaveFiles/"+fileName,std::ios::app);
+    file->open("src/SaveFiles/"+fileName,std::ios::app);
     file->close();
 }
 
 void FileManager::saveData(ArrayList<Spedizione *> &vettore) const {
-    std::ofstream file("../src/SaveFiles/"+fileName, std::ios::out);
+    std::ofstream file("src/SaveFiles/"+fileName, std::ios::out);
     for(auto it = vettore.begin(); it != vettore.end(); it++)
         file << (*it)->toSaveFormat() + "\n";
     file.close();
@@ -25,7 +25,7 @@ void FileManager::saveData(ArrayList<Spedizione *> &vettore) const {
 
 ArrayList<Spedizione*> FileManager::readSpedizioni() const {
     ArrayList<Spedizione*> res;
-    file->open("../src/SaveFiles/"+fileName,std::ios::in);
+    file->open("src/SaveFiles/"+fileName,std::ios::in);
     string linea;
     std::getline(*file, linea);
     while(linea != ""){
@@ -85,13 +85,13 @@ ArrayList<Spedizione*> FileManager::readSpedizioni() const {
 
 std::vector<Assicurazione> FileManager::readAssicurazioni() {
     fstream *fA = new fstream;
-    fA->open("../src/SaveFiles/Assicurazioni.txt",std::ios::app);
+    fA->open("src/SaveFiles/Assicurazioni.txt",std::ios::app);
     fA->close();
 
     std::vector<Assicurazione> res;
 
     fstream* fileAssicurazioni = new fstream;
-    fileAssicurazioni->open("../src/SaveFiles/Assicurazioni.txt", std::ios::in);
+    fileAssicurazioni->open("src/SaveFiles/Assicurazioni.txt", std::ios::in);
     std::string linea;
     std::getline(*fileAssicurazioni, linea);
     while (linea != ""){
@@ -115,13 +115,13 @@ std::vector<Assicurazione> FileManager::readAssicurazioni() {
 
 std::vector<Filiale> FileManager::readFiliali() {
     fstream *fL = new fstream;
-    fL->open("../src/SaveFiles/Filiali.txt",std::ios::app);
+    fL->open("src/SaveFiles/Filiali.txt",std::ios::app);
     fL->close();
 
     std::vector<Filiale> res;
 
     fstream* fileFiliali = new fstream;
-    fileFiliali->open("../src/SaveFiles/Filiali.txt", std::ios::in);
+    fileFiliali->open("src/SaveFiles/Filiali.txt", std::ios::in);
     std::string linea;
     std::getline(*fileFiliali, linea);
     while (linea != ""){
@@ -144,14 +144,14 @@ std::vector<Filiale> FileManager::readFiliali() {
 }
 
 void FileManager::saveAssicurazioni(ArrayList<Assicurazione *> vettore) {
-    std::ofstream file("../src/SaveFiles/Assicurazioni.txt", std::ios::out);
+    std::ofstream file("src/SaveFiles/Assicurazioni.txt", std::ios::out);
     for(auto it = vettore.begin(); it != vettore.end(); it++)
         file << (*it)->toString() + "\n";
     file.close();
 }
 
 void FileManager::saveFiliali(ArrayList<Filiale *> vettore) {
-    std::ofstream file("../src/SaveFiles/Filiali.txt", std::ios::out);
+    std::ofstream file("src/SaveFiles/Filiali.txt", std::ios::out);
     for(auto it = vettore.begin(); it != vettore.end(); it++)
         file << (*it)->toString() + "\n";
     file.close();

@@ -117,8 +117,8 @@ int main(int argc, char *argv[]) {/*
     fm->saveData(nuovo);
 
     QApplication app(argc, argv);
-    QFile stylesheet("../styleFile.qss");
-    app.setWindowIcon(QIcon("../Assets/Icon/icon.png"));
+    app.setWindowIcon(QIcon("Assets/Icon/icon.png"));
+    QFile stylesheet("styleFile.qss");
     stylesheet.open(QFile::ReadOnly);
     app.setStyleSheet(QLatin1String(stylesheet.readAll()));
     StackTracer st(nuovo, nullptr);
