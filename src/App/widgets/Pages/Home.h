@@ -5,17 +5,18 @@
 #ifndef PROJECT_HOME_H
 #define PROJECT_HOME_H
 
-
-#include <QMainWindow>
 #include <QVBoxLayout>
 #include <QCheckBox>
 #include <QListWidget>
+#include <QLineEdit>
 #include <QListWidgetItem>
+#include <QGroupBox>
 #include "../CustomWidgets/MyButton.h"
+#include "../CustomWidgets/QLabelTitle.h"
 #include "../../../Model/hierarchy/Spedizione.h"
 #include "../../../Collection/ArrayList.h"
-//#include "CreaSpedizione.h"
-//#include "SpedizioniTotali.h"
+#include "../../../Librerie/FileManager.h"
+#include "../CustomWidgets/ListViewItemCustomWidget/ListViewSpedizioniItemWidget.h"
 
 class Home : public QWidget{
 Q_OBJECT
@@ -24,9 +25,10 @@ private:
     MyButton *statoSpedizioneButton;
     MyButton *filiere;
 
+    FileManager* fm;
     ArrayList<Spedizione*> lstElements;
 public:
-    explicit Home(ArrayList<Spedizione*>&, QWidget *parent = nullptr);
+    explicit Home(QWidget *parent = nullptr);
 
     QLineEdit* txtSearchBar;
     MyButton* btnOrderButton;
@@ -40,12 +42,14 @@ public:
     MyButton *getFiliere();
 
     void loadListView();
-    int SearchSpedizioneById(int id);
 public
 slots:
     void FilterSelectedSlot();
     void SearchbarModifiedSlot();
     void AddNewSpedizioneSlot(Spedizione*);
+signals:
+    void SaveOnFileSignal();
+
 };
 
 

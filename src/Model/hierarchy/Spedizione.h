@@ -10,11 +10,9 @@
 #include "../SupportClasses/Address.h"
 #include "../SupportClasses/Package.h"
 #include "../SupportClasses/Stato.h"
-#include "../../Librerie/json.hpp"
 #include "../../App/widgets/Visitor/Visitor.h"
 
 using namespace std;
-using json = nlohmann::json;
 
 class Spedizione {
 protected:
@@ -61,10 +59,6 @@ public:
     void setDescrizione(const string &descrizione);
 
     friend ostream &operator<<(ostream &os, const Spedizione &spedizione);
-
-    //json
-    //json objectToJson();
-    //virtual Spedizione* jsonToObject(const json &dati) {};
 
     virtual std::string getTypeName() const = 0;
     virtual std::string toSaveFormat() const;

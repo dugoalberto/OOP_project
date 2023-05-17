@@ -18,10 +18,12 @@ PackageWidgetBase::PackageWidgetBase(Package *pkg, bool toEdit, QWidget* parent)
     QHBoxLayout* secondRow = new QHBoxLayout();
     txtContenuto = new QLineEdit((pkg)?QString::fromStdString((pkg)->getContenuto()):"");
     txtContenuto->setPlaceholderText("Contenuto");
+    connect(txtContenuto, &QLineEdit::textChanged, this, &PackageWidgetBase::textChangedSlot);
 
     txtValore = new QLineEdit((pkg)?QString::fromStdString(to_string((pkg)->getValore())):"");
     txtValore->setPlaceholderText("Valore in €");
     txtValore->setValidator(new QRegularExpressionValidator(QRegularExpression("[0-9]{1,6}+(\\.[0-9]{1,2})?"), this));
+    connect(txtValore, &QLineEdit::textChanged, this, &PackageWidgetBase::textChangedSlot);
 
     secondRow->addWidget(txtContenuto);
     secondRow->addWidget(txtValore);
@@ -30,10 +32,12 @@ PackageWidgetBase::PackageWidgetBase(Package *pkg, bool toEdit, QWidget* parent)
     txtPeso = new QLineEdit((pkg)?QString::number((pkg)->getPeso()):"");
     txtPeso->setPlaceholderText("Peso (Kg)");
     txtPeso->setValidator(new QRegularExpressionValidator(QRegularExpression("[0-9]{1,6}+(\\.[0-9]{1,2})?"), this));
+    connect(txtPeso, &QLineEdit::textChanged, this, &PackageWidgetBase::textChangedSlot);
 
     txtVolume = new QLineEdit((pkg)?QString::number((pkg)->getVolume()):"");
     txtVolume->setPlaceholderText("Volume (m^3)");
     txtVolume->setValidator(new QRegularExpressionValidator(QRegularExpression("[0-9]{1,6}+(\\.[0-9]{1,2})?"), this));
+    connect(txtVolume, &QLineEdit::textChanged, this, &PackageWidgetBase::textChangedSlot);
 
     thirdRow->addWidget(txtPeso);
     thirdRow->addWidget(txtVolume);
@@ -54,8 +58,18 @@ Package* PackageWidgetBase::getPackage() const {
 }
 
 bool PackageWidgetBase::ConvalidaInput() const {
+    if(!txtValore->hasAcceptableInput()) txtValore->setStyleSheet("QLineEdit{ border: 2px solid red; }");
+    if(!txtPeso->hasAcceptableInput()) txtPeso->setStyleSheet("QLineEdit{ border: 2px solid red; }");
+    if(!txtVolume->hasAcceptableInput()) txtVolume->setStyleSheet("QLineEdit{ border: 2px solid red; }");
+    if(txtContenuto->text().isEmpty()) txtContenuto->setStyleSheet("QLineEdit{ border: 2px solid red; }");
+
     return  !txtContenuto->text().isEmpty() &&
             txtValore->hasAcceptableInput() &&
             txtPeso->hasAcceptableInput() &&
             txtVolume->hasAcceptableInput();
+}
+
+void PackageWidgetBase::textChangedSlot(){
+    QLineEdit* txtSender = dynamic_cast<QLineEdit *>(sender());
+    txtSender->setStyleSheet("QLineEdit::focus{ border: 2px solid #0078D7; } QLineEdit{ border: 1px solid #555555; }");
 }

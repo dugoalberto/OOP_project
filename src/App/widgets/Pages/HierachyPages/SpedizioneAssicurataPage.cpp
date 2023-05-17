@@ -5,6 +5,7 @@
 #include <QVBoxLayout>
 #include <QGroupBox>
 #include <QComboBox>
+#include <QDialog>
 #include "SpedizioneAssicurataPage.h"
 #include "../../../../Librerie/FileManager.h"
 
@@ -92,8 +93,8 @@ SpedizioneAssicurataPage::SpedizioneAssicurataPage(SpedizioneAssicurata *spe, bo
 }
 
 void SpedizioneAssicurataPage::CreaSlot() {
-    if( mittente->ConvalidaInput() &&
-        destinatario->ConvalidaInput() &&
+    if( mittente->ConvalidaInput() &
+        destinatario->ConvalidaInput() &
         package->ConvalidaInput()){
 
         Assicurazione* toSet = package->getAssicurazione();
@@ -107,6 +108,13 @@ void SpedizioneAssicurataPage::CreaSlot() {
                                                                *toSet);
         emit HierachyPageInterface::CreaSignal(nuova);
 
+    }else{
+        QDialog dialog;
+        QLabel *dialogLabel = new QLabel("Attenzione: tutti i campi devono essere inseriti");
+        QHBoxLayout *dialogLayout = new QHBoxLayout;
+        dialogLayout->addWidget(dialogLabel);
+        dialog.setLayout(dialogLayout);
+        dialog.exec();
     }
 
 }

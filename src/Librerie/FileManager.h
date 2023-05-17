@@ -19,8 +19,8 @@ public:
     void saveData(ArrayList<Spedizione *> &vettore) const;
     ArrayList<Spedizione*> readSpedizioni() const;
 
-    static void saveAssicurazioni(ArrayList<Assicurazione*>);
-    static void saveFiliali(ArrayList<Filiale*>);
+    static void saveAssicurazioni(std::vector<Assicurazione*>);
+    static void saveFiliali(std::vector<Filiale*>);
     static std::vector<Assicurazione> readAssicurazioni();
     static std::vector<Filiale> readFiliali();
 };

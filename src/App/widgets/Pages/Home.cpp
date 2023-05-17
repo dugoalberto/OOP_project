@@ -2,17 +2,12 @@
 // Created by Alberto Dugo on 02/05/23.
 //
 
-#include <QLabel>
-#include <QtWidgets>
-#include <QMainWindow>
-#include "Home.h"
-#include "../StackTracer.h"
-#include "../CustomWidgets/QLabelTitle.h"
-#include "../../../Model/hierarchy/Spedizione.h"
-#include "../CustomWidgets/ListViewItemCustomWidget/ListViewSpedizioniItemWidget.h"
-
 #include <iostream>
-Home::Home(ArrayList<Spedizione*>& lstDb, QWidget *parents) : QWidget(parents), lstElements(lstDb){
+#include "Home.h"
+
+Home::Home(QWidget *parents) : QWidget(parents){
+    fm = new FileManager("fileDiProva");
+    lstElements = fm->readSpedizioni();
     QHBoxLayout* MainLayout = new QHBoxLayout(this);
 
     //LAYOUT PARTE SINISTRA
@@ -124,16 +119,10 @@ void Home::SearchbarModifiedSlot() {
 void Home::AddNewSpedizioneSlot(Spedizione* spedizione) {
 
     int n = rand() % (9999-1000+1)+1000;
-    while(SearchSpedizioneById(n) != -1){
+    while(lstElements.search(n) != -1){
         n = rand() % (9999-1000+1)+1000;
     }
     spedizione->setTrakingNumber(n);
     lstElements.add(spedizione);
-}
-
-int Home::SearchSpedizioneById(int id) {
-    for(int i = 0; i < lstElements.getDim(); ++i)
-        if(lstElements[i]->getTrakingNumber() == id)
-            return i;
-    return -1;
+    fm->saveData(lstElements);
 }

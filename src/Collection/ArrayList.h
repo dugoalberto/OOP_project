@@ -22,6 +22,7 @@ public:
     int getCapacity() const;
     void add(const T &_obj);
     void add(const T &_obj, int _index);
+    int search(int id) const;
     const T* remove(int _index);
     void removeAll();
     bool exchange(int _index1, int _index2);

@@ -7,9 +7,8 @@
 #include "PackageWidgetAssicurata.h"
 #include "../../../../Librerie/FileManager.h"
 
-PackageWidgetAssicurata::PackageWidgetAssicurata(Package *pkg, bool toEdit, QWidget *parent) : PackageWidgetBase(pkg, toEdit, parent){
+PackageWidgetAssicurata::PackageWidgetAssicurata(Package *pkg, Assicurazione* ass, bool toEdit, QWidget *parent) : PackageWidgetBase(pkg, toEdit, parent), assicurazione(ass){
     QHBoxLayout* thirdRow = new QHBoxLayout();
-
     //PARTE SINISTRA
     mainLyt->addSpacing(35);
     QVBoxLayout* lytComboBoxAssicurazioni = new QVBoxLayout();
@@ -41,6 +40,7 @@ PackageWidgetAssicurata::PackageWidgetAssicurata(Package *pkg, bool toEdit, QWid
     for(int i = 0; i < 3; i++){
         checkBoxs[i] = new QCheckBox(QString::fromStdString(sceltePossibili[i]));
         lytScelte->addWidget(checkBoxs[i]);
+        connect(checkBoxs[i], &QCheckBox::stateChanged, this, &PackageWidgetAssicurata::checkBoxSelectedSlot);
     }
 
     thirdRow->addLayout(lytComboBoxAssicurazioni);
@@ -84,6 +84,17 @@ int PackageWidgetAssicurata::getNumeroServiziSelezionati() const {
 }
 
 bool PackageWidgetAssicurata::ConvalidaInput() const {
-    return PackageWidgetBase::ConvalidaInput() && getNumeroServiziSelezionati() > 0;
+    int numeroSelezionate = getNumeroServiziSelezionati();
+    if(numeroSelezionate == 0)
+        for(int i = 0; i <3; i++)
+            checkBoxs[i]->setStyleSheet("QCheckBox::indicator{ border: 2px solid red; }");
+    return PackageWidgetBase::ConvalidaInput() && numeroSelezionate > 0;
 }
 
+void PackageWidgetAssicurata::checkBoxSelectedSlot() {
+    for(int i = 0; i < 3; i++)
+        checkBoxs[i]->setStyleSheet("QCheckBox::indicator::unchecked{"
+                                    "    border: 2px solid #2B2E3B;"
+                                    "    background-color: #384354;"
+                                    "}");
+}

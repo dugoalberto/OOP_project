@@ -20,7 +20,7 @@ private:
     QComboBox* cmbAssicurazioniPossibili;
     QLineEdit* txtCostoPerServizio;
 public:
-    PackageWidgetAssicurata(Package* = nullptr, bool toEdit = false, QWidget* = nullptr);
+    PackageWidgetAssicurata(Package* = nullptr, Assicurazione* = nullptr,  bool toEdit = false, QWidget* = nullptr);
     float addedCost() const;
     Assicurazione* getAssicurazione();
     bool ConvalidaInput() const override;
@@ -28,6 +28,7 @@ public:
     int getNumeroServiziSelezionati() const;
 public slots:
     void AssicurazioneChosenChangedSlot();
+    void checkBoxSelectedSlot();
 };
 
 

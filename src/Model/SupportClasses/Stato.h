@@ -8,10 +8,8 @@
 #include <string>
 #include <ostream>
 #include "Filiale.h"
-#include "../../Librerie/json.hpp"
 
 using namespace std;
-using json = nlohmann::json;
 
 class Stato{
 private:
@@ -34,10 +32,6 @@ public:
     void setFiliale(const Filiale &filiale);
 
     friend ostream &operator<<(ostream &os, const Stato &stato);
-
-    //json
-    json objectToJson();
-    static Stato jsonToObject(const json &dati);
 };
 
 #endif //PROJECT_STATO_H

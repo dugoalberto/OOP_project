@@ -7,6 +7,7 @@
 #include "ArrayList.h"
 #include "../Model/hierarchy/SpedizionePremium.h"
 #include "../Model/SupportClasses/Assicurazione.h"
+#include "../App/widgets/Visitor/VisitorById.h"
 
 template<class T>
 ArrayList<T>::ArrayList() {
@@ -105,6 +106,16 @@ const T *ArrayList<T>::remove(int _index) {
 }
 
 template<class T>
+int ArrayList<T>::search(int id) const{
+    VisitorById* visitorById = new VisitorById(id);
+    for(int i = 0 ; i < _dimensione; i++){
+        if(visitorById->accept(_head[i]))
+            return i;
+    }
+    return -1;
+}
+
+template<class T>
 void ArrayList<T>::removeAll() {
     delete [] _head;
     _head = new T[_capacita];
@@ -195,7 +206,4 @@ typename ArrayList<T>::Iterator ArrayList<T>::end() {
 }
 
 template class ArrayList<Spedizione*>;
-template class ArrayList<Filiale*>;
-template class ArrayList<Assicurazione*>;
-template class ArrayList<int>;
 

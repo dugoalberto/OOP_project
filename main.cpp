@@ -104,8 +104,9 @@ int main(int argc, char *argv[]) {/*
                                                          Assicurazione("Assicurazione Economica", 53)
     );
 */
-    FileManager* fm = new FileManager("fileDiProva");
-    ArrayList<Spedizione*> nuovo = fm->readSpedizioni();
+
+/*
+
     /*nuovo.add(sp1);
     nuovo.add(se1);
     nuovo.add(sc1);
@@ -114,14 +115,20 @@ int main(int argc, char *argv[]) {/*
     nuovo.add(si2);
     nuovo.add(sa1);
     nuovo.add(sa2);*/
-    fm->saveData(nuovo);
+/*
+    for(auto it = nuovo.begin(); it != nuovo.end(); ++it)
+        std::cout << (*it)->getTrakingNumber() << std::endl;
+
+    std::cout << nuovo.search(9999) << std::endl;
+    std::cout << nuovo.search(8852) << std::endl;
+*/
 
     QApplication app(argc, argv);
-    app.setWindowIcon(QIcon("Assets/Icon/icon.png"));
+    app.setWindowIcon(QIcon("src/Assets/Icon/icon.png"));
     QFile stylesheet("styleFile.qss");
     stylesheet.open(QFile::ReadOnly);
     app.setStyleSheet(QLatin1String(stylesheet.readAll()));
-    StackTracer st(nuovo, nullptr);
+    StackTracer st;
     st.resize(1000,600);
     st.setMinimumSize(1000,600);
     st.show();

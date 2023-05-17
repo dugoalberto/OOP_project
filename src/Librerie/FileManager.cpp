@@ -143,14 +143,14 @@ std::vector<Filiale> FileManager::readFiliali() {
     return res;
 }
 
-void FileManager::saveAssicurazioni(ArrayList<Assicurazione *> vettore) {
+void FileManager::saveAssicurazioni(std::vector<Assicurazione *> vettore) {
     std::ofstream file("src/SaveFiles/Assicurazioni.txt", std::ios::out);
     for(auto it = vettore.begin(); it != vettore.end(); it++)
         file << (*it)->toString() + "\n";
     file.close();
 }
 
-void FileManager::saveFiliali(ArrayList<Filiale *> vettore) {
+void FileManager::saveFiliali(std::vector<Filiale *> vettore) {
     std::ofstream file("src/SaveFiles/Filiali.txt", std::ios::out);
     for(auto it = vettore.begin(); it != vettore.end(); it++)
         file << (*it)->toString() + "\n";

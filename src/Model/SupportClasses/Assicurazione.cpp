@@ -34,6 +34,6 @@ int Assicurazione::getNumeroServizi() const {
 }
 
 void Assicurazione::setNumeroServizi(float numero) {
-    Assicurazione::numeroServizi = numero;
+    numeroServizi = numero;
 }
 

@@ -233,3 +233,7 @@ QTextEdit:focus {
     border: 1px solid #0078D7;
 }
 
+QDialog {
+    background-color: #1C1E22;
+    color: #FFFFFF;
+}

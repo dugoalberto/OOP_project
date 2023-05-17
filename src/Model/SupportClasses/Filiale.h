@@ -7,10 +7,8 @@
 
 #include <string>
 #include <ostream>
-#include "../../Librerie/json.hpp"
 
 using namespace std;
-using json = nlohmann::json;
 
 class Filiale {
 
@@ -39,10 +37,6 @@ public:
     void setNumeroTel(const string &numeroTel);
 
     friend ostream &operator<<(ostream &os, const Filiale &filiale);
-
-    //json
-    json objectToJson();
-    static Filiale jsonToObject(const json &dati);
 
     std::string toString() const;
 

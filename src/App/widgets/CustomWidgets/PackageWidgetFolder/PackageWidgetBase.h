@@ -30,6 +30,8 @@ protected:
 public:
     PackageWidgetBase(Package* = nullptr, bool toEdit = false, QWidget* parent = nullptr);
     Package* getPackage() const;
+public slots:
+    void textChangedSlot();
 };
 
 

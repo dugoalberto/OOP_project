@@ -7,10 +7,8 @@
 
 #include <string>
 #include <ostream>
-#include "../../Librerie/json.hpp"
 
 using namespace std;
-using json = nlohmann::json;
 
 class Package {
 
@@ -45,10 +43,6 @@ public:
     void setVolume(float volume);
 
     friend ostream &operator<<(ostream &os, const Package &aPackage);
-
-    //json
-    json objectToJson();
-    static Package jsonToObject(const json &dati);
 };
 
 

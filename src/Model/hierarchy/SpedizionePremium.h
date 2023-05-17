@@ -9,9 +9,6 @@
 #include <ctime>
 #include <ostream>
 #include <sstream>
-#include "../../Librerie/json.hpp"
-
-using json = nlohmann::json;
 
 class SpedizionePremium: public Spedizione{
 private:
@@ -37,12 +34,6 @@ public:
                       int meseanno= -1, int giornianno= -1, int oreanno= -1, int minutianno= -1);
     ~SpedizionePremium() override;
     void setOrario(int year, int month, int day, int hours, int minuti);
-
-    //friend ostream &operator<<(ostream &os, const SpedizionePremium &premium);
-
-    //json
-    //json objectToJson();
-    //SpedizionePremium* jsonToObject(const json &dati);
 
     std::string getTypeName() const;
     float getCosto() const override;

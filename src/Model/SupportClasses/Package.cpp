@@ -29,17 +29,7 @@ ostream &operator<<(ostream &os, const Package &aPackage) {
     return os;
 }
 
-json Package::objectToJson() {
-    json j;
-    j["contenuto"] = Package::contenuto;
-    j["valore"] = Package::valore;
-    return j;
-}
 
-Package Package::jsonToObject(const json &dati) {
-    Package p(dati["contenuto"], dati["valore"], 0, 0);
-    return p;
-}
 
 float Package::getVolume() const {
     return volume;

@@ -34,6 +34,9 @@ public:
 
     void setField(bool toBeEdited);
     bool ConvalidaInput() const;
+
+public slots:
+    void textChangedSlot();
 };
 
 
