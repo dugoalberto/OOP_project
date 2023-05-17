@@ -20,6 +20,8 @@ public:
     std::string toSaveFormat() const override;
     std::string getTypeName() const override;
     void Accept(Visitor *visitor, bool toEdit);
+
+    ~SpedizioneEconomica() = default;
 };
 
 

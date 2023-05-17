@@ -7,7 +7,7 @@
 
 Home::Home(QWidget *parents) : QWidget(parents){
     fm = new FileManager("fileDiProva");
-    lstElements = fm->readSpedizioni();
+    /*lstElements = */fm->readSpedizioni();
     QHBoxLayout* MainLayout = new QHBoxLayout(this);
 
     //LAYOUT PARTE SINISTRA
@@ -62,7 +62,7 @@ Home::Home(QWidget *parents) : QWidget(parents){
 
     lstSpedizioni = new QListWidget();
     lstSpedizioni->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding);
-    loadListView();
+    //loadListView();
     lytView->addWidget(lstSpedizioni);
 
     grpRight->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding);

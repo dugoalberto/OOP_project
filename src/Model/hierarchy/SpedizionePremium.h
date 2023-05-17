@@ -40,7 +40,6 @@ public:
     std::string toSaveFormat() const;
 
     void Accept(Visitor *visitor, bool toEdit);
-
 };
 
 #endif //PROJECT_SPEDIZIONEPREMIUM_H

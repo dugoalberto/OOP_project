@@ -25,13 +25,12 @@ ArrayList<T>::ArrayList(int _capacity) {
 
 template<class T>
 ArrayList<T>::ArrayList(const ArrayList &_al) {
-    _head = new T[_al._capacita];
-    this->_capacita = _al._capacita;
-    this->_dimensione = _al._dimensione;
-    for (int i = 0; i < _dimensione; ++i) {
-        _head[i] = *(_al._head+i);
-    }
-
+        //delete[] _head;
+        _dimensione = _al._dimensione;
+        _capacita = _al._capacita;
+        _head = new T[_dimensione];
+        for(int i = 0; i < _al._dimensione; ++i)
+            add(T(_al[i]));
 }
 
 template<class T>
@@ -68,7 +67,7 @@ void ArrayList<T>::realloc(int dim) {
 }
 template<class T>
 void ArrayList<T>::add(const T &_obj) {
-    if((_dimensione - 1) == _capacita && _dimensione != 0) realloc(_capacita*2);
+    if(_dimensione == _capacita) realloc((_capacita == 0)? 1 : _capacita*2);
     _head[_dimensione] = _obj;
     _dimensione++;
 }
@@ -117,7 +116,7 @@ int ArrayList<T>::search(int id) const{
 
 template<class T>
 void ArrayList<T>::removeAll() {
-    delete [] _head;
+    //delete [] _head;
     _head = new T[_capacita];
     _dimensione = 0;
 }
@@ -149,8 +148,21 @@ std::string ArrayList<T>::toString() const {
 }
 
 template<class T>
-T ArrayList<T>::operator[](int _index){
+T ArrayList<T>::operator[](int _index) const{
     return _head[_index];
+}
+
+template<class T>
+ArrayList<T> ArrayList<T>::operator=(ArrayList<T> secondo) {
+    if(_head != secondo._head){
+        delete[] _head;
+        _dimensione = 0;
+        _capacita = 1;
+        for(auto it = secondo.begin(); it != secondo.end(); ++it)
+            add(T(*it));
+        return *this;
+    }
+    return *this;
 }
 
 template<class T>

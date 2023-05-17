@@ -22,6 +22,8 @@ public:
     std::string getTypeName() const override;
     std::string toSaveFormat() const override;
     void Accept(Visitor *visitor, bool toEdit);
+
+    ~SpedizioneAssicurata() = default;
 };
 
 
