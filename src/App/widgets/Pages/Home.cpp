@@ -62,7 +62,7 @@ Home::Home(QWidget *parents) : QWidget(parents){
 
     lstSpedizioni = new QListWidget();
     lstSpedizioni->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding);
-    //loadListView();
+    loadListView();
     lytView->addWidget(lstSpedizioni);
 
     grpRight->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding);
