@@ -17,7 +17,6 @@ SOURCES += \
     src/Model/hierarchy/SpedizionePremium.cpp \
     src/App/widgets/Visitor/VisitorById.cpp \
     src/Collection/ArrayList.cpp \
-    src/Librerie/DataPersistence.cpp \
     src/App/widgets/Pages/Home.cpp \
     src/App/widgets/CustomWidgets/MyButton.cpp \
     src/App/widgets/StackTracer.cpp \
@@ -51,7 +50,6 @@ HEADERS += \
     src/Model/hierarchy/SpedizionePremium.h \
     src/App/widgets/Visitor/VisitorById.h \
     src/Collection/ArrayList.h \
-    src/Librerie/DataPersistence.h \
     src/App/widgets/Pages/Home.h \
     src/App/widgets/CustomWidgets/MyButton.h \
     src/App/widgets/StackTracer.h \
