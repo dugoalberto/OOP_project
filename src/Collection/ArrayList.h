@@ -28,7 +28,7 @@ public:
     bool exchange(int _index1, int _index2);
     std::string toString() const;
     T operator[](int _index) const;
-    ArrayList<T> operator=(ArrayList<T>);
+    ArrayList<T>& operator=(ArrayList<T>);
 
     class Iterator {
     private:

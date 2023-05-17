@@ -80,7 +80,7 @@ ArrayList<Spedizione*> FileManager::readSpedizioni() const {
         std::getline(*file, linea);
     }
     file->close();
-    return 3;
+    return res;
 }
 
 std::vector<Assicurazione> FileManager::readAssicurazioni() {

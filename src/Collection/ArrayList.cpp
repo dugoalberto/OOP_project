@@ -62,12 +62,12 @@ void ArrayList<T>::realloc(int dim) {
     for (int i = 0; i < _dimensione; i++){
         t[i] = _head[i];
     }
-    //delete[] _head;
+    delete[] _head;
     _head = t;
 }
 template<class T>
 void ArrayList<T>::add(const T &_obj) {
-    if(_dimensione == _capacita) realloc((_capacita == 0)? 1 : _capacita*2);
+    if(_dimensione == _capacita) realloc(_capacita*2);
     _head[_dimensione] = _obj;
     _dimensione++;
 }
@@ -153,14 +153,15 @@ T ArrayList<T>::operator[](int _index) const{
 }
 
 template<class T>
-ArrayList<T> ArrayList<T>::operator=(ArrayList<T> secondo) {
-    if(_head != secondo._head){
+ArrayList<T>& ArrayList<T>::operator=(ArrayList<T> secondo) {
+    if(this != &secondo){
         delete[] _head;
-        _dimensione = 0;
-        _capacita = 1;
-        for(auto it = secondo.begin(); it != secondo.end(); ++it)
-            add(T(*it));
-        return *this;
+        _dimensione = secondo._dimensione;
+        _capacita = secondo._capacita;
+        _head = new T[_capacita];
+        for (int i = 0; i < _dimensione; ++i) {
+            _head[i] = secondo._head[i];
+        }
     }
     return *this;
 }

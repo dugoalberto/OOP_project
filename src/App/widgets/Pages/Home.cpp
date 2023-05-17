@@ -7,7 +7,8 @@
 
 Home::Home(QWidget *parents) : QWidget(parents){
     fm = new FileManager("fileDiProva");
-    /*lstElements = */fm->readSpedizioni();
+    lstElements = fm->readSpedizioni();
+
     QHBoxLayout* MainLayout = new QHBoxLayout(this);
 
     //LAYOUT PARTE SINISTRA
