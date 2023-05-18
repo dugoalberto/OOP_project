@@ -7,7 +7,7 @@ CMakeCCompilerId.o
 CMakeCXXCompilerId.o
 .qmake.stash
 mocs_compilation.o
-Project.exe
+*.exe
 
 # qtcreator generated files
 *.pro.user*
