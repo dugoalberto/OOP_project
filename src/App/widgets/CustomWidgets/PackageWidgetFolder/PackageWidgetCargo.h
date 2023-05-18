@@ -14,7 +14,7 @@ class PackageWidgetCargo : public PackageWidgetBase{
 private:
     QCheckBox *checkBoxs[2];
 public:
-    PackageWidgetCargo(Package* = nullptr, bool toEdit = false, QWidget* parent = nullptr);
+    PackageWidgetCargo(Package* = nullptr,const std::string& = "", bool toEdit = false, QWidget* parent = nullptr);
     SpedizioneCargo::TipologiaTrasporto getCheckedBox() const;
 
 public

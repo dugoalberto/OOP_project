@@ -56,6 +56,9 @@ Address::Address(const string &nomeCognome, const string &indirizzo, const strin
                  int cap,
                  const string &nazione)
         : nomeCognome(nomeCognome), indirizzo(indirizzo), citta(citta), provincia(provincia), nazione(nazione), cap(cap) {
+
+    std::transform(this->nazione.begin(), this->nazione.end(), this->nazione.begin(), ::toupper);
+
 }
 
 Address::~Address() {}

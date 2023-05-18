@@ -92,6 +92,7 @@ void Home::loadListView() {
             ListViewSpedizioniItemWidget *widget = new ListViewSpedizioniItemWidget(*it);
             connect(widget, &ListViewSpedizioniItemWidget::VisualizzaSignal, this, &Home::VisualizzaSpedizioneSlot);
             connect(widget, &ListViewSpedizioniItemWidget::ModificaSignal, this, &Home::ModificaSpedizioneSlot);
+            connect(widget, &ListViewSpedizioniItemWidget::EliminaSignal, this, &Home::EliminaSlot);
             item->setSizeHint(widget->sizeHint());
             lstSpedizioni->addItem(item);
             lstSpedizioni->setItemWidget(item, widget);
@@ -147,4 +148,11 @@ void Home::ModificaSpedizioneSlot (const Spedizione *spe) {
     Visitor* visitor = new Visitor;
     spe->Accept(visitor, true);
     emit ModificaSpedizioneSignal(visitor->getWidget());
+}
+
+void Home::EliminaSlot(const Spedizione *spe) {
+    int index = lstElements->search(spe->getTrakingNumber());
+    lstElements->remove(index);
+    fm->saveData(*lstElements);
+    loadListView();
 }

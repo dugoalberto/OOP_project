@@ -32,3 +32,8 @@ SpedizioneCargo::TipologiaTrasporto SpedizioneCargo::getTipologiaTrasporto() con
 void SpedizioneCargo::Accept(Visitor *visitor, bool toEdit) const {
     visitor->visit(this, toEdit);
 }
+
+void SpedizioneCargo::modifica(Spedizione *spe) {
+    Spedizione::modifica(spe);
+    tipoTrasporto = dynamic_cast<SpedizioneCargo*>(spe)->tipoTrasporto;
+}

@@ -3,24 +3,34 @@
 //
 
 #include "PackageWidgetCargo.h"
-PackageWidgetCargo::PackageWidgetCargo(Package *pkg, bool toEdit, QWidget *parent) : PackageWidgetBase(pkg, toEdit, parent){
+#include <iostream>
+PackageWidgetCargo::PackageWidgetCargo(Package *pkg, const std::string& tipo, bool toEdit, QWidget *parent) : PackageWidgetBase(pkg, toEdit, parent){
 
     QHBoxLayout* thirdRow = new QHBoxLayout();
+    thirdRow->addWidget(new QLabel("Modalità di trasporto:"));
+    thirdRow->setAlignment(Qt::AlignCenter);
 
+    QHBoxLayout* fourthRow = new QHBoxLayout();
     std::string tipologie[2] = {"Aereo","Barca"};
     for(int i = 0; i < 2; i++){
         checkBoxs[i] = new QCheckBox(QString::fromStdString(tipologie[i]));
-        thirdRow->addWidget(checkBoxs[i]);
+        if(tipologie[i] == tipo)
+            checkBoxs[i]->setCheckState(Qt::Checked);
+        fourthRow->addWidget(checkBoxs[i]);
+        connect(checkBoxs[i], &QCheckBox::clicked, this, &PackageWidgetCargo::CheckBoxPressedSlot);
     }
-    thirdRow->setAlignment(Qt::AlignCenter);
+    fourthRow->setAlignment(Qt::AlignCenter);
+    mainLyt->addSpacing(20);
     mainLyt->addLayout(thirdRow);
+    mainLyt->addLayout(fourthRow);
 }
 
 void PackageWidgetCargo::CheckBoxPressedSlot() {
     std::string clickedCheckBox = qobject_cast<QCheckBox*>(sender())->text().toStdString();
-    for(int i = 0; i < 2; i++)
-        if(checkBoxs[i]->text().toStdString() != clickedCheckBox)
-            checkBoxs[i]->setCheckState(Qt::Unchecked);
+    for(int i = 0; i < 2; i++) {
+        if (checkBoxs[i] != qobject_cast<QCheckBox*>(sender()))
+            checkBoxs[i]->setChecked(false);
+    }
 }
 
 SpedizioneCargo::TipologiaTrasporto PackageWidgetCargo::getCheckedBox() const {

@@ -50,6 +50,7 @@ slots:
     void VisualizzaSpedizioneSlot(const Spedizione*);
     void ModificaSpedizioneSlot(const Spedizione*);
     void ModificaSpedizioneAggiornataSlot(Spedizione *spedizione);
+    void EliminaSlot(const Spedizione*);
 signals:
     void SaveOnFileSignal();
     void VisualizzaSpedizioneSignal(HierachyPageInterface*);

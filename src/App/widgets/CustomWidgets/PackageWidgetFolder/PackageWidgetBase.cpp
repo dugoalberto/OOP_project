@@ -24,6 +24,7 @@ PackageWidgetBase::PackageWidgetBase(Package *pkg, bool toEdit, QWidget* parent)
     txtValore = new QLineEdit((pkg)?QString::number((pkg)->getValore()):"");
     txtValore->setPlaceholderText("Valore in €");
     txtValore->setValidator(new QRegularExpressionValidator(QRegularExpression("[0-9]{1,6}+(\\.[0-9]{1,2})?"), this));
+    if(pkg && !toEdit) txtValore->setText(txtValore->text().append(" €"));
     txtValore->setEnabled(toEdit);
     connect(txtValore, &QLineEdit::textChanged, this, &PackageWidgetBase::textChangedSlot);
 
@@ -34,12 +35,14 @@ PackageWidgetBase::PackageWidgetBase(Package *pkg, bool toEdit, QWidget* parent)
     txtPeso = new QLineEdit((pkg)?QString::number((pkg)->getPeso()):"");
     txtPeso->setPlaceholderText("Peso (Kg)");
     txtPeso->setValidator(new QRegularExpressionValidator(QRegularExpression("[0-9]{1,6}+(\\.[0-9]{1,2})?"), this));
+    if(pkg && !toEdit) txtPeso->setText(txtPeso->text().append(" Kg"));
     txtPeso->setEnabled(toEdit);
     connect(txtPeso, &QLineEdit::textChanged, this, &PackageWidgetBase::textChangedSlot);
 
     txtVolume = new QLineEdit((pkg)?QString::number((pkg)->getVolume()):"");
     txtVolume->setPlaceholderText("Volume (m^3)");
     txtVolume->setValidator(new QRegularExpressionValidator(QRegularExpression("[0-9]{1,6}+(\\.[0-9]{1,2})?"), this));
+    if(pkg && !toEdit) txtVolume->setText(txtVolume->text().append(" m^3"));
     txtVolume->setEnabled(toEdit);
     connect(txtVolume, &QLineEdit::textChanged, this, &PackageWidgetBase::textChangedSlot);
 

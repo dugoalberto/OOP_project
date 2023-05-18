@@ -61,7 +61,7 @@ ArrayList<Spedizione*> FileManager::readSpedizioni() const {
         }else if(att[0] == "SPEDIZIONEINTERNAZIONALE"){
             toAdd = new SpedizioneInternazionale(std::stoi(att[1]),
                                                  new Address(att[2], att[3], att[4], att[5], std::stoi(att[7]), att[6]),
-                                                 new Address(att[8], att[9], att[10], att[11], std::stoi(att[13]), att[6]),
+                                                 new Address(att[8], att[9], att[10], att[11], std::stoi(att[13]), att[12]),
                                                  new Package(att[14], std::stof(att[15]), std::stof(att[16]), std::stof(att[17])),
                                                  new Stato(att[18], Filiale(att[19], att[20], att[21])),
                                                  att[22]

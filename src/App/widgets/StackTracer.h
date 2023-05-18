@@ -37,6 +37,9 @@ public:
             connect(selezioneTipoPage, &SelezioneTipoPage::backSignal, this, &StackTracer::switchToHomePage);
             connect(selezioneTipoPage, &SelezioneTipoPage::AssicurataSignal, this, &StackTracer::switchToSelectedCreatingPage);
             connect(selezioneTipoPage, &SelezioneTipoPage::PremiumSignal, this, &StackTracer::switchToSelectedCreatingPage);
+            connect(selezioneTipoPage, &SelezioneTipoPage::InternazionaleSignal, this, &StackTracer::switchToSelectedCreatingPage);
+            connect(selezioneTipoPage, &SelezioneTipoPage::CargoSignal, this, &StackTracer::switchToSelectedCreatingPage);
+            connect(selezioneTipoPage, &SelezioneTipoPage::EconomicaSignal, this, &StackTracer::switchToSelectedCreatingPage);
             connect(homePage, &Home::VisualizzaSpedizioneSignal, this, &StackTracer::switchToSelectedCreatingPage);
             connect(homePage, &Home::ModificaSpedizioneSignal, this, &StackTracer::switchToSelectedCreatingPage);
     }

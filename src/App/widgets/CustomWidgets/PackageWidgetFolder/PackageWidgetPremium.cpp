@@ -18,29 +18,37 @@ PackageWidgetPremium::PackageWidgetPremium(Package* pkg, std::vector<int> dataOr
     connect(txtGiorno, &QLineEdit::textChanged, this, &PackageWidgetPremium::textChangedSlot);
     txtGiorno->setValidator(new QRegularExpressionValidator(QRegularExpression("[0-9]{2}"), this));
     txtGiorno->setEnabled(toEdit);
+    txtGiorno->setAlignment(Qt::AlignHCenter);
     txtMese = new QLineEdit((dataOra[1]!=-1)? QString::number(dataOra[1]):"");
     txtMese->setPlaceholderText("MM");
     connect(txtMese, &QLineEdit::textChanged, this, &PackageWidgetPremium::textChangedSlot);
     txtMese->setValidator(new QRegularExpressionValidator(QRegularExpression("[0-9]{2}"), this));
     txtMese->setEnabled(toEdit);
+    txtMese->setAlignment(Qt::AlignHCenter);
     txtAnno = new QLineEdit((dataOra[2]!=-1)? QString::number(dataOra[2]):"");
     txtAnno->setPlaceholderText("AAAA");
     connect(txtAnno, &QLineEdit::textChanged, this, &PackageWidgetPremium::textChangedSlot);
     txtAnno->setValidator(new QRegularExpressionValidator(QRegularExpression("[0-9]{4}"), this));
     txtAnno->setEnabled(toEdit);
+    txtAnno->setAlignment(Qt::AlignHCenter);
     txtOre = new QLineEdit((dataOra[3]!=-1)? QString::number(dataOra[3]):"");
     txtOre->setPlaceholderText("HH");
     connect(txtOre, &QLineEdit::textChanged, this, &PackageWidgetPremium::textChangedSlot);
     txtOre->setValidator(new QRegularExpressionValidator(QRegularExpression("[0-9]{2}"), this));
     txtOre->setEnabled(toEdit);
+    txtOre->setAlignment(Qt::AlignHCenter);
     txtMinuti = new QLineEdit((dataOra[4]!=-1)? QString::number(dataOra[4]):"");
     txtMinuti->setPlaceholderText("mm");
     connect(txtMinuti, &QLineEdit::textChanged, this, &PackageWidgetPremium::textChangedSlot);
     txtMinuti->setValidator(new QRegularExpressionValidator(QRegularExpression("[0-9]{2}"), this));
     txtMinuti->setEnabled(toEdit);
+    txtMinuti->setAlignment(Qt::AlignHCenter);
+
     //GIORNO MESE ANNO
     thirdRow->addWidget(txtGiorno);
+    thirdRow->addWidget(new QLabel("/"));
     thirdRow->addWidget(txtMese);
+    thirdRow->addWidget(new QLabel("/"));
     thirdRow->addWidget(txtAnno);
 
     //ORE e MINUTI
@@ -49,6 +57,7 @@ PackageWidgetPremium::PackageWidgetPremium(Package* pkg, std::vector<int> dataOr
     txtOre->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     txtMinuti->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     fourthRow->addWidget(txtOre);
+    fourthRow->addWidget(new QLabel(":"));
     fourthRow->addWidget(txtMinuti);
 
     orderLabel->addLayout(thirdRow);

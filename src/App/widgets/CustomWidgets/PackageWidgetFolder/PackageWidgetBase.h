@@ -26,10 +26,10 @@ protected:
     QLineEdit* txtPeso;
     QLineEdit* txtVolume;
 
-    virtual bool ConvalidaInput() const;
 public:
     PackageWidgetBase(Package* = nullptr, bool toEdit = false, QWidget* parent = nullptr);
     Package* getPackage() const;
+    virtual bool ConvalidaInput() const;
 public slots:
     void textChangedSlot();
 };

@@ -10,10 +10,10 @@
 
 class SpedizioneEconomica : public Spedizione{
 static std::string TypeName;
-static float VOL_MAX;
-static float PES_MAX;
 
 public:
+    static float VOL_MAX;
+    static float PES_MAX;
     SpedizioneEconomica(int trakingNumber, Address *mittente, Address *destinatario,
                         Package *pac, Stato *stato, const string &descrizione);
     float getCosto() const override;

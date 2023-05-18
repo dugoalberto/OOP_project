@@ -23,6 +23,7 @@ public:
 
     TipologiaTrasporto getTipologiaTrasporto() const;
     float getCosto() const override;
+    void modifica(Spedizione*) override;
     std::string toSaveFormat() const override;
     std::string getTypeName() const override;
     void Accept(Visitor *visitor, bool toEdit) const;

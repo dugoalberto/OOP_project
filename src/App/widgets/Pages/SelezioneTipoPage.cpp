@@ -2,6 +2,7 @@
 // Created by utente on 12/05/2023.
 //
 #include "SelezioneTipoPage.h"
+#include "HierachyPages/SpedizioneInternazionalePage.h"
 
 SelezioneTipoPage::SelezioneTipoPage(QWidget *parent) : QWidget(parent){
     QVBoxLayout* lytMain = new QVBoxLayout(this);
@@ -109,7 +110,7 @@ void SelezioneTipoPage::btnBackSlot() {
 }
 
 void SelezioneTipoPage::btnEconomicaPressedSlot() {
-    emit EconomicaSignal(new SpedizioneAssicurataPage(nullptr, false, nullptr));
+    emit EconomicaSignal(new SpedizioneEconomicaPage(nullptr, true, nullptr));
 }
 
 void SelezioneTipoPage::btnPremiumPressedSlot() {
@@ -117,11 +118,11 @@ void SelezioneTipoPage::btnPremiumPressedSlot() {
 }
 
 void SelezioneTipoPage::btnCargoPressedSlot() {
-    emit CargoSignal(new SpedizioneAssicurataPage(nullptr, false, nullptr));
+    emit CargoSignal(new SpedizioneCargoPage(nullptr, true, nullptr));
 }
 
 void SelezioneTipoPage::btnInternazionalePressedSlot() {
-    emit InternazionaleSignal(new SpedizioneAssicurataPage(nullptr, false, nullptr));
+    emit InternazionaleSignal(new SpedizioneInternazionalePage(nullptr, true, nullptr));
 }
 
 void SelezioneTipoPage::btnAssicurataPressedSlot() {

@@ -42,7 +42,7 @@ AddressWidget::AddressWidget(Address *obj, bool toEdit, Sender sender, bool inte
 
     txtStato = new QLineEdit(QString::fromStdString((obj)? obj->getNazione():""));
     txtStato->setPlaceholderText("Stato");
-    txtStato->setValidator(new QRegularExpressionValidator(QRegularExpression("[A-Z]{2}"), this));
+    txtStato->setValidator(new QRegularExpressionValidator(QRegularExpression("[A-Za-z]{2}"), this));
     connect(txtStato, &QLineEdit::textChanged, this, &AddressWidget::textChangedSlot);
 
     setField(toEdit);
