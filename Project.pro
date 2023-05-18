@@ -22,6 +22,7 @@ SOURCES += \
     src/Librerie/FileManager.cpp \
     src/App/widgets/CustomWidgets/QLabelTitle.cpp \
     src/App/widgets/Visitor/Visitor.cpp \
+    src/App/widgets/Pages/HierachyPages/HierachyPageInterface.cpp \
     src/App/widgets/Pages/HierachyPages/SpedizionePremiumPage.cpp \
     src/App/widgets/CustomWidgets/ListViewItemCustomWidget/ListViewSpedizioniItemWidget.cpp \
     src/Model/hierarchy/SpedizioneEconomica.cpp \
@@ -57,6 +58,7 @@ HEADERS += \
     src/Librerie/FileManager.h \
     src/App/widgets/CustomWidgets/QLabelTitle.h \
     src/App/widgets/Visitor/Visitor.h \
+    src/App/widgets/Pages/HierachyPages/HierachyPageInterface.h \
     src/App/widgets/Pages/HierachyPages/SpedizionePremiumPage.h \
     src/App/widgets/CustomWidgets/ListViewItemCustomWidget/ListViewSpedizioniItemWidget.h \
     src/Model/hierarchy/SpedizioneEconomica.h \
