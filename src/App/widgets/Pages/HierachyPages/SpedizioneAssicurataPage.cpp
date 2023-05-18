@@ -13,9 +13,9 @@ SpedizioneAssicurataPage::SpedizioneAssicurataPage(SpedizioneAssicurata *spe, bo
     QVBoxLayout* lytMain = new QVBoxLayout(this);
 
     QVBoxLayout* lytIndirizzi = new QVBoxLayout();
-    mittente = new AddressWidget();
+    mittente = new AddressWidget(((spe)? spe->getMittente(): nullptr), toEdit);
     lytIndirizzi->addWidget(mittente);
-    destinatario = new AddressWidget(nullptr, false, AddressWidget::Sender::DESTINATARIO);
+    destinatario = new AddressWidget(((spe)? spe->getDestinatario(): nullptr), toEdit, AddressWidget::Sender::DESTINATARIO);
     lytIndirizzi->addWidget(destinatario);
     QGroupBox* grpAddress = new QGroupBox();
     grpAddress->setLayout(lytIndirizzi);
@@ -25,7 +25,7 @@ SpedizioneAssicurataPage::SpedizioneAssicurataPage(SpedizioneAssicurata *spe, bo
     QHBoxLayout* lowerRow = new QHBoxLayout();
 
     QVBoxLayout* lytPackage = new QVBoxLayout();
-    package = new PackageWidgetAssicurata();
+    package = new PackageWidgetAssicurata((spe)? spe->getPacco():nullptr, (spe)? spe->getAssicurazione(): nullptr, (spe)? spe->getServiziAssicurazione():nullptr ,toEdit);
     lytPackage->addWidget(package);
     QGroupBox* grpPackage = new QGroupBox();
     grpPackage->setLayout(lytPackage);
@@ -41,17 +41,22 @@ SpedizioneAssicurataPage::SpedizioneAssicurataPage(SpedizioneAssicurata *spe, bo
     lytFiliale->setAlignment(Qt::AlignCenter);
     possibiliFiliali = new QComboBox();
     filiali = FileManager::readFiliali();
+    if(spe) possibiliFiliali->addItem(QString::fromStdString(spe->getStato()->getFiliale().getCitta()));
     for(auto it = filiali.begin(); it != filiali.end(); ++it)
         possibiliFiliali->addItem(QString::fromStdString((*it).getCitta()));
     possibiliFiliali->setCurrentIndex(0);
+    possibiliFiliali->setEditable(toEdit);
 
     QVBoxLayout* lytStato = new QVBoxLayout();
     lytStato->setAlignment(Qt::AlignCenter);
     possibiliStati = new QComboBox();
+    if(spe)  possibiliStati->addItem(QString::fromStdString(spe->getStato()->getDescStato()));
     std::string stati[5] = {"In spedizione", "In arrivo", "In partenza", "In filiale", "Consegnato"};
     for(int i = 0; i < 5; i++){
         possibiliStati->addItem(QString::fromStdString(stati[i]));
     }
+    possibiliStati->setCurrentIndex(0);
+    possibiliStati->setEditable(toEdit);
     lytFiliale->addWidget(new QLabel("Filiali presenti:"));
     lytFiliale->addWidget(possibiliFiliali);
 
@@ -66,6 +71,7 @@ SpedizioneAssicurataPage::SpedizioneAssicurataPage(SpedizioneAssicurata *spe, bo
     txtDescrizione->setPlaceholderText("Inserire descrizione (opzionale)");
     txtDescrizione->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     lytFilialiDescrizioni->addWidget(txtDescrizione);
+    txtDescrizione->setEnabled(toEdit);
 
     QGroupBox* grpFilialeStatoDescrizione = new QGroupBox();
     grpFilialeStatoDescrizione->setLayout(lytFilialiDescrizioni);
@@ -73,21 +79,28 @@ SpedizioneAssicurataPage::SpedizioneAssicurataPage(SpedizioneAssicurata *spe, bo
 
     //parte pulsanti
     QVBoxLayout* lytPulsanti = new QVBoxLayout();
-    btnAnnulla = new MyButton("Annulla");
+    btnAnnulla = new MyButton((toEdit)? "Annulla":"Torna alla Home");
     btnAnnulla->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
     btnAnnulla->setFixedWidth(180);
     btnConferma = new MyButton("Conferma");
     btnConferma->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
     btnConferma->setFixedWidth(180);
     lytPulsanti->addWidget(btnAnnulla);
-    lytPulsanti->addWidget(btnConferma);
+
+    if(toEdit)
+        lytPulsanti->addWidget(btnConferma);
 
     QGroupBox* grpPulsanti = new QGroupBox();
     grpPulsanti->setLayout(lytPulsanti);
     lowerRow->addWidget(grpPulsanti);
 
-    connect(btnAnnulla, &QPushButton::clicked, this, &HierachyPageInterface::BackSlot);
-    connect(btnConferma, &QPushButton::clicked, this, &HierachyPageInterface::CreaSlot);
+    if(toEdit)
+        connect(btnAnnulla, &QPushButton::clicked, this, &HierachyPageInterface::BackSlot);
+    else connect(btnAnnulla, &QPushButton::clicked, this, &HierachyPageInterface::toHomeSlot);
+
+    if(!spe)
+        connect(btnConferma, &QPushButton::clicked, this, &HierachyPageInterface::CreaSlot);
+    else connect(btnConferma, &QPushButton::clicked, this, &SpedizioneAssicurataPage::ModificaSlot);
 
     lytMain->addLayout(lowerRow);
 }
@@ -98,14 +111,14 @@ void SpedizioneAssicurataPage::CreaSlot() {
         package->ConvalidaInput()){
 
         Assicurazione* toSet = package->getAssicurazione();
-        toSet->setNumeroServizi(package->getNumeroServiziSelezionati());
         SpedizioneAssicurata* nuova = new SpedizioneAssicurata(-1,
-                                                               *mittente->getAddress(),
-                                                               *mittente->getAddress(),
-                                                               *package->getPackage(),
-                                                               Stato(possibiliStati->currentText().toStdString(), filiali[possibiliFiliali->currentIndex()]),
+                                                               mittente->getAddress(),
+                                                               destinatario->getAddress(),
+                                                               package->getPackage(),
+                                                               new Stato(possibiliStati->currentText().toStdString(),
+                                                                         filiali[possibiliFiliali->currentIndex()]),
                                                                txtDescrizione->toPlainText().toStdString(),
-                                                               *toSet);
+                                                               toSet, package->getServiziSelezionati());
         emit HierachyPageInterface::CreaSignal(nuova);
 
     }else{
@@ -116,5 +129,25 @@ void SpedizioneAssicurataPage::CreaSlot() {
         dialog.setLayout(dialogLayout);
         dialog.exec();
     }
+}
 
+void SpedizioneAssicurataPage::ModificaSlot() {
+    //TODO: implementare logica di modifica della spedizione: fare una serie di set, tornare l'oggetto alla home che ricercherà la spedizione tramite tracking number e poi fara il salvataggio
+    /*obj->setMittente(mittente->getAddress());
+    obj->setMittente(destinatario->getAddress());
+    obj->setPacco(package->getPackage());
+    obj->setStato(new Stato(possibiliStati->currentText().toStdString(), filiali[possibiliFiliali->currentIndex()]));
+    obj->setDescrizione(txtDescrizione->toPlainText().toStdString());
+    static_cast<SpedizioneAssicurata*>(obj)->setAssicurazione(package->getAssicurazione());
+    static_cast<SpedizioneAssicurata*>(obj)->setServiziAssicurazione(package->getServiziSelezionati());*/
+
+    cout << mittente->getAddress()->getNomeCognome() << endl;
+    emit HierachyPageInterface::ModificaSignal(     new SpedizioneAssicurata(obj->getTrakingNumber(),
+                                                                            mittente->getAddress(),
+                                                                            destinatario->getAddress(),
+                                                                            package->getPackage(),
+                                                                            new Stato(possibiliStati->currentText().toStdString(),
+                                                                                      filiali[possibiliFiliali->currentIndex()]),
+                                                                            txtDescrizione->toPlainText().toStdString(),
+                                                                            package->getAssicurazione(), package->getServiziSelezionati()));
 }

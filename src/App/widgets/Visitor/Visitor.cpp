@@ -5,22 +5,26 @@
 #include "Visitor.h"
 #include "../Pages/HierachyPages/SpedizioneAssicurataPage.h"
 
-void Visitor::visit(SpedizioneAssicurata *obj, bool toEdit) {
-    widget = new SpedizioneAssicurataPage(obj, toEdit);
+void Visitor::visit(const SpedizioneAssicurata *obj, bool toEdit) {
+    widget = new SpedizioneAssicurataPage(const_cast<SpedizioneAssicurata*>(obj), toEdit);
 }
 
-void Visitor::visit(SpedizioneEconomica *obj, bool toEdit) {
+void Visitor::visit(const SpedizioneEconomica *obj, bool toEdit) {
     //widget = new SpedizioneAssicurataPage(obj, toEdit);
 }
 
-void Visitor::visit(SpedizionePremium *obj, bool toEdit) {
+void Visitor::visit(const SpedizionePremium *obj, bool toEdit) {
     //widget = new SpedizioneAssicurataPage(obj, toEdit);
 }
 
-void Visitor::visit(SpedizioneCargo *obj, bool toEdit) {
+void Visitor::visit(const SpedizioneCargo *obj, bool toEdit) {
     //widget = new SpedizioneAssicurataPage(obj, toEdit);
 }
 
-void Visitor::visit(SpedizioneInternazionale *obj, bool toEdit) {
+void Visitor::visit(const SpedizioneInternazionale *obj, bool toEdit) {
     //widget = new SpedizioneAssicurataPage(obj, toEdit);
+}
+
+HierachyPageInterface* Visitor::getWidget() const {
+    return widget;
 }

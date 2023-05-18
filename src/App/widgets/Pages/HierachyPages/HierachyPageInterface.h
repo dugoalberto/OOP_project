@@ -11,18 +11,20 @@ class Spedizione;
 
 class HierachyPageInterface : public QWidget{
     Q_OBJECT
-private:
+protected:
     Spedizione* obj;
 public:
     HierachyPageInterface(Spedizione* = nullptr, QWidget* parent = nullptr);
 public slots:
     void BackSlot();
+    void toHomeSlot();
     virtual void ModificaSlot();
     virtual void CreaSlot();
 signals:
     void BackSignal();
     void ModificaSignal(Spedizione* obj);
     void CreaSignal(Spedizione* obj);
+    void toHomeSignal();
 };
 
 

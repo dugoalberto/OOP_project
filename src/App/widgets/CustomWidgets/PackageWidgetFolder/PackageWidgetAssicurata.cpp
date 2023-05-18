@@ -7,7 +7,7 @@
 #include "PackageWidgetAssicurata.h"
 #include "../../../../Librerie/FileManager.h"
 
-PackageWidgetAssicurata::PackageWidgetAssicurata(Package *pkg, Assicurazione* ass, bool toEdit, QWidget *parent) : PackageWidgetBase(pkg, toEdit, parent), assicurazione(ass){
+PackageWidgetAssicurata::PackageWidgetAssicurata(Package *pkg, Assicurazione* ass, std::vector<std::string>* vec, bool toEdit, QWidget *parent) : PackageWidgetBase(pkg, toEdit, parent), assicurazione(ass), alreadyCheckedService(vec){
     QHBoxLayout* thirdRow = new QHBoxLayout();
     //PARTE SINISTRA
     mainLyt->addSpacing(35);
@@ -19,6 +19,7 @@ PackageWidgetAssicurata::PackageWidgetAssicurata(Package *pkg, Assicurazione* as
     for(auto it = lstAssicurazioni.begin(); it != lstAssicurazioni.end(); ++it)
         cmbAssicurazioniPossibili->addItem(QString::fromStdString((*it).getNomeAssicurazione()));
     cmbAssicurazioniPossibili->setCurrentIndex(0);
+    cmbAssicurazioniPossibili->setEnabled(toEdit);
 
     txtCostoPerServizio = new QLineEdit();
     txtCostoPerServizio->setReadOnly(true);
@@ -41,6 +42,15 @@ PackageWidgetAssicurata::PackageWidgetAssicurata(Package *pkg, Assicurazione* as
         checkBoxs[i] = new QCheckBox(QString::fromStdString(sceltePossibili[i]));
         lytScelte->addWidget(checkBoxs[i]);
         connect(checkBoxs[i], &QCheckBox::stateChanged, this, &PackageWidgetAssicurata::checkBoxSelectedSlot);
+        checkBoxs[i]->setEnabled(toEdit);
+    }
+
+    if(alreadyCheckedService){
+        for(int i = 0; i < 3; i++){
+            for(auto it = alreadyCheckedService->begin(); it != alreadyCheckedService->end(); ++it)
+                if((*it) == checkBoxs[i]->text().toStdString())
+                    checkBoxs[i]->setCheckState(Qt::Checked);
+        }
     }
 
     thirdRow->addLayout(lytComboBoxAssicurazioni);
@@ -76,15 +86,15 @@ float PackageWidgetAssicurata::PrezzoTotaleAssicurazione() const {
     return tot;
 }
 
-int PackageWidgetAssicurata::getNumeroServiziSelezionati() const {
-    int selezionate = 0;
+std::vector<std::string>* PackageWidgetAssicurata::getServiziSelezionati() const {
+    std::vector<std::string>* res = new std::vector<std::string>();
     for(int i = 0; i < 3; i++)
-        if(checkBoxs[i]->isChecked()) selezionate++;
-    return selezionate;
+        if(checkBoxs[i]->isChecked()) res->push_back(checkBoxs[i]->text().toStdString());
+    return res;
 }
 
 bool PackageWidgetAssicurata::ConvalidaInput() const {
-    int numeroSelezionate = getNumeroServiziSelezionati();
+    int numeroSelezionate = getServiziSelezionati()->size();
     if(numeroSelezionate == 0)
         for(int i = 0; i <3; i++)
             checkBoxs[i]->setStyleSheet("QCheckBox::indicator{ border: 2px solid red; }");

@@ -148,7 +148,7 @@ std::string ArrayList<T>::toString() const {
 }
 
 template<class T>
-T ArrayList<T>::operator[](int _index) const{
+T& ArrayList<T>::operator[](int _index) const{
     return _head[_index];
 }
 

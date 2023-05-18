@@ -15,7 +15,7 @@ ListViewSpedizioniItemWidget::ListViewSpedizioniItemWidget(Spedizione *s, QWidge
 
     lblTrackingNumber = new QLabel(QString::number(obj->getTrakingNumber()));
     lblTrackingNumber->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding);
-    lblStato = new QLabel(QString::fromStdString(obj->getStato().getDescStato()));
+    lblStato = new QLabel(QString::fromStdString(obj->getStato()->getDescStato()));
     lblStato->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding);
     lblPrezzo = new QLabel(QString::number(obj->getCosto(), 'f', 2));
     lblPrezzo->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding);

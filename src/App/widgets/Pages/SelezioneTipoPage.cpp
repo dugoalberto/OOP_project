@@ -125,7 +125,7 @@ void SelezioneTipoPage::btnInternazionalePressedSlot() {
 }
 
 void SelezioneTipoPage::btnAssicurataPressedSlot() {
-    emit AssicurataSignal(new SpedizioneAssicurataPage(nullptr, false, nullptr));
+    emit AssicurataSignal(new SpedizioneAssicurataPage(nullptr, true, nullptr));
 }
 
 void SelezioneTipoPage::btnAddAssicurazioneSlot() {

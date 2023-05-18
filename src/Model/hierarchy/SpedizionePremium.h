@@ -29,8 +29,8 @@ private:
 public:
     SpedizionePremium() = default;
     //6.creazione, modifica e cancellazione
-    SpedizionePremium(int trakingNumber, const Address &mittente, const Address &destinatario,
-                      const Package &pacco, const Stato &stato, const string &descrizione, int anno = -1,
+    SpedizionePremium(int trakingNumber, Address *mittente, Address *destinatario,
+                      Package *pacco, Stato *stato, const string &descrizione, int anno = -1,
                       int meseanno= -1, int giornianno= -1, int oreanno= -1, int minutianno= -1);
     ~SpedizionePremium() override;
     void setOrario(int year, int month, int day, int hours, int minuti);
@@ -39,7 +39,7 @@ public:
     float getCosto() const override;
     std::string toSaveFormat() const;
 
-    void Accept(Visitor *visitor, bool toEdit);
+    void Accept(Visitor *visitor, bool toEdit) const;
 };
 
 #endif //PROJECT_SPEDIZIONEPREMIUM_H

@@ -69,14 +69,12 @@ void AddressWidget::setField(bool toBeEdited){
 }
 
 Address* AddressWidget::getAddress() const {
-    if(address != nullptr)
-        return address;
-    else if(ConvalidaInput()) return new Address(txtNome->text().toStdString(),
-                            txtIndirizzo->text().toStdString(),
-                            txtCitta->text().toStdString(),
-                            txtProvincia->text().toStdString(),
-                            std::stoi(txtCap->text().toStdString()),
-                            txtStato->text().toStdString());
+    if(ConvalidaInput()) return new Address(txtNome->text().toStdString(),
+                                txtIndirizzo->text().toStdString(),
+                                txtCitta->text().toStdString(),
+                                txtProvincia->text().toStdString(),
+                                std::stoi(txtCap->text().toStdString()),
+                                txtStato->text().toStdString());
     else return nullptr;
 }
 

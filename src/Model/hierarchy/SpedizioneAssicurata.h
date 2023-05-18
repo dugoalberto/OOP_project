@@ -11,17 +11,23 @@
 
 class SpedizioneAssicurata : public Spedizione{
 private:
-    Assicurazione assicurazione;
+    Assicurazione* assicurazione;
     static std::string TypeName;
+    std::vector<std::string>* serviziAssicurazione;
+
 public:
-    SpedizioneAssicurata(int trakingNumber, const Address &mittente, const Address &destinatario,
-                         const Package &pacco, const Stato &stato, const string &descrizione,
-                         const Assicurazione &ass);
+    SpedizioneAssicurata(int trakingNumber, Address *mittente, Address *destinatario, Package *pacco, Stato *stato,
+                         const string &descrizione, Assicurazione *ass, std::vector<std::string> *vec);
 
     float getCosto() const override;
+    void modifica(Spedizione* spe) override;
     std::string getTypeName() const override;
+    Assicurazione* getAssicurazione() const;
+    vector<std::string> *getServiziAssicurazione() const;
+    void setServiziAssicurazione(vector<string> *serviziAssicurazione);
+    void setAssicurazione(Assicurazione* assicurazione);
     std::string toSaveFormat() const override;
-    void Accept(Visitor *visitor, bool toEdit);
+    void Accept(Visitor *visitor, bool toEdit) const;
 
     ~SpedizioneAssicurata() = default;
 };

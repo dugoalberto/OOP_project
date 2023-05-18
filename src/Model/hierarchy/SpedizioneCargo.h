@@ -17,15 +17,15 @@ public:
 private:
     TipologiaTrasporto tipoTrasporto;
 public:
-    SpedizioneCargo(int trakingNumber, const Address &mittente, const Address &destinatario,
-                    const Package &pacco, const Stato &stato, const string &descrizionem,
+    SpedizioneCargo(int trakingNumber, Address *mittente, Address *destinatario,
+                    Package *pacco, Stato *stato, const string &descrizione,
                     const TipologiaTrasporto &tipologiaTrasporto);
 
     TipologiaTrasporto getTipologiaTrasporto() const;
     float getCosto() const override;
     std::string toSaveFormat() const override;
     std::string getTypeName() const override;
-    void Accept(Visitor *visitor, bool toEdit);
+    void Accept(Visitor *visitor, bool toEdit) const;
 
     ~SpedizioneCargo() = default;
 };

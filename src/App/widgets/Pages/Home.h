@@ -26,9 +26,9 @@ private:
     MyButton *filiere;
 
     FileManager* fm;
-    ArrayList<Spedizione*> lstElements;
+    ArrayList<Spedizione*>* lstElements;
 public:
-    explicit Home(QWidget *parent = nullptr);
+    explicit Home(FileManager *file, ArrayList<Spedizione *>* lst, QWidget *parent = nullptr);
 
     QLineEdit* txtSearchBar;
     MyButton* btnOrderButton;
@@ -47,9 +47,13 @@ slots:
     void FilterSelectedSlot();
     void SearchbarModifiedSlot();
     void AddNewSpedizioneSlot(Spedizione*);
+    void VisualizzaSpedizioneSlot(const Spedizione*);
+    void ModificaSpedizioneSlot(const Spedizione*);
+    void ModificaSpedizioneAggiornataSlot(Spedizione *spedizione);
 signals:
     void SaveOnFileSignal();
-
+    void VisualizzaSpedizioneSignal(HierachyPageInterface*);
+    void ModificaSpedizioneSignal(HierachyPageInterface*);
 };
 
 

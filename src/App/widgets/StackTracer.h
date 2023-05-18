@@ -16,9 +16,16 @@ class StackTracer : public QStackedWidget{
 private:
     Home *homePage;
     SelezioneTipoPage* selezioneTipoPage;
+
+    ArrayList<Spedizione*>* lstElements;
+    FileManager* fm;
+
 public:
     explicit StackTracer(QWidget *parent = nullptr) : QStackedWidget(parent) {
-            homePage = new Home(this);
+            fm = new FileManager("fileDiProva");
+            lstElements = new ArrayList<Spedizione*>(fm->readSpedizioni());
+
+            homePage = new Home(fm, lstElements, this);
             selezioneTipoPage = new SelezioneTipoPage();
 
             addWidget(homePage);
@@ -29,6 +36,8 @@ public:
             connect(homePage, &Home::SaveOnFileSignal, this, &StackTracer::switchToSelezioneTipoPage);
             connect(selezioneTipoPage, &SelezioneTipoPage::backSignal, this, &StackTracer::switchToHomePage);
             connect(selezioneTipoPage, &SelezioneTipoPage::AssicurataSignal, this, &StackTracer::switchToSelectedCreatingPage);
+            connect(homePage, &Home::VisualizzaSpedizioneSignal, this, &StackTracer::switchToSelectedCreatingPage);
+            connect(homePage, &Home::ModificaSpedizioneSignal, this, &StackTracer::switchToSelectedCreatingPage);
     }
 public slots:
     void switchToHomePage() {
@@ -41,15 +50,23 @@ public slots:
         addWidget(nuovaPagina);
         connect(nuovaPagina, &HierachyPageInterface::BackSignal, this, &StackTracer::switchToSelezioneTipoPage);
         connect(nuovaPagina, &HierachyPageInterface::CreaSignal, this, &StackTracer::addNewSpedizioneSlot);
+        connect(nuovaPagina, &HierachyPageInterface::ModificaSignal, this, &StackTracer::ModificaSpedizioneSlot);
+        connect(nuovaPagina, &HierachyPageInterface::toHomeSignal, this, &StackTracer::switchToHomePage);
         //TODO FARLO ANCHE PER L'ALTRO PULSANTE DENTRO LE SCHERMATE
         setCurrentWidget(nuovaPagina);
     }
-    void addNewSpedizioneSlot(Spedizione* spedizione){
-        cout << "Nuova spedizione arrivata e aggiunta" << endl;
+    void addNewSpedizioneSlot(Spedizione* spedizione) {
         homePage->AddNewSpedizioneSlot(spedizione);
         homePage->loadListView();
         switchToHomePage();
     }
+    void ModificaSpedizioneSlot(Spedizione* spedizione){
+        cout << spedizione->getMittente()->getNomeCognome();
+        homePage->ModificaSpedizioneAggiornataSlot(spedizione);
+        homePage->loadListView();
+        switchToHomePage();
+    }
+
     /*
     void switchToSpedizioniTotali() {
         setCurrentWidget(spedizioniTotali);

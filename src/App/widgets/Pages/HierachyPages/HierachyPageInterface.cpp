@@ -16,3 +16,7 @@ void HierachyPageInterface::ModificaSlot() {
 void HierachyPageInterface::CreaSlot() {
     emit CreaSignal(obj);
 }
+
+void HierachyPageInterface::toHomeSlot() {
+    emit toHomeSignal();
+}

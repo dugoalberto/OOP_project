@@ -19,13 +19,14 @@ private:
     std::vector<Assicurazione> lstAssicurazioni;
     QComboBox* cmbAssicurazioniPossibili;
     QLineEdit* txtCostoPerServizio;
+    std::vector<std::string>* alreadyCheckedService;
 public:
-    PackageWidgetAssicurata(Package* = nullptr, Assicurazione* = nullptr,  bool toEdit = false, QWidget* = nullptr);
+    PackageWidgetAssicurata(Package* = nullptr, Assicurazione* = nullptr, std::vector<std::string>* = nullptr,bool toEdit = false, QWidget* = nullptr);
     float addedCost() const;
     Assicurazione* getAssicurazione();
     bool ConvalidaInput() const override;
     float PrezzoTotaleAssicurazione() const;
-    int getNumeroServiziSelezionati() const;
+    std::vector<std::string>* getServiziSelezionati() const;
 public slots:
     void AssicurazioneChosenChangedSlot();
     void checkBoxSelectedSlot();

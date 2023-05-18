@@ -5,9 +5,9 @@
 #include "SpedizioneInternazionale.h"
 std::string SpedizioneInternazionale::TypeName = "SPEDIZIONEINTERNAZIONALE";
 
-SpedizioneInternazionale::SpedizioneInternazionale(int trakingNumber, const Address &mittente,
-                                                   const Address &destinatario,
-                                                   const Package &pacco, const Stato &stato, const string &descrizione)
+SpedizioneInternazionale::SpedizioneInternazionale(int trakingNumber, Address *mittente,
+                                                   Address *destinatario,
+                                                   Package *pacco, Stato *stato, const string &descrizione)
         :
         Spedizione(trakingNumber, mittente, destinatario, pacco, stato,
                    descrizione) {
@@ -26,6 +26,6 @@ std::string SpedizioneInternazionale::getTypeName() const {
     return TypeName;
 }
 
-void SpedizioneInternazionale::Accept(Visitor *visitor, bool toEdit) {
+void SpedizioneInternazionale::Accept(Visitor *visitor, bool toEdit) const {
     visitor->visit(this, toEdit);
 }

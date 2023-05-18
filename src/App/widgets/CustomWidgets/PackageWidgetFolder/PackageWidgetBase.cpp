@@ -18,11 +18,13 @@ PackageWidgetBase::PackageWidgetBase(Package *pkg, bool toEdit, QWidget* parent)
     QHBoxLayout* secondRow = new QHBoxLayout();
     txtContenuto = new QLineEdit((pkg)?QString::fromStdString((pkg)->getContenuto()):"");
     txtContenuto->setPlaceholderText("Contenuto");
+    txtContenuto->setEnabled(toEdit);
     connect(txtContenuto, &QLineEdit::textChanged, this, &PackageWidgetBase::textChangedSlot);
 
-    txtValore = new QLineEdit((pkg)?QString::fromStdString(to_string((pkg)->getValore())):"");
+    txtValore = new QLineEdit((pkg)?QString::number((pkg)->getValore()):"");
     txtValore->setPlaceholderText("Valore in €");
     txtValore->setValidator(new QRegularExpressionValidator(QRegularExpression("[0-9]{1,6}+(\\.[0-9]{1,2})?"), this));
+    txtValore->setEnabled(toEdit);
     connect(txtValore, &QLineEdit::textChanged, this, &PackageWidgetBase::textChangedSlot);
 
     secondRow->addWidget(txtContenuto);
@@ -32,11 +34,13 @@ PackageWidgetBase::PackageWidgetBase(Package *pkg, bool toEdit, QWidget* parent)
     txtPeso = new QLineEdit((pkg)?QString::number((pkg)->getPeso()):"");
     txtPeso->setPlaceholderText("Peso (Kg)");
     txtPeso->setValidator(new QRegularExpressionValidator(QRegularExpression("[0-9]{1,6}+(\\.[0-9]{1,2})?"), this));
+    txtPeso->setEnabled(toEdit);
     connect(txtPeso, &QLineEdit::textChanged, this, &PackageWidgetBase::textChangedSlot);
 
     txtVolume = new QLineEdit((pkg)?QString::number((pkg)->getVolume()):"");
     txtVolume->setPlaceholderText("Volume (m^3)");
     txtVolume->setValidator(new QRegularExpressionValidator(QRegularExpression("[0-9]{1,6}+(\\.[0-9]{1,2})?"), this));
+    txtVolume->setEnabled(toEdit);
     connect(txtVolume, &QLineEdit::textChanged, this, &PackageWidgetBase::textChangedSlot);
 
     thirdRow->addWidget(txtPeso);
@@ -49,8 +53,7 @@ PackageWidgetBase::PackageWidgetBase(Package *pkg, bool toEdit, QWidget* parent)
 }
 
 Package* PackageWidgetBase::getPackage() const {
-    if(package) return package;
-    else if(ConvalidaInput()) return new Package(txtContenuto->text().toStdString(),
+    if(ConvalidaInput()) return new Package(txtContenuto->text().toStdString(),
                                                  txtValore->text().toFloat(),
                                                  txtPeso->text().toFloat(),
                                                  txtVolume->text().toFloat());

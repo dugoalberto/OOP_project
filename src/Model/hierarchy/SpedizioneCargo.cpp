@@ -5,8 +5,8 @@
 #include "SpedizioneCargo.h"
 std::string SpedizioneCargo::TypeName = "SPEDIZIONECARGO";
 
-SpedizioneCargo::SpedizioneCargo(int trakingNumber, const Address &mittente, const Address &destinatario,
-                                 const Package &pacco, const Stato &stato, const string &descrizione,
+SpedizioneCargo::SpedizioneCargo(int trakingNumber, Address *mittente, Address *destinatario,
+                                 Package *pacco, Stato *stato, const string &descrizione,
                                  const TipologiaTrasporto &tipologiaTrasporto) : SpedizioneInternazionale(
         trakingNumber, mittente, destinatario, pacco,stato,descrizione), tipoTrasporto(tipologiaTrasporto){
 
@@ -29,6 +29,6 @@ SpedizioneCargo::TipologiaTrasporto SpedizioneCargo::getTipologiaTrasporto() con
     return tipoTrasporto;
 }
 
-void SpedizioneCargo::Accept(Visitor *visitor, bool toEdit) {
+void SpedizioneCargo::Accept(Visitor *visitor, bool toEdit) const {
     visitor->visit(this, toEdit);
 }

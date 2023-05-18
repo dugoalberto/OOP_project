@@ -5,9 +5,9 @@
 #include <iostream>
 #include "Home.h"
 
-Home::Home(QWidget *parents) : QWidget(parents){
-    fm = new FileManager("fileDiProva");
-    lstElements = fm->readSpedizioni();
+Home::Home(FileManager *file, ArrayList<Spedizione *>* lst, QWidget *parents) : QWidget(parents), fm(file), lstElements(lst){
+    /*fm = new FileManager("fileDiProva");
+    lstElements = fm->readSpedizioni();*/
 
     QHBoxLayout* MainLayout = new QHBoxLayout(this);
 
@@ -77,19 +77,21 @@ Home::Home(QWidget *parents) : QWidget(parents){
 
 void Home::loadListView() {
     lstSpedizioni->clear();
-    for(auto it = lstElements.begin(); it != lstElements.end(); ++it){
+    for(auto it = lstElements->begin(); it != lstElements->end(); ++it){
         bool toBeInsert = false;
         for(int j = 0; j < 5; j++)
             if(CbTypesArray[j]->isChecked() && ((*it)->getTypeName() == "SPEDIZIONE" + CbTypesArray[j]->text().toUpper().toStdString() || (*it)->getTypeName() == "SPEDIZIONE" + CbTypesArray[j]->text().toUpper().toStdString() + "A"
                                                                                                                                       || (*it)->getTypeName() == "SPEDIZIONE" + CbTypesArray[j]->text().toUpper().toStdString() + "B"))
                 for(int k = 0; k < 5; k++)
-                    if(CbStatoArray[k]->isChecked() && (*it)->getStato().getDescStato() == CbStatoArray[k]->text().toStdString())
+                    if(CbStatoArray[k]->isChecked() && (*it)->getStato()->getDescStato() == CbStatoArray[k]->text().toStdString())
                         if(QString::fromStdString(std::to_string((*it)->getTrakingNumber())).contains(txtSearchBar->text()))
                             toBeInsert = true;
 
         if(toBeInsert) {
             QListWidgetItem *item = new QListWidgetItem();
             ListViewSpedizioniItemWidget *widget = new ListViewSpedizioniItemWidget(*it);
+            connect(widget, &ListViewSpedizioniItemWidget::VisualizzaSignal, this, &Home::VisualizzaSpedizioneSlot);
+            connect(widget, &ListViewSpedizioniItemWidget::ModificaSignal, this, &Home::ModificaSpedizioneSlot);
             item->setSizeHint(widget->sizeHint());
             lstSpedizioni->addItem(item);
             lstSpedizioni->setItemWidget(item, widget);
@@ -120,10 +122,29 @@ void Home::SearchbarModifiedSlot() {
 void Home::AddNewSpedizioneSlot(Spedizione* spedizione) {
 
     int n = rand() % (9999-1000+1)+1000;
-    while(lstElements.search(n) != -1){
+    while(lstElements->search(n) != -1){
         n = rand() % (9999-1000+1)+1000;
     }
     spedizione->setTrakingNumber(n);
-    lstElements.add(spedizione);
-    fm->saveData(lstElements);
+    lstElements->add(spedizione);
+    fm->saveData(*lstElements);
+}
+
+void Home::ModificaSpedizioneAggiornataSlot(Spedizione* spedizione){
+    int index = lstElements->search(spedizione->getTrakingNumber());
+    Spedizione* s = *lstElements->get(index);
+    s->modifica(spedizione);
+    fm->saveData(*lstElements);
+}
+
+void Home::VisualizzaSpedizioneSlot(const Spedizione *spe) {
+    Visitor* visitor = new Visitor;
+    spe->Accept(visitor, false);
+    emit VisualizzaSpedizioneSignal(visitor->getWidget());
+}
+
+void Home::ModificaSpedizioneSlot (const Spedizione *spe) {
+    Visitor* visitor = new Visitor;
+    spe->Accept(visitor, true);
+    emit ModificaSpedizioneSignal(visitor->getWidget());
 }

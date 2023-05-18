@@ -17,53 +17,52 @@ using namespace std;
 class Spedizione {
 protected:
     int trakingNumber; //ID number per identificare il pacco
-    Address mittente;
-    Address destinatario;
-    Package pacco; //contenuto, valore
-    Stato stato; //tipologia(arrivato, filiale->PD, ..)
+    Address* mittente;
+    Address* destinatario;
+    Package* pacco; //contenuto, valore
+    Stato* stato; //tipologia(arrivato, filiale->PD, ..)
     string descrizione;
     static std::string SEPARATOR;
 public:
     Spedizione() = default;
-    Spedizione(int trakingNumber, const Address &mittente, const Address &destinatario,
-               const Package &pacco, const Stato &stato, const string &descrizione);
+    Spedizione(int trakingNumber, Address *mittente, Address *destinatario,
+               Package *pacco, Stato *stato, const string &descrizione);
     Spedizione(const Spedizione& other);
     virtual ~Spedizione();
 
     virtual float getCosto() const = 0;
+    virtual void modifica(Spedizione* spe);
 
     //getter
     int getTrakingNumber() const;
 
-    const Address &getMittente() const;
+    Address* getMittente() const;
 
-    const Address &getDestinatario() const;
+    Address* getDestinatario() const;
 
-    const Package &getPacco() const;
+    Package* getPacco() const;
 
-    const Stato &getStato() const;
+    Stato* getStato() const;
 
-    const string &getDescrizione() const;
+    std::string getDescrizione() const;
 
     //setter
     void setTrakingNumber(int trakingNumber);
 
-    void setMittente(const Address &mittente);
+    void setMittente(Address* mittente);
 
-    void setDestinatario(const Address &destinatario);
+    void setDestinatario(Address* destinatario);
 
-    void setPacco(const Package &pacco);
+    void setPacco(Package* pacco);
 
-    void setStato(const Stato &stato);
+    void setStato(Stato* stato);
 
     void setDescrizione(const string &descrizione);
-
-    friend ostream &operator<<(ostream &os, const Spedizione &spedizione);
 
     virtual std::string getTypeName() const = 0;
     virtual std::string toSaveFormat() const;
     static std::vector<string> ScomposeAttribute(const std::string&);
-    virtual void Accept(Visitor *visitor, bool toEdit) = 0;
+    virtual void Accept(Visitor *visitor, bool toEdit) const = 0;
 
 };
 

@@ -17,11 +17,11 @@ class Visitor {
 private:
     HierachyPageInterface* widget;
 public:
-    void visit(SpedizionePremium*, bool);
-    void visit(SpedizioneEconomica*, bool);
-    void visit(SpedizioneCargo*, bool);
-    void visit(SpedizioneInternazionale*, bool);
-    void visit(SpedizioneAssicurata*, bool);
+    void visit(const SpedizionePremium*, bool);
+    void visit(const SpedizioneEconomica*, bool);
+    void visit(const SpedizioneCargo*, bool);
+    void visit(const SpedizioneInternazionale*, bool);
+    void visit(const SpedizioneAssicurata*, bool);
     HierachyPageInterface* getWidget() const;
 };
 

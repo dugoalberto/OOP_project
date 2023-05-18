@@ -5,16 +5,16 @@
 #include "SpedizionePremium.h"
 std::string SpedizionePremium::typeName = "SPEDIZIONEPREMIUM";
 
-SpedizionePremium::SpedizionePremium(int trakingNumber, const Address &mittente, const Address &destinatario,
-                                     const Package &pacco, const Stato &stato, const string &descrizione, int anno,
-                                     int mese, int giorni, int ore, int minuti)
+SpedizionePremium::SpedizionePremium(int trakingNumber, Address *mittente, Address *destinatario,
+                                     Package *pacco, Stato *stato, const string &descrizione, int anno,
+                                     int meseanno, int giornianno, int oreanno, int minutianno)
                                      : Spedizione(trakingNumber, mittente, destinatario, pacco, stato, descrizione) {
     if(anno != -1){
         ordine_tm.tm_year = anno; //l'anno è "shiftato" di 1900 in tm struct
-        ordine_tm.tm_mon = mese; // partono da 0 in tm struct
-        ordine_tm.tm_mday = giorni;
-        ordine_tm.tm_hour = ore;
-        ordine_tm.tm_min = minuti;
+        ordine_tm.tm_mon = meseanno; // partono da 0 in tm struct
+        ordine_tm.tm_mday = giornianno;
+        ordine_tm.tm_hour = oreanno;
+        ordine_tm.tm_min = minutianno;
     }else{
         ordine_tm.tm_year += 1900; //l'anno è "shiftato" di 1900 in tm struct
         ordine_tm.tm_mon += 1; // partono da 0 in tm struct
@@ -101,6 +101,6 @@ std::string SpedizionePremium::getTypeName() const {
     return typeName;
 }
 
-void SpedizionePremium::Accept(Visitor *visitor, bool toEdit) {
+void SpedizionePremium::Accept(Visitor *visitor, bool toEdit) const {
     visitor->visit(this, toEdit);
 }

@@ -36,6 +36,7 @@ public:
     SpedizioneAssicurataPage(SpedizioneAssicurata * = nullptr, bool toEdit = false, QWidget *parent = nullptr);
 public slots:
     void CreaSlot() override;
+    void ModificaSlot();
 };
 
 

@@ -14,12 +14,12 @@ static float VOL_MAX;
 static float PES_MAX;
 
 public:
-    SpedizioneEconomica(int trakingNumber, const Address &mittente, const Address &destinatario,
-                        const Package &pacco, const Stato &stato, const string &descrizione);
+    SpedizioneEconomica(int trakingNumber, Address *mittente, Address *destinatario,
+                        Package *pac, Stato *stato, const string &descrizione);
     float getCosto() const override;
     std::string toSaveFormat() const override;
     std::string getTypeName() const override;
-    void Accept(Visitor *visitor, bool toEdit);
+    void Accept(Visitor *visitor, bool toEdit) const;
 
     ~SpedizioneEconomica() = default;
 };
