@@ -46,6 +46,7 @@ SpedizioneAssicurataPage::SpedizioneAssicurataPage(SpedizioneAssicurata *spe, bo
         possibiliFiliali->addItem(QString::fromStdString((*it).getCitta()));
     possibiliFiliali->setCurrentIndex(0);
     possibiliFiliali->setEditable(toEdit);
+    possibiliFiliali->setEnabled(toEdit);
 
     QVBoxLayout* lytStato = new QVBoxLayout();
     lytStato->setAlignment(Qt::AlignCenter);
@@ -57,6 +58,7 @@ SpedizioneAssicurataPage::SpedizioneAssicurataPage(SpedizioneAssicurata *spe, bo
     }
     possibiliStati->setCurrentIndex(0);
     possibiliStati->setEditable(toEdit);
+    possibiliStati->setEnabled(toEdit);
     lytFiliale->addWidget(new QLabel("Filiali presenti:"));
     lytFiliale->addWidget(possibiliFiliali);
 
@@ -72,6 +74,7 @@ SpedizioneAssicurataPage::SpedizioneAssicurataPage(SpedizioneAssicurata *spe, bo
     txtDescrizione->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     lytFilialiDescrizioni->addWidget(txtDescrizione);
     txtDescrizione->setEnabled(toEdit);
+    if(spe) txtDescrizione->setText(QString::fromStdString(spe->getDescrizione()));
 
     QGroupBox* grpFilialeStatoDescrizione = new QGroupBox();
     grpFilialeStatoDescrizione->setLayout(lytFilialiDescrizioni);
@@ -94,7 +97,7 @@ SpedizioneAssicurataPage::SpedizioneAssicurataPage(SpedizioneAssicurata *spe, bo
     grpPulsanti->setLayout(lytPulsanti);
     lowerRow->addWidget(grpPulsanti);
 
-    if(toEdit)
+    if(!spe)
         connect(btnAnnulla, &QPushButton::clicked, this, &HierachyPageInterface::BackSlot);
     else connect(btnAnnulla, &QPushButton::clicked, this, &HierachyPageInterface::toHomeSlot);
 
@@ -141,7 +144,10 @@ void SpedizioneAssicurataPage::ModificaSlot() {
     static_cast<SpedizioneAssicurata*>(obj)->setAssicurazione(package->getAssicurazione());
     static_cast<SpedizioneAssicurata*>(obj)->setServiziAssicurazione(package->getServiziSelezionati());*/
 
-    cout << mittente->getAddress()->getNomeCognome() << endl;
+    if( mittente->ConvalidaInput() &
+        destinatario->ConvalidaInput() &
+        package->ConvalidaInput()){
+
     emit HierachyPageInterface::ModificaSignal(     new SpedizioneAssicurata(obj->getTrakingNumber(),
                                                                             mittente->getAddress(),
                                                                             destinatario->getAddress(),
@@ -150,4 +156,13 @@ void SpedizioneAssicurataPage::ModificaSlot() {
                                                                                       filiali[possibiliFiliali->currentIndex()]),
                                                                             txtDescrizione->toPlainText().toStdString(),
                                                                             package->getAssicurazione(), package->getServiziSelezionati()));
+
+    }else{
+        QDialog dialog;
+        QLabel *dialogLabel = new QLabel("Attenzione: tutti i campi devono essere inseriti");
+        QHBoxLayout *dialogLayout = new QHBoxLayout;
+        dialogLayout->addWidget(dialogLabel);
+        dialog.setLayout(dialogLayout);
+        dialog.exec();
+    }
 }

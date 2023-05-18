@@ -4,6 +4,7 @@
 
 #include "Visitor.h"
 #include "../Pages/HierachyPages/SpedizioneAssicurataPage.h"
+#include "../Pages/HierachyPages/SpedizionePremiumPage.h"
 
 void Visitor::visit(const SpedizioneAssicurata *obj, bool toEdit) {
     widget = new SpedizioneAssicurataPage(const_cast<SpedizioneAssicurata*>(obj), toEdit);
@@ -14,7 +15,7 @@ void Visitor::visit(const SpedizioneEconomica *obj, bool toEdit) {
 }
 
 void Visitor::visit(const SpedizionePremium *obj, bool toEdit) {
-    //widget = new SpedizioneAssicurataPage(obj, toEdit);
+    widget = new SpedizionePremiumPage(const_cast<SpedizionePremium*>(obj), toEdit);
 }
 
 void Visitor::visit(const SpedizioneCargo *obj, bool toEdit) {

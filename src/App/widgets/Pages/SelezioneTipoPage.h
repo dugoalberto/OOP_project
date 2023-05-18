@@ -17,6 +17,7 @@
 #include "../CustomWidgets/ListViewItemCustomWidget/ListViewFilialeItemWidget.h"
 #include "../CustomWidgets/ListViewItemCustomWidget/ListViewAssicurazioneItemWidget.h"
 #include "HierachyPages/SpedizioneAssicurataPage.h"
+#include "HierachyPages/SpedizionePremiumPage.h"
 
 class SelezioneTipoPage : public QWidget {
     Q_OBJECT

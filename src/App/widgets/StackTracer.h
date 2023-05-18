@@ -36,6 +36,7 @@ public:
             connect(homePage, &Home::SaveOnFileSignal, this, &StackTracer::switchToSelezioneTipoPage);
             connect(selezioneTipoPage, &SelezioneTipoPage::backSignal, this, &StackTracer::switchToHomePage);
             connect(selezioneTipoPage, &SelezioneTipoPage::AssicurataSignal, this, &StackTracer::switchToSelectedCreatingPage);
+            connect(selezioneTipoPage, &SelezioneTipoPage::PremiumSignal, this, &StackTracer::switchToSelectedCreatingPage);
             connect(homePage, &Home::VisualizzaSpedizioneSignal, this, &StackTracer::switchToSelectedCreatingPage);
             connect(homePage, &Home::ModificaSpedizioneSignal, this, &StackTracer::switchToSelectedCreatingPage);
     }
@@ -61,7 +62,6 @@ public slots:
         switchToHomePage();
     }
     void ModificaSpedizioneSlot(Spedizione* spedizione){
-        cout << spedizione->getMittente()->getNomeCognome();
         homePage->ModificaSpedizioneAggiornataSlot(spedizione);
         homePage->loadListView();
         switchToHomePage();

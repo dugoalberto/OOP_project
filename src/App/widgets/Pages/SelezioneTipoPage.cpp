@@ -113,7 +113,7 @@ void SelezioneTipoPage::btnEconomicaPressedSlot() {
 }
 
 void SelezioneTipoPage::btnPremiumPressedSlot() {
-    emit PremiumSignal(new SpedizioneAssicurataPage(nullptr, false, nullptr));
+    emit PremiumSignal(new SpedizionePremiumPage(nullptr, true, nullptr));
 }
 
 void SelezioneTipoPage::btnCargoPressedSlot() {

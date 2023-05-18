@@ -34,12 +34,15 @@ public:
                       int meseanno= -1, int giornianno= -1, int oreanno= -1, int minutianno= -1);
     ~SpedizionePremium() override;
     void setOrario(int year, int month, int day, int hours, int minuti);
+    std::vector<int> getOrario() const;
 
     std::string getTypeName() const;
     float getCosto() const override;
     std::string toSaveFormat() const;
 
     void Accept(Visitor *visitor, bool toEdit) const;
+
+    void modifica(Spedizione *spe);
 };
 
 #endif //PROJECT_SPEDIZIONEPREMIUM_H

@@ -10,14 +10,14 @@ SpedizionePremium::SpedizionePremium(int trakingNumber, Address *mittente, Addre
                                      int meseanno, int giornianno, int oreanno, int minutianno)
                                      : Spedizione(trakingNumber, mittente, destinatario, pacco, stato, descrizione) {
     if(anno != -1){
-        ordine_tm.tm_year = anno; //l'anno è "shiftato" di 1900 in tm struct
-        ordine_tm.tm_mon = meseanno; // partono da 0 in tm struct
-        ordine_tm.tm_mday = giornianno;
-        ordine_tm.tm_hour = oreanno;
-        ordine_tm.tm_min = minutianno;
+        arrivo_tm.tm_year = anno; //l'anno è "shiftato" di 1900 in tm struct
+        arrivo_tm.tm_mon = meseanno; // partono da 0 in tm struct
+        arrivo_tm.tm_mday = giornianno;
+        arrivo_tm.tm_hour = oreanno;
+        arrivo_tm.tm_min = minutianno;
     }else{
-        ordine_tm.tm_year += 1900; //l'anno è "shiftato" di 1900 in tm struct
-        ordine_tm.tm_mon += 1; // partono da 0 in tm struct
+        arrivo_tm.tm_year += 1900; //l'anno è "shiftato" di 1900 in tm struct
+        arrivo_tm.tm_mon += 1; // partono da 0 in tm struct
     }
 }
 
@@ -103,4 +103,14 @@ std::string SpedizionePremium::getTypeName() const {
 
 void SpedizionePremium::Accept(Visitor *visitor, bool toEdit) const {
     visitor->visit(this, toEdit);
+}
+
+std::vector<int> SpedizionePremium::getOrario() const {
+    return std::vector<int>{arrivo_tm.tm_mday, arrivo_tm.tm_mon, arrivo_tm.tm_year, arrivo_tm.tm_hour, arrivo_tm.tm_min};
+}
+
+void SpedizionePremium::modifica(Spedizione *spe) {
+    Spedizione::modifica(spe);
+    std::vector<int> res = (dynamic_cast<SpedizionePremium*>(spe))->getOrario();
+    setOrario(res[2],res[1],res[0],res[3],res[4]);
 }

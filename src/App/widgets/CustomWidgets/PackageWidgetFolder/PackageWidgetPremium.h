@@ -16,7 +16,7 @@ private:
     QLineEdit* txtOre;
     QLineEdit* txtMinuti;
 public:
-    PackageWidgetPremium(Package* = nullptr, bool = false, QWidget* = nullptr);
+    PackageWidgetPremium(Package* = nullptr, std::vector<int> dataOra = std::vector<int>{-1,-1,-1,-1,-1}, bool = false, QWidget* = nullptr);
 
     QLineEdit *getTxtGiorno() const;
 
@@ -27,6 +27,11 @@ public:
     QLineEdit *getTxtOre() const;
 
     QLineEdit *getTxtMinuti() const;
+
+    bool ConvalidaInput() const override;
+
+public slots:
+    void textChangedSlot();
 
 };
 

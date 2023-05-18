@@ -11,38 +11,30 @@
 #include "../../../../Model/hierarchy/Spedizione.h"
 #include "../../../../Model/hierarchy/SpedizionePremium.h"
 #include "HierachyPageInterface.h"
+#include "../../CustomWidgets/MyButton.h"
+#include "../../CustomWidgets/AddressWidget.h"
+#include "../../CustomWidgets/PackageWidgetFolder/PackageWidgetPremium.h"
 
 
 class SpedizionePremiumPage : public HierachyPageInterface{
 private:
-    const SpedizionePremium* obj;
-    QLineEdit* txtTrackingNumber;
+    AddressWidget* mittente;
+    AddressWidget* destinatario;
+    PackageWidgetPremium* package;
 
-    //mittente
-    QLineEdit* txtMittenteNomeCognome;
-    QLineEdit* txtMittenteAddress;
-    QLineEdit* txtMittenteCitta;
-    QLineEdit* txtMittenteProvincia;
-    QLineEdit* txtMittenteNazione;
-    QLineEdit* txtMittenteCap;
-
-    //destinatario
-    QLineEdit* txtDestinatarioAddress;
-    QLineEdit* txtDestinatarioCitta;
-    QLineEdit* txtDestinatarioProvincia;
-    QLineEdit* txtDestinatarioNazione;
-    QLineEdit* txtDestinatarioCap;
-
-    QLineEdit* txtContenuto;
-    QLineEdit* txtValore;
-
-    QLineEdit* txtPeso;
-    QLineEdit* txtVolume;
-
-    QLineEdit* txtStato;
-    QComboBox* txtFiliale;
-
+    QComboBox* possibiliFiliali;
+    QComboBox* possibiliStati;
     QTextEdit* txtDescrizione;
+    MyButton* btnAnnulla;
+    MyButton* btnConferma;
+    std::vector<Filiale> filiali;
+
+    bool ConvalidaInput();
+public:
+    SpedizionePremiumPage(SpedizionePremium* = nullptr, bool toEdit = false, QWidget* parent = nullptr);
+public slots:
+    void CreaSlot() override;
+    void ModificaSlot();
 };
 
 
