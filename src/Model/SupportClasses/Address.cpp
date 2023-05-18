@@ -3,6 +3,7 @@
 //
 
 #include "Address.h"
+#include <algorithm>
 
 const string &Address::getNomeCognome() const {
     return nomeCognome;
