@@ -45,7 +45,7 @@ SpedizioneEconomicaPage::SpedizioneEconomicaPage(SpedizioneEconomica *spe, bool 
     for(auto it = filiali.begin(); it != filiali.end(); ++it)
         possibiliFiliali->addItem(QString::fromStdString((*it).getCitta()));
     possibiliFiliali->setCurrentIndex(0);
-    possibiliFiliali->setEditable(toEdit);
+    possibiliFiliali->setEditable(false);
     possibiliFiliali->setEnabled(toEdit);
 
     QVBoxLayout* lytStato = new QVBoxLayout();
@@ -57,7 +57,7 @@ SpedizioneEconomicaPage::SpedizioneEconomicaPage(SpedizioneEconomica *spe, bool 
         possibiliStati->addItem(QString::fromStdString(stati[i]));
     }
     possibiliStati->setCurrentIndex(0);
-    possibiliStati->setEditable(toEdit);
+    possibiliStati->setEditable(false);
     possibiliStati->setEnabled(toEdit);
     lytFiliale->addWidget(new QLabel("Filiali presenti:"));
     lytFiliale->addWidget(possibiliFiliali);

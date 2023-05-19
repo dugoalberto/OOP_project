@@ -6,27 +6,28 @@
 #define DUGO_PROGETTO_PACKAGEWIDGETPREMIUM_H
 
 
+#include <QComboBox>
 #include "PackageWidgetBase.h"
 
 class PackageWidgetPremium : public PackageWidgetBase{
 private:
-    QLineEdit* txtGiorno;
-    QLineEdit* txtMese;
-    QLineEdit* txtAnno;
-    QLineEdit* txtOre;
-    QLineEdit* txtMinuti;
+    QComboBox* txtGiorno;
+    QComboBox* txtMese;
+    QComboBox* txtAnno;
+    QComboBox* txtOre;
+    QComboBox* txtMinuti;
 public:
     PackageWidgetPremium(Package* = nullptr, std::vector<int> dataOra = std::vector<int>{-1,-1,-1,-1,-1}, bool = false, QWidget* = nullptr);
 
-    QLineEdit *getTxtGiorno() const;
+    QComboBox *getTxtGiorno() const;
 
-    QLineEdit *getTxtMese() const;
+    QComboBox *getTxtMese() const;
 
-    QLineEdit *getTxtAnno() const;
+    QComboBox *getTxtAnno() const;
 
-    QLineEdit *getTxtOre() const;
+    QComboBox *getTxtOre() const;
 
-    QLineEdit *getTxtMinuti() const;
+    QComboBox *getTxtMinuti() const;
 
     bool ConvalidaInput() const override;
 

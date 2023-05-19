@@ -35,7 +35,7 @@ AddressWidget::AddressWidget(Address *obj, bool toEdit, Sender sender, bool inte
     txtProvincia->setPlaceholderText("Provincia");
     connect(txtProvincia, &QLineEdit::textChanged, this, &AddressWidget::textChangedSlot);
 
-    txtCap = new QLineEdit(QString::fromStdString((obj)? to_string(obj->getCap()):""));
+    txtCap = new QLineEdit((obj)? QString::number(obj->getCap(),10).rightJustified(5,'0'):"");
     txtCap->setPlaceholderText("Cap");
     txtCap->setValidator(new QRegularExpressionValidator(QRegularExpression("[0-9]{5}"), this));
     connect(txtCap, &QLineEdit::textChanged, this, &AddressWidget::textChangedSlot);

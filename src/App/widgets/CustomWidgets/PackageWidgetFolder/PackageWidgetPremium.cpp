@@ -3,7 +3,9 @@
 //
 
 #include <QRegularExpressionValidator>
+#include <QDate>
 #include "PackageWidgetPremium.h"
+#include <iostream>
 
 PackageWidgetPremium::PackageWidgetPremium(Package* pkg, std::vector<int> dataOra, bool toEdit, QWidget* parent) : PackageWidgetBase(pkg, toEdit, parent) {
     QHBoxLayout* thirdRow = new QHBoxLayout();
@@ -13,36 +15,57 @@ PackageWidgetPremium::PackageWidgetPremium(Package* pkg, std::vector<int> dataOr
     QLabel* lblDataOra = new QLabel("Data e Ora di consegna");
     orderLabel->addWidget(lblDataOra);
 
-    txtGiorno = new QLineEdit((dataOra[0]!=-1)? QString::number(dataOra[0]):"");
+    txtGiorno = new QComboBox();
     txtGiorno->setPlaceholderText("DD");
-    connect(txtGiorno, &QLineEdit::textChanged, this, &PackageWidgetPremium::textChangedSlot);
-    txtGiorno->setValidator(new QRegularExpressionValidator(QRegularExpression("[0-9]{2}"), this));
     txtGiorno->setEnabled(toEdit);
-    txtGiorno->setAlignment(Qt::AlignHCenter);
-    txtMese = new QLineEdit((dataOra[1]!=-1)? QString::number(dataOra[1]):"");
+    for(int i = 1; i <=31; i++)
+        txtGiorno->addItem(QString::number(i,10).rightJustified(2,'0'));
+    if(dataOra[0] != -1)
+        txtGiorno->setCurrentText(QString::number(dataOra[0],10).rightJustified(2,'0'));
+    else txtGiorno->setCurrentText("01");
+    connect(txtGiorno, &QComboBox::currentIndexChanged, this, &PackageWidgetPremium::textChangedSlot);
+
+    txtMese = new QComboBox();
     txtMese->setPlaceholderText("MM");
-    connect(txtMese, &QLineEdit::textChanged, this, &PackageWidgetPremium::textChangedSlot);
-    txtMese->setValidator(new QRegularExpressionValidator(QRegularExpression("[0-9]{2}"), this));
     txtMese->setEnabled(toEdit);
-    txtMese->setAlignment(Qt::AlignHCenter);
-    txtAnno = new QLineEdit((dataOra[2]!=-1)? QString::number(dataOra[2]):"");
+    for(int i = 1; i <= 12; i++)
+        txtMese->addItem(QString::number(i,10).rightJustified(2,'0'));
+    if(dataOra[1] != -1)
+        txtMese->setCurrentText(QString::number(dataOra[1],10).rightJustified(2,'0'));
+    else txtMese->setCurrentText("01");
+    connect(txtMese,  &QComboBox::currentIndexChanged, this, &PackageWidgetPremium::textChangedSlot);
+
+
+    txtAnno = new QComboBox();
     txtAnno->setPlaceholderText("AAAA");
-    connect(txtAnno, &QLineEdit::textChanged, this, &PackageWidgetPremium::textChangedSlot);
-    txtAnno->setValidator(new QRegularExpressionValidator(QRegularExpression("[0-9]{4}"), this));
     txtAnno->setEnabled(toEdit);
-    txtAnno->setAlignment(Qt::AlignHCenter);
-    txtOre = new QLineEdit((dataOra[3]!=-1)? QString::number(dataOra[3]):"");
+    for(int i = 2023; i <= 2025; i++)
+        txtAnno->addItem(QString::number(i));
+    if(dataOra[2] != -1)
+        txtAnno->setCurrentText(QString::number(dataOra[2],10).rightJustified(2,'0'));
+    else txtAnno->setCurrentText("2023");
+    connect(txtAnno, &QComboBox::currentIndexChanged, this, &PackageWidgetPremium::textChangedSlot);
+
+
+    txtOre = new QComboBox();
     txtOre->setPlaceholderText("HH");
-    connect(txtOre, &QLineEdit::textChanged, this, &PackageWidgetPremium::textChangedSlot);
-    txtOre->setValidator(new QRegularExpressionValidator(QRegularExpression("[0-9]{2}"), this));
     txtOre->setEnabled(toEdit);
-    txtOre->setAlignment(Qt::AlignHCenter);
-    txtMinuti = new QLineEdit((dataOra[4]!=-1)? QString::number(dataOra[4]):"");
+    for(int i = 0; i <= 24; i++)
+        txtOre->addItem(QString::number(i,10).rightJustified(2,'0'));
+    if(dataOra[3] != -1)
+        txtOre->setCurrentText(QString::number(dataOra[3],10).rightJustified(2,'0'));
+    else txtOre->setCurrentText("00");
+    connect(txtOre, &QComboBox::currentIndexChanged, this, &PackageWidgetPremium::textChangedSlot);
+
+    txtMinuti = new QComboBox();
     txtMinuti->setPlaceholderText("mm");
-    connect(txtMinuti, &QLineEdit::textChanged, this, &PackageWidgetPremium::textChangedSlot);
-    txtMinuti->setValidator(new QRegularExpressionValidator(QRegularExpression("[0-9]{2}"), this));
     txtMinuti->setEnabled(toEdit);
-    txtMinuti->setAlignment(Qt::AlignHCenter);
+    for(int i = 0; i < 60; i+=15)
+        txtMinuti->addItem(QString::number(i,10).rightJustified(2,'0'));
+    if(dataOra[4] != -1)
+        txtMinuti->setCurrentText(QString::number(dataOra[4],10).rightJustified(2,'0'));
+    else txtMinuti->setCurrentText("00");
+    connect(txtMinuti, &QComboBox::currentIndexChanged, this, &PackageWidgetPremium::textChangedSlot);
 
     //GIORNO MESE ANNO
     thirdRow->addWidget(txtGiorno);
@@ -50,6 +73,7 @@ PackageWidgetPremium::PackageWidgetPremium(Package* pkg, std::vector<int> dataOr
     thirdRow->addWidget(txtMese);
     thirdRow->addWidget(new QLabel("/"));
     thirdRow->addWidget(txtAnno);
+
 
     //ORE e MINUTI
     QHBoxLayout* fourthRow = new QHBoxLayout();
@@ -65,44 +89,96 @@ PackageWidgetPremium::PackageWidgetPremium(Package* pkg, std::vector<int> dataOr
     mainLyt->addLayout(orderLabel);
 }
 
-QLineEdit *PackageWidgetPremium::getTxtGiorno() const {
+QComboBox *PackageWidgetPremium::getTxtGiorno() const {
     return txtGiorno;
 }
 
-QLineEdit *PackageWidgetPremium::getTxtMese() const {
+QComboBox *PackageWidgetPremium::getTxtMese() const {
     return txtMese;
 }
 
-QLineEdit *PackageWidgetPremium::getTxtAnno() const {
+QComboBox *PackageWidgetPremium::getTxtAnno() const {
     return txtAnno;
 }
 
-QLineEdit *PackageWidgetPremium::getTxtOre() const {
+QComboBox *PackageWidgetPremium::getTxtOre() const {
     return txtOre;
 }
 
-QLineEdit *PackageWidgetPremium::getTxtMinuti() const {
+QComboBox *PackageWidgetPremium::getTxtMinuti() const {
     return txtMinuti;
 }
 
 bool PackageWidgetPremium::ConvalidaInput() const {
-    if(!txtGiorno->hasAcceptableInput()) txtGiorno->setStyleSheet("QLineEdit{ border: 2px solid red; }");
-    if(!txtMese->hasAcceptableInput()) txtMese->setStyleSheet("QLineEdit{ border: 2px solid red; }");
-    if(!txtAnno->hasAcceptableInput()) txtAnno->setStyleSheet("QLineEdit{ border: 2px solid red; }");
-    if(!txtOre->hasAcceptableInput()) txtOre->setStyleSheet("QLineEdit{ border: 2px solid red; }");
-    if(!txtMinuti->hasAcceptableInput()) txtMinuti->setStyleSheet("QLineEdit{ border: 2px solid red; }");
+    if(txtGiorno->currentText().isEmpty()) txtGiorno->setStyleSheet("QComboBox{ border: 2px solid red; }");
+    if(txtMese->currentText().isEmpty()) txtMese->setStyleSheet("QComboBox{ border: 2px solid red; }");
+    if(txtAnno->currentText().isEmpty()) txtAnno->setStyleSheet("QComboBox{ border: 2px solid red; }");
+    if(txtOre->currentText().isEmpty()) txtOre->setStyleSheet("QComboBox{ border: 2px solid red; }");
+    if(txtMinuti->currentText().isEmpty()) txtMinuti->setStyleSheet("QComboBox{ border: 2px solid red; }");
 
 
     return  PackageWidgetBase::ConvalidaInput() &&
-            txtGiorno->hasAcceptableInput() &&
-            txtMese->hasAcceptableInput() &&
-            txtAnno->hasAcceptableInput() &&
-            txtOre->hasAcceptableInput() &&
-            txtMinuti->hasAcceptableInput();
+            !txtGiorno->currentText().isEmpty() &&
+            !txtMese->currentText().isEmpty() &&
+            !txtAnno->currentText().isEmpty() &&
+            !txtOre->currentText().isEmpty() &&
+            !txtMinuti->currentText().isEmpty();
 
 }
 
 void PackageWidgetPremium::textChangedSlot() {
-    QLineEdit* txtSender = dynamic_cast<QLineEdit *>(sender());
-    txtSender->setStyleSheet("QLineEdit{ border: 2px solid #0078D7; } QLineEdit{ border: 1px solid #555555; }");
+    QComboBox* txtSender = dynamic_cast<QComboBox *>(sender());
+    txtSender->setStyleSheet("QComboBox{ border: 1px solid #555555; }");
+
+    QDate* currData = new QDate(txtAnno->currentText().toInt(), txtMese->currentText().toInt(), txtGiorno->currentText().toInt());
+    QDate* data = nullptr;
+    if(txtSender == txtGiorno || txtSender == txtAnno){
+        disconnect(txtMese, &QComboBox::currentIndexChanged, this, &PackageWidgetPremium::textChangedSlot);
+        txtMese->clear();
+        for(int i = 1; i <= 12; i++){
+            data = new QDate(txtAnno->currentText().toInt(), i, txtGiorno->currentText().toInt());
+            if(data->isValid()) {
+                txtMese->addItem(QString::number(i, 10).rightJustified(2, '0'));
+            }
+        }
+
+        if(currData->isValid()){
+            txtGiorno->setCurrentText(QString::number(currData->day(),10).rightJustified(2,'0'));
+            txtMese->setCurrentText(QString::number(currData->month(),10).rightJustified(2,'0'));
+        }
+
+        connect(txtMese, &QComboBox::currentIndexChanged, this, &PackageWidgetPremium::textChangedSlot);
+    } else if(txtSender == txtMese || txtSender == txtAnno){
+        disconnect(txtGiorno, &QComboBox::currentIndexChanged, this, &PackageWidgetPremium::textChangedSlot);
+        txtGiorno->clear();
+        for(int i = 1; i <= 31; i++){
+            data = new QDate(txtAnno->currentText().toInt(), txtMese->currentText().toInt(), i);
+            if(data->isValid()) {
+                txtGiorno->addItem(QString::number(i, 10).rightJustified(2, '0'));
+            }
+        }
+
+        if(currData->isValid()){
+            txtGiorno->setCurrentText(QString::number(currData->day(),10).rightJustified(2,'0'));
+            txtMese->setCurrentText(QString::number(currData->month(),10).rightJustified(2,'0'));
+        }
+
+        connect(txtGiorno, &QComboBox::currentIndexChanged, this, &PackageWidgetPremium::textChangedSlot);
+    } else if(txtSender == txtAnno){
+        disconnect(txtAnno, &QComboBox::currentIndexChanged, this, &PackageWidgetPremium::textChangedSlot);
+        
+        txtAnno->clear();
+        for(int i = 2023; i <= 2025; i++){
+            data = new QDate(i, txtMese->currentText().toInt(), txtGiorno->currentText().toInt());
+            if(data->isValid()) {
+                txtAnno->addItem(QString::number(i, 10).rightJustified(2, '0'));
+            }
+        }
+
+        if(currData->isValid()){
+            txtAnno->setCurrentText(QString::number(currData->year(),10).rightJustified(4,'0'));
+        }else txtAnno->setCurrentText("2024");
+
+        connect(txtAnno, &QComboBox::currentIndexChanged, this, &PackageWidgetPremium::textChangedSlot);
+    }
 }

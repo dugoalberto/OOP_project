@@ -45,7 +45,7 @@ SpedizioneAssicurataPage::SpedizioneAssicurataPage(SpedizioneAssicurata *spe, bo
     for(auto it = filiali.begin(); it != filiali.end(); ++it)
         possibiliFiliali->addItem(QString::fromStdString((*it).getCitta()));
     possibiliFiliali->setCurrentIndex(0);
-    possibiliFiliali->setEditable(toEdit);
+    possibiliFiliali->setEditable(false);
     possibiliFiliali->setEnabled(toEdit);
 
     QVBoxLayout* lytStato = new QVBoxLayout();
@@ -57,7 +57,7 @@ SpedizioneAssicurataPage::SpedizioneAssicurataPage(SpedizioneAssicurata *spe, bo
         possibiliStati->addItem(QString::fromStdString(stati[i]));
     }
     possibiliStati->setCurrentIndex(0);
-    possibiliStati->setEditable(toEdit);
+    possibiliStati->setEditable(false);
     possibiliStati->setEnabled(toEdit);
     lytFiliale->addWidget(new QLabel("Filiali presenti:"));
     lytFiliale->addWidget(possibiliFiliali);
@@ -135,15 +135,6 @@ void SpedizioneAssicurataPage::CreaSlot() {
 }
 
 void SpedizioneAssicurataPage::ModificaSlot() {
-    //TODO: implementare logica di modifica della spedizione: fare una serie di set, tornare l'oggetto alla home che ricercherà la spedizione tramite tracking number e poi fara il salvataggio
-    /*obj->setMittente(mittente->getAddress());
-    obj->setMittente(destinatario->getAddress());
-    obj->setPacco(package->getPackage());
-    obj->setStato(new Stato(possibiliStati->currentText().toStdString(), filiali[possibiliFiliali->currentIndex()]));
-    obj->setDescrizione(txtDescrizione->toPlainText().toStdString());
-    static_cast<SpedizioneAssicurata*>(obj)->setAssicurazione(package->getAssicurazione());
-    static_cast<SpedizioneAssicurata*>(obj)->setServiziAssicurazione(package->getServiziSelezionati());*/
-
     if( mittente->ConvalidaInput() &
         destinatario->ConvalidaInput() &
         package->ConvalidaInput()){

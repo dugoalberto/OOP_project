@@ -42,7 +42,7 @@ SpedizionePremiumPage::SpedizionePremiumPage(SpedizionePremium *spe, bool toEdit
     for(auto it = filiali.begin(); it != filiali.end(); ++it)
         possibiliFiliali->addItem(QString::fromStdString((*it).getCitta()));
     possibiliFiliali->setCurrentIndex(0);
-    possibiliFiliali->setEditable(toEdit);
+    possibiliFiliali->setEditable(false);
     possibiliFiliali->setEnabled(toEdit);
 
     QVBoxLayout* lytStato = new QVBoxLayout();
@@ -54,7 +54,7 @@ SpedizionePremiumPage::SpedizionePremiumPage(SpedizionePremium *spe, bool toEdit
         possibiliStati->addItem(QString::fromStdString(stati[i]));
     }
     possibiliStati->setCurrentIndex(0);
-    possibiliStati->setEditable(toEdit);
+    possibiliStati->setEditable(false);
     possibiliStati->setEnabled(toEdit);
     lytFiliale->addWidget(new QLabel("Filiali presenti:"));
     lytFiliale->addWidget(possibiliFiliali);
@@ -118,11 +118,11 @@ void SpedizionePremiumPage::CreaSlot() {
                                                   new Stato(possibiliStati->currentText().toStdString(),
                                                             filiali[possibiliFiliali->currentIndex()]),
                                                   txtDescrizione->toPlainText().toStdString(),
-                                                  stoi(package->getTxtAnno()->text().toStdString()),
-                                                  stoi(package->getTxtMese()->text().toStdString()),
-                                                  stoi(package->getTxtGiorno()->text().toStdString()),
-                                                  stoi(package->getTxtOre()->text().toStdString()),
-                                                  stoi(package->getTxtMinuti()->text().toStdString())
+                                                  stoi(package->getTxtAnno()->currentText().toStdString()),
+                                                  stoi(package->getTxtMese()->currentText().toStdString()),
+                                                  stoi(package->getTxtGiorno()->currentText().toStdString()),
+                                                  stoi(package->getTxtOre()->currentText().toStdString()),
+                                                  stoi(package->getTxtMinuti()->currentText().toStdString())
                                                   );
         emit HierachyPageInterface::CreaSignal(nuova);
 
@@ -148,11 +148,11 @@ void SpedizionePremiumPage::ModificaSlot() {
                                                                                  new Stato(possibiliStati->currentText().toStdString(),
                                                                                            filiali[possibiliFiliali->currentIndex()]),
                                                                                  txtDescrizione->toPlainText().toStdString(),
-                                                                                 stoi(package->getTxtAnno()->text().toStdString()),
-                                                                                 stoi(package->getTxtMese()->text().toStdString()),
-                                                                                 stoi(package->getTxtGiorno()->text().toStdString()),
-                                                                                 stoi(package->getTxtOre()->text().toStdString()),
-                                                                                 stoi(package->getTxtMinuti()->text().toStdString())
+                                                                                 stoi(package->getTxtAnno()->currentText().toStdString()),
+                                                                                 stoi(package->getTxtMese()->currentText().toStdString()),
+                                                                                 stoi(package->getTxtGiorno()->currentText().toStdString()),
+                                                                                 stoi(package->getTxtOre()->currentText().toStdString()),
+                                                                                 stoi(package->getTxtMinuti()->currentText().toStdString())
                                                                                  ));
     }else{
         QDialog dialog;
