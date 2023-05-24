@@ -24,8 +24,12 @@
 class SelezioneTipoPage : public QWidget {
     Q_OBJECT
 private:
-    template <class T>
-    void loadView(std::vector<T> &lst, QListWidget *wiew) const;
+    std::vector<Filiale*> lstFiliali;
+    QListWidget* viewFiliali;
+    std::vector<Assicurazione*> lstAssicurazioni;
+    QListWidget* viewAssicurazioni;
+    void loadAssicurazioni() const;
+    void loadFiliali();
 public:
     SelezioneTipoPage(QWidget* parent = nullptr);
 public
@@ -38,6 +42,19 @@ slots:
     void btnAssicurataPressedSlot();
     void btnAddFilialePressedSlot();
     void btnAddAssicurazioneSlot();
+
+    void VisualizzaFilialeSlot(Filiale* f);
+    void ModificaFilialeSlot(Filiale* f);
+    void AggiungiFilialeSlot(Filiale *f);
+    void EliminaFilialeSlot(Filiale* f);
+
+    void VisualizzaAssicurazioneSlot(Assicurazione* a);
+    void AggiungiAssicurazioneSlot(Assicurazione *a);
+    void ModificaAssicurazioneSlot(Assicurazione *a);
+    void EliminaAssicurazioneSlot(Assicurazione *a);
+
+    void reloadFilialiSlot();
+    void reloadAssicurazioneSlot();
 signals:
     void backSignal();
     void EconomicaSignal(HierachyPageInterface*);

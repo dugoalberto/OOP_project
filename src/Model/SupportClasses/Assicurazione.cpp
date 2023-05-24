@@ -29,4 +29,8 @@ std::string Assicurazione::toString() const {
     return nomeAssicurazione + "|" + std::to_string(prezzo);
 }
 
+void Assicurazione::Accept(VisitorDialog * visitor, bool toEdit) const {
+    visitor->visit(this, toEdit);
+}
+
 

@@ -17,13 +17,13 @@ PackageWidgetAssicurata::PackageWidgetAssicurata(Package *pkg, Assicurazione* as
 
     lstAssicurazioni = FileManager::readAssicurazioni();
     for(auto it = lstAssicurazioni.begin(); it != lstAssicurazioni.end(); ++it)
-        cmbAssicurazioniPossibili->addItem(QString::fromStdString((*it).getNomeAssicurazione()));
+        cmbAssicurazioniPossibili->addItem(QString::fromStdString((*it)->getNomeAssicurazione()));
     cmbAssicurazioniPossibili->setCurrentIndex(0);
     cmbAssicurazioniPossibili->setEnabled(toEdit);
 
     txtCostoPerServizio = new QLineEdit();
     txtCostoPerServizio->setReadOnly(true);
-    txtCostoPerServizio->setText(QString::number(lstAssicurazioni[cmbAssicurazioniPossibili->currentIndex()].getPrezzo(),'f',2));
+    txtCostoPerServizio->setText(QString::number(lstAssicurazioni[cmbAssicurazioniPossibili->currentIndex()]->getPrezzo(),'f',2));
 
     lytComboBoxAssicurazioni->addWidget(new QLabel("Assicurazioni:"));
     lytComboBoxAssicurazioni->addWidget(cmbAssicurazioniPossibili);
@@ -71,11 +71,11 @@ float PackageWidgetAssicurata::addedCost() const {
 Assicurazione* PackageWidgetAssicurata::getAssicurazione() {
     if(assicurazione)
         return assicurazione;
-    else return &lstAssicurazioni[cmbAssicurazioniPossibili->currentIndex()];
+    else return lstAssicurazioni[cmbAssicurazioniPossibili->currentIndex()];
 }
 
 void PackageWidgetAssicurata::AssicurazioneChosenChangedSlot() {
-    txtCostoPerServizio->setText(QString::number(lstAssicurazioni[cmbAssicurazioniPossibili->currentIndex()].getPrezzo(), 'f', 2));
+    txtCostoPerServizio->setText(QString::number(lstAssicurazioni[cmbAssicurazioniPossibili->currentIndex()]->getPrezzo(), 'f', 2));
 }
 
 float PackageWidgetAssicurata::PrezzoTotaleAssicurazione() const {

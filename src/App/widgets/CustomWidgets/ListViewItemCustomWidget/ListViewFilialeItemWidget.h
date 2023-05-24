@@ -21,9 +21,9 @@ public slots:
     void ModificaSlot();
     void EliminaSlot();
     signals:
-    void VisualizzaSignal(const Filiale*);
+    void VisualizzaSignal(Filiale*);
     void ModificaSignal(Filiale*);
-    void EliminaSignal(const Filiale*);
+    void EliminaSignal(Filiale*);
 };
 
 

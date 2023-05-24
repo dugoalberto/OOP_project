@@ -42,7 +42,9 @@ SOURCES += \
     src/App/widgets/Visitor/VisitorById.cpp \
     src/App/widgets/Pages/HierachyPages/SpedizioneInternazionalePage.cpp \
     src/App/widgets/Pages/HierachyPages/SpedizioneCargoPage.cpp \
-    src/App/widgets/Pages/HierachyPages/SpedizioneEconomicaPage.cpp
+    src/App/widgets/Pages/HierachyPages/SpedizioneEconomicaPage.cpp \
+    src/App/widgets/CustomWidgets/CustomDialog/DialogAssicurazione.cpp \
+    src/App/widgets/CustomWidgets/CustomDialog/DialogFiliale.cpp
 
 HEADERS += \
     src/Model/hierarchy/Spedizione.h \
@@ -78,6 +80,8 @@ HEADERS += \
     src/App/widgets/Visitor/VisitorById.h \
     src/App/widgets/Pages/HierachyPages/SpedizioneInternazionalePage.h \
     src/App/widgets/Pages/HierachyPages/SpedizioneCargoPage.h \
-    src/App/widgets/Pages/HierachyPages/SpedizioneEconomicaPage.h
+    src/App/widgets/Pages/HierachyPages/SpedizioneEconomicaPage.h \
+    src/App/widgets/CustomWidgets/CustomDialog/DialogAssicurazione.h \
+    src/App/widgets/CustomWidgets/CustomDialog/DialogFiliale.h
 
 LIBS += -L$$[QT_INSTALL_LIBS] -lQt6Core -lQt6Gui -lQt6Widgets

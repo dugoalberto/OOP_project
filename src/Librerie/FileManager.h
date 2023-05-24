@@ -21,8 +21,8 @@ public:
 
     static void saveAssicurazioni(std::vector<Assicurazione*>);
     static void saveFiliali(std::vector<Filiale*>);
-    static std::vector<Assicurazione> readAssicurazioni();
-    static std::vector<Filiale> readFiliali();
+    static std::vector<Assicurazione *> readAssicurazioni();
+    static std::vector<Filiale *> readFiliali();
 };
 
 

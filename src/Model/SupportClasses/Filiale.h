@@ -7,39 +7,41 @@
 
 #include <string>
 #include <ostream>
-
-using namespace std;
+#include "../../App/widgets/Visitor/VisitorDialog.h"
 
 class Filiale {
 
 private:
-    string citta; //città della filiale
-    string provincia; //provincia della filiale
-    string numeroTel; //telefono (assistenza) della filiale
+    std::string citta; //città della filiale
+    std::string provincia; //provincia della filiale
+    std::string numeroTel; //telefono (assistenza) della filiale
 
 public:
     Filiale() = default;
-    Filiale(const string &citta, const string &provincia, const string &numeroTel);
+    Filiale(const std::string &citta, const std::string &provincia, const std::string &numeroTel);
     virtual ~Filiale();
 
     //getter
-    const string &getCitta() const;
+    std::string getCitta() const;
 
-    const string &getProvincia() const;
+    std::string getProvincia() const;
 
-    const string &getNumeroTel() const;
+    std::string getNumeroTel() const;
 
     //setter
-    void setCitta(const string &citta);
+    void setCitta(const std::string &citta);
 
-    void setProvincia(const string &provincia);
+    void setProvincia(const std::string &provincia);
 
-    void setNumeroTel(const string &numeroTel);
+    void setNumeroTel(const std::string &numeroTel);
 
-    friend ostream &operator<<(ostream &os, const Filiale &filiale);
+    friend std::ostream &operator<<(std::ostream &os, const Filiale &filiale);
 
     std::string toString() const;
 
+    void Accept(VisitorDialog*, bool = false) const;
+
+    Filiale& operator=(const Filiale&) = default;
 };
 
 

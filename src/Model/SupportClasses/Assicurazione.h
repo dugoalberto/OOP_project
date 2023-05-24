@@ -6,6 +6,7 @@
 #define DUGO_PROGETTO_ASSICURAZIONE_H
 #include <iostream>
 #include <vector>
+#include "../../App/widgets/Visitor/VisitorDialog.h"
 
 class Assicurazione {
 private:
@@ -21,6 +22,7 @@ public:
     void setPrezzo(float prezzo);
     virtual ~Assicurazione() {}
 
+    void Accept(VisitorDialog*, bool = false) const;
 };
 
 

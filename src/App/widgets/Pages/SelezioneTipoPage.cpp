@@ -3,6 +3,9 @@
 //
 #include "SelezioneTipoPage.h"
 #include "HierachyPages/SpedizioneInternazionalePage.h"
+#include "../Visitor/VisitorDialog.h"
+#include "../CustomWidgets/CustomDialog/DialogFiliale.h"
+#include "../CustomWidgets/CustomDialog/DialogAssicurazione.h"
 
 SelezioneTipoPage::SelezioneTipoPage(QWidget *parent) : QWidget(parent){
     QVBoxLayout* lytMain = new QVBoxLayout(this);
@@ -56,9 +59,9 @@ SelezioneTipoPage::SelezioneTipoPage(QWidget *parent) : QWidget(parent){
     firstRowFiliali->addWidget(new QLabelTitle("Filiali"));
     firstRowFiliali->addWidget(btnAddFiliale);
 
-    std::vector<Filiale> lstFiliali = FileManager::readFiliali();
-    QListWidget* viewFiliali = new QListWidget();
-    loadView(lstFiliali, viewFiliali);
+    lstFiliali = FileManager::readFiliali();
+    viewFiliali = new QListWidget();
+    loadFiliali();
 
     lytFiliali->addLayout(firstRowFiliali);
     lytFiliali->addWidget(viewFiliali);
@@ -76,9 +79,9 @@ SelezioneTipoPage::SelezioneTipoPage(QWidget *parent) : QWidget(parent){
     firstRowAssicurazioni->addWidget(new QLabelTitle("Assicurazioni"));
     firstRowAssicurazioni->addWidget(btnAddAssicurazione);
 
-    std::vector<Assicurazione> lstAssicurazioni = FileManager::readAssicurazioni();
-    QListWidget* viewAssicurazioni = new QListWidget();
-    loadView(lstAssicurazioni, viewAssicurazioni);
+    lstAssicurazioni = FileManager::readAssicurazioni();
+    viewAssicurazioni = new QListWidget();
+    loadAssicurazioni();
 
     lytAssicurazioni->addLayout(firstRowAssicurazioni);
     lytAssicurazioni->addWidget(viewAssicurazioni);
@@ -88,20 +91,32 @@ SelezioneTipoPage::SelezioneTipoPage(QWidget *parent) : QWidget(parent){
     lytMain->addLayout(lowerRow);
 }
 
-template<class T>
-void SelezioneTipoPage::loadView(std::vector<T> &lst, QListWidget *wiew) const {
-    for(auto it = lst.begin(); it != lst.end(); ++it) {
+void SelezioneTipoPage::loadFiliali() {
+    viewFiliali->clear();
+    for(auto it = lstFiliali.begin(); it != lstFiliali.end(); ++it) {
         QListWidgetItem *item = new QListWidgetItem();
-        QWidget* widget = nullptr;
-        if (dynamic_cast<Filiale*>(&(*it))){
-            widget = new ListViewFilialeItemWidget(dynamic_cast<Filiale *>(&(*it)));
-        }
-        else if(dynamic_cast<Assicurazione*>(&(*it))){
-            widget = new ListViewAssicurazioneItemWidget(dynamic_cast<Assicurazione*>(&(*it)));
-        }
+        ListViewFilialeItemWidget* widget = new ListViewFilialeItemWidget(*it);
+        connect(widget, &ListViewFilialeItemWidget::VisualizzaSignal, this, &SelezioneTipoPage::VisualizzaFilialeSlot);
+        connect(widget, &ListViewFilialeItemWidget::ModificaSignal, this, &SelezioneTipoPage::ModificaFilialeSlot);
+        connect(widget, &ListViewFilialeItemWidget::EliminaSignal, this, &SelezioneTipoPage::EliminaFilialeSlot);
+
         item->setSizeHint(widget->sizeHint());
-        wiew->addItem(item);
-        wiew->setItemWidget(item, widget);
+        viewFiliali->addItem(item);
+        viewFiliali->setItemWidget(item, widget);
+    }
+}
+
+void SelezioneTipoPage::loadAssicurazioni() const {
+    viewAssicurazioni->clear();
+    for(auto it = lstAssicurazioni.begin(); it != lstAssicurazioni.end(); ++it) {
+        QListWidgetItem *item = new QListWidgetItem();
+        ListViewAssicurazioneItemWidget* widget =  new ListViewAssicurazioneItemWidget(*it);
+        connect(widget, &ListViewAssicurazioneItemWidget::VisualizzaSignal, this, &SelezioneTipoPage::VisualizzaAssicurazioneSlot);
+        connect(widget, &ListViewAssicurazioneItemWidget::ModificaSignal, this, &SelezioneTipoPage::ModificaAssicurazioneSlot);
+        connect(widget, &ListViewAssicurazioneItemWidget::EliminaSignal, this, &SelezioneTipoPage::EliminaAssicurazioneSlot);
+        item->setSizeHint(widget->sizeHint());
+        viewAssicurazioni->addItem(item);
+        viewAssicurazioni->setItemWidget(item, widget);
     }
 }
 
@@ -129,10 +144,120 @@ void SelezioneTipoPage::btnAssicurataPressedSlot() {
     emit AssicurataSignal(new SpedizioneAssicurataPage(nullptr, true, nullptr));
 }
 
-void SelezioneTipoPage::btnAddAssicurazioneSlot() {
-    //TODO
+void SelezioneTipoPage::VisualizzaFilialeSlot(Filiale* f) {
+    VisitorDialog* visitor = new VisitorDialog();
+    f->Accept(visitor, false);
+    QDialog* dialog = visitor->getWidget();
+    dialog->show();
 }
 
+void SelezioneTipoPage::ModificaFilialeSlot(Filiale* f) {
+    VisitorDialog* visitor = new VisitorDialog();
+    f->Accept(visitor,true);
+    QDialog* dialog = visitor->getWidget();
+    connect(dynamic_cast<DialogFiliale*>(dialog), &DialogFiliale::FilialeModificataSignal, this, &SelezioneTipoPage::reloadFilialiSlot);
+    dialog->show();
+}
+
+void SelezioneTipoPage::VisualizzaAssicurazioneSlot(Assicurazione* a) {
+    VisitorDialog* visitor = new VisitorDialog();
+    a->Accept(visitor, false);
+    QDialog* dialog = visitor->getWidget();
+    dialog->show();
+}
+
+void SelezioneTipoPage::reloadFilialiSlot() {
+    FileManager::saveFiliali(lstFiliali);
+    loadFiliali();
+}
+
+void SelezioneTipoPage::reloadAssicurazioneSlot() {
+    FileManager::saveAssicurazioni(lstAssicurazioni);
+    loadAssicurazioni();
+}
+
+//
+// FILIALE
+//
+
 void SelezioneTipoPage::btnAddFilialePressedSlot() {
-    //TODO
+    DialogFiliale* dialog = new DialogFiliale(nullptr, true);
+    connect(dialog, &DialogFiliale::AggiungiFilialeSignal, this, &SelezioneTipoPage::AggiungiFilialeSlot);
+    dialog->show();
+}
+
+void SelezioneTipoPage::AggiungiFilialeSlot(Filiale *f) {
+    int pos = -1;
+    for(int i = 0; i < lstFiliali.size(); ++i){
+        if(lstFiliali[i]->getCitta() == f->getCitta())
+            pos = i;
+    }
+    if(pos == -1)
+        lstFiliali.push_back(f);
+    else{
+        QDialog dialog;
+        QLabel *dialogLabel = new QLabel("Attenzione: La filiale di questa città è già presente!");
+        QHBoxLayout *dialogLayout = new QHBoxLayout;
+        dialogLayout->addWidget(dialogLabel);
+        dialog.setLayout(dialogLayout);
+        dialog.exec();
+    }
+    reloadFilialiSlot();
+}
+
+void SelezioneTipoPage::EliminaFilialeSlot(Filiale *f) {
+    for (int i = 0; i < lstFiliali.size(); ++i){
+        if (lstFiliali[i]->getCitta() == f->getCitta()) {
+            lstFiliali.erase(lstFiliali.begin() + i);
+            continue;
+        }
+    }
+    reloadFilialiSlot();
+}
+
+//
+// ASSICURAZIONE
+//
+
+void SelezioneTipoPage::btnAddAssicurazioneSlot() {
+    DialogAssicurazione* dialog = new DialogAssicurazione(nullptr, true);
+    connect(dialog, &DialogAssicurazione::AggiungiAssicurazioneSignal, this, &SelezioneTipoPage::AggiungiAssicurazioneSlot);
+    dialog->show();
+}
+
+void SelezioneTipoPage::EliminaAssicurazioneSlot(Assicurazione *a) {
+    for (int i = 0; i < lstAssicurazioni.size(); ++i){
+        if (lstAssicurazioni[i]->getNomeAssicurazione() == a->getNomeAssicurazione()) {
+            lstAssicurazioni.erase(lstAssicurazioni.begin() + i);
+            continue;
+        }
+    }
+    reloadAssicurazioneSlot();
+}
+
+void SelezioneTipoPage::AggiungiAssicurazioneSlot(Assicurazione *a) {
+    int pos = -1;
+    for(int i = 0; i < lstAssicurazioni.size(); ++i){
+        if(lstAssicurazioni[i]->getNomeAssicurazione() == a->getNomeAssicurazione())
+            pos = i;
+    }
+    if(pos == -1)
+        lstAssicurazioni.push_back(a);
+    else{
+        QDialog dialog;
+        QLabel *dialogLabel = new QLabel("Attenzione: Nome assicurazione già presente!");
+        QHBoxLayout *dialogLayout = new QHBoxLayout;
+        dialogLayout->addWidget(dialogLabel);
+        dialog.setLayout(dialogLayout);
+        dialog.exec();
+    }
+    reloadAssicurazioneSlot();
+}
+
+void SelezioneTipoPage::ModificaAssicurazioneSlot(Assicurazione *a) {
+    VisitorDialog* visitor = new VisitorDialog();
+    a->Accept(visitor,true);
+    QDialog* dialog = visitor->getWidget();
+    connect(dynamic_cast<DialogAssicurazione*>(dialog), &DialogAssicurazione::AssicurazioneModificataSignal, this, &SelezioneTipoPage::reloadAssicurazioneSlot);
+    dialog->show();
 }

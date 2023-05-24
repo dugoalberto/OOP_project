@@ -43,7 +43,7 @@ SpedizioneInternazionalePage::SpedizioneInternazionalePage(SpedizioneInternazion
     filiali = FileManager::readFiliali();
     if(spe) possibiliFiliali->addItem(QString::fromStdString(spe->getStato()->getFiliale().getCitta()));
     for(auto it = filiali.begin(); it != filiali.end(); ++it)
-        possibiliFiliali->addItem(QString::fromStdString((*it).getCitta()));
+        possibiliFiliali->addItem(QString::fromStdString((*it)->getCitta()));
     possibiliFiliali->setCurrentIndex(0);
     possibiliFiliali->setEditable(false);
     possibiliFiliali->setEnabled(toEdit);
@@ -127,7 +127,7 @@ void SpedizioneInternazionalePage::CreaSlot() {
                                                                destinatario->getAddress(),
                                                                package->getPackage(),
                                                                new Stato(possibiliStati->currentText().toStdString(),
-                                                                         filiali[possibiliFiliali->currentIndex()]),
+                                                                         *filiali[possibiliFiliali->currentIndex()]),
                                                                txtDescrizione->toPlainText().toStdString()
                                                                );
         emit HierachyPageInterface::CreaSignal(nuova);
@@ -162,7 +162,7 @@ void SpedizioneInternazionalePage::ModificaSlot() {
                                                                                  destinatario->getAddress(),
                                                                                  package->getPackage(),
                                                                                  new Stato(possibiliStati->currentText().toStdString(),
-                                                                                           filiali[possibiliFiliali->currentIndex()]),
+                                                                                           *filiali[possibiliFiliali->currentIndex()]),
                                                                                  txtDescrizione->toPlainText().toStdString()));
 
     }else{

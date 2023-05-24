@@ -16,7 +16,7 @@ class PackageWidgetAssicurata : public PackageWidgetBase{
 private:
     Assicurazione* assicurazione;
     QCheckBox *checkBoxs[3];
-    std::vector<Assicurazione> lstAssicurazioni;
+    std::vector<Assicurazione*> lstAssicurazioni;
     QComboBox* cmbAssicurazioniPossibili;
     QLineEdit* txtCostoPerServizio;
     std::vector<std::string>* alreadyCheckedService;

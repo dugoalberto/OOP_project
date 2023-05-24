@@ -29,7 +29,7 @@ private:
     QTextEdit* txtDescrizione;
     MyButton* btnAnnulla;
     MyButton* btnConferma;
-    std::vector<Filiale> filiali;
+    std::vector<Filiale*> filiali;
 
     bool ConvalidaInput() const;
 public:

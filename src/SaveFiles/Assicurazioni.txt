@@ -1,4 +1,2 @@
-Super Agenzia Assicurativa|5
-Brutta Agenzia Assicurativa|20
-Super Agenzia Assicurativa|5
-Brutta Agenzia Assicurativa|20
+Agenzia 1|23.000000
+Agenzia 2|5.000000

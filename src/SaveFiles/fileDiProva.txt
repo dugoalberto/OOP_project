@@ -1,2 +1,1 @@
-SPEDIZIONEASSICURATA/4535/Mittente 1/fdsfasd/sdfds/fsd/IT/54350/fsdfsd/5/fdgdf/dfg/IT/64565/fgd/100.000000/100.000000/1000.000000/In spedizione/Napoli/NP/12345667/Nuova Descrizione/Super Agenzia Assicurativa/5.000000/3/Furto/Perdita/Danni
-SPEDIZIONEPREMIUM/2135/aaa/aa/aa/aaa/IT/43245/434/4/434/43/IT/32432/34/43.000000/43.000000/43.000000/In spedizione/Napoli/NP/12345667//123/4/19/17/38/2024/2/29/5/45
+SPEDIZIONEASSICURATA/4535/Mittente 1/fdsfasd/sdfds/fsd/IT/54350/fsdfsd/5/fdgdf/dfg/IT/64565/fgd/100.000000/1000.000000/100.000000/In spedizione/Napoli/NP/12345667/Nuova Descrizione/Super Agenzia Assicurativa/5.000000/3/Furto/Perdita/Danni

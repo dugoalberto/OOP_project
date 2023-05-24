@@ -87,12 +87,12 @@ ArrayList<Spedizione*> FileManager::readSpedizioni() const {
     return res;
 }
 
-std::vector<Assicurazione> FileManager::readAssicurazioni() {
+std::vector<Assicurazione *> FileManager::readAssicurazioni() {
     fstream *fA = new fstream;
     fA->open("src/SaveFiles/Assicurazioni.txt",std::ios::app);
     fA->close();
 
-    std::vector<Assicurazione> res;
+    std::vector<Assicurazione*> res;
 
     fstream* fileAssicurazioni = new fstream;
     fileAssicurazioni->open("src/SaveFiles/Assicurazioni.txt", std::ios::in);
@@ -110,19 +110,19 @@ std::vector<Assicurazione> FileManager::readAssicurazioni() {
             current = "";
         }
 
-        res.push_back(Assicurazione(attAssicurazione[0], stof(attAssicurazione[1])));
+        res.push_back(new Assicurazione(attAssicurazione[0], stof(attAssicurazione[1])));
         std::getline(*fileAssicurazioni, linea);
     }
 
     return res;
 }
 
-std::vector<Filiale> FileManager::readFiliali() {
+std::vector<Filiale*> FileManager::readFiliali() {
     fstream *fL = new fstream;
     fL->open("src/SaveFiles/Filiali.txt",std::ios::app);
     fL->close();
 
-    std::vector<Filiale> res;
+    std::vector<Filiale*> res;
 
     fstream* fileFiliali = new fstream;
     fileFiliali->open("src/SaveFiles/Filiali.txt", std::ios::in);
@@ -140,7 +140,7 @@ std::vector<Filiale> FileManager::readFiliali() {
             current = "";
         }
 
-        res.push_back(Filiale(attFiliale[0], attFiliale[1], attFiliale[2]));
+        res.push_back(new Filiale(attFiliale[0], attFiliale[1], attFiliale[2]));
         std::getline(*fileFiliali, linea);
     }
 
