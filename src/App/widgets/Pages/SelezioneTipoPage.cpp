@@ -188,7 +188,7 @@ void SelezioneTipoPage::btnAddFilialePressedSlot() {
 
 void SelezioneTipoPage::AggiungiFilialeSlot(Filiale *f) {
     int pos = -1;
-    for(int i = 0; i < lstFiliali.size(); ++i){
+    for(unsigned int i = 0; i < lstFiliali.size(); ++i){
         if(lstFiliali[i]->getCitta() == f->getCitta())
             pos = i;
     }
@@ -206,7 +206,7 @@ void SelezioneTipoPage::AggiungiFilialeSlot(Filiale *f) {
 }
 
 void SelezioneTipoPage::EliminaFilialeSlot(Filiale *f) {
-    for (int i = 0; i < lstFiliali.size(); ++i){
+    for (unsigned int i = 0; i < lstFiliali.size(); ++i){
         if (lstFiliali[i]->getCitta() == f->getCitta()) {
             lstFiliali.erase(lstFiliali.begin() + i);
             continue;
@@ -226,7 +226,7 @@ void SelezioneTipoPage::btnAddAssicurazioneSlot() {
 }
 
 void SelezioneTipoPage::EliminaAssicurazioneSlot(Assicurazione *a) {
-    for (int i = 0; i < lstAssicurazioni.size(); ++i){
+    for (unsigned int i = 0; i < lstAssicurazioni.size(); ++i){
         if (lstAssicurazioni[i]->getNomeAssicurazione() == a->getNomeAssicurazione()) {
             lstAssicurazioni.erase(lstAssicurazioni.begin() + i);
             continue;
@@ -237,7 +237,7 @@ void SelezioneTipoPage::EliminaAssicurazioneSlot(Assicurazione *a) {
 
 void SelezioneTipoPage::AggiungiAssicurazioneSlot(Assicurazione *a) {
     int pos = -1;
-    for(int i = 0; i < lstAssicurazioni.size(); ++i){
+    for(unsigned int i = 0; i < lstAssicurazioni.size(); ++i){
         if(lstAssicurazioni[i]->getNomeAssicurazione() == a->getNomeAssicurazione())
             pos = i;
     }
