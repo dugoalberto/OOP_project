@@ -1,5 +1,5 @@
 //
-// Created by utente on 18/05/2023.
+// Created by Alberto Dugo on 18/05/2023.
 //
 
 #ifndef DUGO_PROGETTO_SPEDIZIONEINTERNAZIONALEPAGE_H

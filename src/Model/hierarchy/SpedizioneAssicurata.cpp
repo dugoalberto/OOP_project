@@ -1,9 +1,10 @@
 //
-// Created by utente on 11/05/2023.
+// Created by Alberto Dugo on 11/05/2023.
 //
 
 #include "SpedizioneAssicurata.h"
 std::string SpedizioneAssicurata::TypeName="SPEDIZIONEASSICURATA";
+float SpedizioneAssicurata::baseCost= 14.99f;
 
 SpedizioneAssicurata::SpedizioneAssicurata(int trakingNumber, Address *mittente, Address *destinatario, Package *pacco,
                                            Stato *stato,
@@ -14,7 +15,7 @@ SpedizioneAssicurata::SpedizioneAssicurata(int trakingNumber, Address *mittente,
 }
 
 float SpedizioneAssicurata::getCosto() const {
-    return 70+assicurazione->getPrezzo()*assicurazione->getNomeAssicurazione().size();
+    return baseCost+assicurazione->getPrezzo()*assicurazione->getNomeAssicurazione().size();
 }
 
 std::string SpedizioneAssicurata::getTypeName() const {

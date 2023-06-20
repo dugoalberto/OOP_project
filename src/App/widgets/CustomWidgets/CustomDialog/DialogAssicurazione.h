@@ -1,5 +1,5 @@
 //
-// Created by utente on 24/05/2023.
+// Created by Alberto Dugo on 24/05/2023.
 //
 
 #ifndef DUGO_PROGETTO_DIALOGASSICURAZIONE_H
@@ -15,7 +15,6 @@ Q_OBJECT
 protected:
     Assicurazione* assicurazione;
     QLineEdit* txtNome;
-    QLineEdit* txtProvincia;
     QLineEdit* txtNumero;
 public:
     DialogAssicurazione(Assicurazione* = nullptr, bool = false, QWidget* = nullptr);

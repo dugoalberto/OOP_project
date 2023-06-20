@@ -1,5 +1,5 @@
 //
-// Created by utente on 24/05/2023.
+// Created by Alberto Dugo on 24/05/2023.
 //
 
 #include <QRegularExpressionValidator>
@@ -38,6 +38,8 @@ DialogAssicurazione::DialogAssicurazione(Assicurazione *a, bool toEdit, QWidget 
     }
 }
 
+//Covalida i campi di input affinchè siano inseriti solo valori coerenti e consistenti
+//mostrando graficamente un avviso all'utente
 bool DialogAssicurazione::ConvalidaInput() {
     if(txtNome->text().isEmpty()) txtNome->setStyleSheet("QLineEdit{ border: 2px solid red; }");
     if(!txtNumero->hasAcceptableInput()) txtNumero->setStyleSheet("QLineEdit{ border: 2px solid red; }");

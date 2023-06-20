@@ -1,5 +1,5 @@
 //
-// Created by utente on 11/05/2023.
+// Created by Alberto Dugo on 11/05/2023.
 //
 
 #include "ListViewSpedizioniItemWidget.h"

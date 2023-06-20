@@ -1,9 +1,10 @@
 //
-// Created by utente on 11/05/2023.
+// Created by Alberto Dugo on 11/05/2023.
 //
 
 #include "SpedizioneCargo.h"
 std::string SpedizioneCargo::TypeName = "SPEDIZIONECARGO";
+float SpedizioneCargo::baseCost= 200.00f;
 
 SpedizioneCargo::SpedizioneCargo(int trakingNumber, Address *mittente, Address *destinatario,
                                  Package *pacco, Stato *stato, const string &descrizione,
@@ -13,7 +14,7 @@ SpedizioneCargo::SpedizioneCargo(int trakingNumber, Address *mittente, Address *
 }
 
 float SpedizioneCargo::getCosto() const {
-    return 100;
+    return baseCost;
 }
 
 std::string SpedizioneCargo::toSaveFormat() const {

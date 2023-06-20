@@ -1,5 +1,5 @@
 //
-// Created by utente on 11/05/2023.
+// Created by Alberto Dugo on 11/05/2023.
 //
 
 #ifndef DUGO_PROGETTO_SPEDIZIONEINTERNAZIONALE_H
@@ -10,6 +10,8 @@
 
 class SpedizioneInternazionale : public Spedizione{
 static std::string TypeName;
+static float baseCost;
+
 public:
     SpedizioneInternazionale(int trakingNumber, Address *mittente, Address *destinatario,
                              Package *pacco, Stato *stato, const string &descrizione);

@@ -1,5 +1,5 @@
 //
-// Created by utente on 11/05/2023.
+// Created by Alberto Dugo on 11/05/2023.
 //
 
 #include "SpedizioneEconomica.h"
@@ -10,6 +10,7 @@ class ExceptionToHeavy {};
 float SpedizioneEconomica::PES_MAX = 3.0f;
 float SpedizioneEconomica::VOL_MAX = 10.0f;
 std::string SpedizioneEconomica::TypeName = "SPEDIZIONEECONOMICA";
+float SpedizioneEconomica::baseCost= 4.99f;
 
 SpedizioneEconomica::SpedizioneEconomica(int trakingNumber, Address *mittente, Address *destinatario,
                                          Package *pac, Stato *stato, const string &descrizione) : Spedizione(trakingNumber, mittente, destinatario,
@@ -21,7 +22,7 @@ SpedizioneEconomica::SpedizioneEconomica(int trakingNumber, Address *mittente, A
 }
 
 float SpedizioneEconomica::getCosto() const {
-    return 20;
+    return baseCost;
 }
 
 std::string SpedizioneEconomica::getTypeName() const {

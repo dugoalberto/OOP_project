@@ -1,5 +1,5 @@
 //
-// Created by utente on 24/05/2023.
+// Created by Alberto Dugo on 24/05/2023.
 //
 
 #include <QRegularExpressionValidator>
@@ -46,6 +46,8 @@ DialogFiliale::DialogFiliale(Filiale *f, bool toEdit, QWidget *parent) : QDialog
     }
 }
 
+//Covalida i campi di input affinchè siano inseriti solo valori coerenti e consistenti
+//mostrando graficamente un avviso all'utente
 bool DialogFiliale::ConvalidaInput() {
     if(txtNome->text().isEmpty()) txtNome->setStyleSheet("QLineEdit{ border: 2px solid red; }");
     if(!txtProvincia->hasAcceptableInput()) txtProvincia->setStyleSheet("QLineEdit{ border: 2px solid red; }");

@@ -1,5 +1,5 @@
 //
-// Created by utente on 11/05/2023.
+// Created by Alberto Dugo on 11/05/2023.
 //
 
 #ifndef DUGO_PROGETTO_SPEDIZIONEECONOMICA_H
@@ -10,6 +10,7 @@
 
 class SpedizioneEconomica : public Spedizione{
 static std::string TypeName;
+static float baseCost;
 
 public:
     static float VOL_MAX;

@@ -1,5 +1,5 @@
 //
-// Created by utente on 19/05/2023.
+// Created by Alberto Dugo on 19/05/2023.
 //
 
 #include "SpedizioneEconomicaPage.h"

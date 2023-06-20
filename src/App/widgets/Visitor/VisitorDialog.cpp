@@ -1,5 +1,5 @@
 //
-// Created by utente on 24/05/2023.
+// Created by Alberto Dugo on 24/05/2023.
 //
 
 #include "VisitorDialog.h"

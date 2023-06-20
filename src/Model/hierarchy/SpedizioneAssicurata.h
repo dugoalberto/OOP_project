@@ -1,5 +1,5 @@
 //
-// Created by utente on 11/05/2023.
+// Created by Alberto Dugo on 11/05/2023.
 //
 
 #ifndef DUGO_PROGETTO_SPEDIZIONEASSICURATA_H
@@ -13,6 +13,7 @@ class SpedizioneAssicurata : public Spedizione{
 private:
     Assicurazione* assicurazione;
     static std::string TypeName;
+    static float baseCost;
     std::vector<std::string>* serviziAssicurazione;
 
 public:

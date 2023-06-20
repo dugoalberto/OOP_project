@@ -1,5 +1,5 @@
 //
-// Created by utente on 11/05/2023.
+// Created by Alberto Dugo on 11/05/2023.
 //
 
 #ifndef DUGO_PROGETTO_SPEDIZIONECARGO_H
@@ -8,6 +8,7 @@
 
 class SpedizioneCargo : public SpedizioneInternazionale{
 static std::string TypeName;
+static float baseCost;
 
 public:
     enum TipologiaTrasporto{

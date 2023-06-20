@@ -1,5 +1,5 @@
 //
-// Created by utente on 12/05/2023.
+// Created by Alberto Dugo on 12/05/2023.
 //
 
 #include <QRegularExpressionValidator>
@@ -137,7 +137,7 @@ void PackageWidgetPremium::textChangedSlot() {
         txtMese->clear();
         for(int i = 1; i <= 12; i++){
             data = new QDate(txtAnno->currentText().toInt(), i, txtGiorno->currentText().toInt());
-            if(data->isValid()) {
+            if(data->isValid() && *data > QDate::currentDate()) {
                 txtMese->addItem(QString::number(i, 10).rightJustified(2, '0'));
             }
         }
@@ -153,7 +153,7 @@ void PackageWidgetPremium::textChangedSlot() {
         txtGiorno->clear();
         for(int i = 1; i <= 31; i++){
             data = new QDate(txtAnno->currentText().toInt(), txtMese->currentText().toInt(), i);
-            if(data->isValid()) {
+            if(data->isValid() && *data > QDate::currentDate()) {
                 txtGiorno->addItem(QString::number(i, 10).rightJustified(2, '0'));
             }
         }
@@ -170,7 +170,7 @@ void PackageWidgetPremium::textChangedSlot() {
         txtAnno->clear();
         for(int i = 2023; i <= 2025; i++){
             data = new QDate(i, txtMese->currentText().toInt(), txtGiorno->currentText().toInt());
-            if(data->isValid()) {
+            if(data->isValid() && *data > QDate::currentDate()) {
                 txtAnno->addItem(QString::number(i, 10).rightJustified(2, '0'));
             }
         }

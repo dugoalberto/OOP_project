@@ -26,6 +26,7 @@ private:
     std::tm arrivo_tm = *std::localtime(&arrivo);
 
     static std::string typeName;
+    static float baseCost;
 public:
     SpedizionePremium() = default;
     //6.creazione, modifica e cancellazione

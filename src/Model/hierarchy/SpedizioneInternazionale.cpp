@@ -1,9 +1,10 @@
 //
-// Created by utente on 11/05/2023.
+// Created by Alberto Dugo on 11/05/2023.
 //
 
 #include "SpedizioneInternazionale.h"
 std::string SpedizioneInternazionale::TypeName = "SPEDIZIONEINTERNAZIONALE";
+float SpedizioneInternazionale::baseCost = 19.99f;
 
 SpedizioneInternazionale::SpedizioneInternazionale(int trakingNumber, Address *mittente,
                                                    Address *destinatario,
@@ -15,7 +16,7 @@ SpedizioneInternazionale::SpedizioneInternazionale(int trakingNumber, Address *m
 }
 
 float SpedizioneInternazionale::getCosto() const {
-    return 75;
+    return baseCost;
 }
 
 std::string SpedizioneInternazionale::toSaveFormat() const {
