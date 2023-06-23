@@ -1,2 +1,6 @@
-SPEDIZIONEASSICURATA/4535/Mittente 1/fdsfasd/sdfds/fsd/IT/54350/fsdfsd/5/fdgdf/dfg/IT/64565/fgd/100.000000/100.000000/1000.000000/In spedizione/Napoli/NP/12345667/Nuova Descrizione/Super Agenzia Assicurativa/5.000000/3/Furto/Perdita/Danni
-SPEDIZIONEPREMIUM/7357/marco/rossi/Padova/PD/IT/1234/luigi/verdi/Milano/MI/IT/32154/Diamanti/1000.000000/10.000000/0.200000/In arrivo/Torino/TO/3424324324//123/5/20/21/36/2024/8/9/12/30
+SPEDIZIONEASSICURATA/4535/Mittente 1/fdsfasd/sdfds/fsd/IT/54350/fsdfsd/5/fdgdf/dfg/IT/64565/fgd/100.000000/1000.000000/100.000000/In spedizione/Napoli/NP/12345667/Nuova Descrizione/Super Agenzia Assicurativa/5.000000/3/Furto/Perdita/Danni
+SPEDIZIONEPREMIUM/7357/marco/rossi/Padova/PD/IT/1234/luigi/verdi/Milano/MI/IT/32154/Diamanti/1000.000000/0.200000/10.000000/In arrivo/Torino/TO/3424324324//123/5/23/11/45/2024/8/9/12/30
+SPEDIZIONEINTERNAZIONALE/8199/Mario Rossi/via esempio int/Roma/RO/IT/32515/Giacomo Verdi/via seconda/Parigi/PA/FR/23515/Esempio contenuto/50.990002/1.050000/2.500000/In spedizione/Torino/TO/3424324324/Esempio di descrizione
+SPEDIZIONEECONOMICA/2423/Mario Rossi/via interna 8/Verona/VR/IT/37039/Giuseppe Gialli/via esempio 2/Vicenza/VI/IT/36100/esempio/19.990000/0.230000/2.500000/In filiale/Torino/TO/3424324324/Descrizione spedizione economica
+SPEDIZIONECARGOB/SPEDIZIONEINTERNAZIONALE/3499/Azienda 1/esempio via 1/Zurigo/ZG/CH/80000/Azienda 2/esempio via 2/Roma/RM/IT/127/Oggetti di valore/1000.000000/10.000000/300.000000/In partenza/Padova/PD/0123456789//1
+SPEDIZIONECARGOA/SPEDIZIONEINTERNAZIONALE/1696/Venditore 1/via venditore/Torino/TO /IT/10024/Acquirente /via acquirente/Berlino/BE/DE/10115/contenuto acquistato/50.490002/3.500000/0.250000/Consegnato/Torino/TO/3424324324//0
