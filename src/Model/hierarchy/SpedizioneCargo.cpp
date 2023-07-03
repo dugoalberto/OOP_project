@@ -31,10 +31,6 @@ json SpedizioneCargo::toSaveFormat(int) const {
     return jsonData;
 }
 
-std::string SpedizioneCargo::getTypeName() const {
-    return TypeName + ((tipoTrasporto == TipologiaTrasporto::AEREO)? "A":"B");
-}
-
 SpedizioneCargo::TipologiaTrasporto SpedizioneCargo::getTipologiaTrasporto() const {
     return tipoTrasporto;
 }
@@ -43,7 +39,11 @@ void SpedizioneCargo::Accept(Visitor *visitor, bool toEdit) const {
     visitor->visit(this, toEdit);
 }
 
-void SpedizioneCargo::modifica(Spedizione *spe) {
-    Spedizione::modifica(spe);
+void SpedizioneCargo::Accept(VisitorForClassName *visitor) const {
+    visitor->visit(this);
+}
+
+void SpedizioneCargo::copy(Spedizione *spe) {
+    Spedizione::copy(spe);
     tipoTrasporto = dynamic_cast<SpedizioneCargo*>(spe)->tipoTrasporto;
 }

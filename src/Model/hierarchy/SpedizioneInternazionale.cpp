@@ -31,10 +31,10 @@ json SpedizioneInternazionale::toSaveFormat(int) const {
     return jsonData;
 }
 
-std::string SpedizioneInternazionale::getTypeName() const {
-    return TypeName;
-}
-
 void SpedizioneInternazionale::Accept(Visitor *visitor, bool toEdit) const {
     visitor->visit(this, toEdit);
+}
+
+void SpedizioneInternazionale::Accept(VisitorForClassName *visitor) const {
+    visitor->visit(this);
 }

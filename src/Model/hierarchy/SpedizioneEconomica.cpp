@@ -25,10 +25,6 @@ float SpedizioneEconomica::getCosto() const {
     return baseCost;
 }
 
-std::string SpedizioneEconomica::getTypeName() const {
-    return TypeName;
-}
-
 std::string SpedizioneEconomica::toSaveFormat() const {
     return TypeName + SEPARATOR + Spedizione::toSaveFormat();
 }
@@ -43,4 +39,8 @@ json SpedizioneEconomica::toSaveFormat(int) const {
 
 void SpedizioneEconomica::Accept(Visitor *visitor, bool toEdit) const {
     visitor->visit(this, toEdit);
+}
+
+void SpedizioneEconomica::Accept(VisitorForClassName *visitor) const {
+    visitor->visit(this);
 }

@@ -140,7 +140,7 @@ std::vector<std::string> Spedizione::ScomposeAttribute(const std::string &str) {
     return res;
 }
 
-void Spedizione::modifica(Spedizione *spe) {
+void Spedizione::copy(Spedizione *spe) {
     setMittente(spe->mittente);
     setDestinatario(spe->destinatario);
     setPacco(spe->pacco);

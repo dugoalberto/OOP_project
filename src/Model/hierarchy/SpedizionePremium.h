@@ -37,14 +37,14 @@ public:
     void setOrario(int year, int month, int day, int hours, int minuti);
     std::vector<int> getOrario() const;
 
-    std::string getTypeName() const;
     float getCosto() const override;
     std::string toSaveFormat() const;
     json toSaveFormat(int) const;
 
     void Accept(Visitor *visitor, bool toEdit) const;
+    void Accept(VisitorForClassName *visitor) const;
 
-    void modifica(Spedizione *spe);
+    void copy(Spedizione *spe);
 };
 
 #endif //PROJECT_SPEDIZIONEPREMIUM_H

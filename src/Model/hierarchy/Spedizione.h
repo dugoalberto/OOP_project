@@ -12,6 +12,8 @@
 #include "../SupportClasses/Stato.h"
 #include "../../App/widgets/Visitor/Visitor.h"
 #include "../../Librerie/json.hpp"
+#include "../../App/widgets/Visitor/VisitorForClassName.h"
+
 using json = nlohmann::json;
 using namespace std;
 
@@ -32,7 +34,7 @@ public:
     virtual ~Spedizione();
 
     virtual float getCosto() const = 0;
-    virtual void modifica(Spedizione* spe);
+    virtual void copy(Spedizione* spe);
 
     //getter
     int getTrakingNumber() const;
@@ -60,12 +62,11 @@ public:
 
     void setDescrizione(const string &descrizione);
 
-    virtual std::string getTypeName() const = 0;
     virtual std::string toSaveFormat() const;
     virtual json toSaveFormat(int) const;
     static std::vector<string> ScomposeAttribute(const std::string&);
     virtual void Accept(Visitor *visitor, bool toEdit) const = 0;
-
+    virtual void Accept(VisitorForClassName*) const = 0;
 };
 
 #endif //PROJECT_SPEDIZIONE_H

@@ -76,9 +76,11 @@ void Home::loadListView() {
     lstSpedizioni->clear();
     for(auto it = lstElements->begin(); it != lstElements->end(); ++it){
         bool toBeInsert = false;
+        VisitorForClassName* visitorForClassName = new VisitorForClassName();
+        (*it)->Accept(visitorForClassName);
         for(int j = 0; j < 5; j++)
-            if(CbTypesArray[j]->isChecked() && ((*it)->getTypeName() == "SPEDIZIONE" + CbTypesArray[j]->text().toUpper().toStdString() || (*it)->getTypeName() == "SPEDIZIONE" + CbTypesArray[j]->text().toUpper().toStdString() + "A"
-                                                                                                                                      || (*it)->getTypeName() == "SPEDIZIONE" + CbTypesArray[j]->text().toUpper().toStdString() + "B"))
+            if(CbTypesArray[j]->isChecked() && (visitorForClassName->getClassName() == "SPEDIZIONE" + CbTypesArray[j]->text().toUpper().toStdString() || visitorForClassName->getClassName() == "SPEDIZIONE" + CbTypesArray[j]->text().toUpper().toStdString() + "A"
+                                                                                                                                      || visitorForClassName->getClassName() == "SPEDIZIONE" + CbTypesArray[j]->text().toUpper().toStdString() + "B"))
                 for(int k = 0; k < 5; k++)
                     if(CbStatoArray[k]->isChecked() && (*it)->getStato()->getDescStato() == CbStatoArray[k]->text().toStdString())
                         if(QString::fromStdString(std::to_string((*it)->getTrakingNumber())).contains(txtSearchBar->text()))
@@ -131,7 +133,7 @@ void Home::AddNewSpedizioneSlot(Spedizione* spedizione) {
 void Home::ModificaSpedizioneAggiornataSlot(Spedizione* spedizione){
     int index = lstElements->search(spedizione->getTrakingNumber());
     Spedizione* s = *lstElements->get(index);
-    s->modifica(spedizione);
+    s->copy(spedizione);
     fm->saveData(*lstElements);
 }
 

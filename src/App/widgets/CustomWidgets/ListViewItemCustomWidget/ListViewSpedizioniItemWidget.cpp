@@ -3,6 +3,7 @@
 //
 
 #include "ListViewSpedizioniItemWidget.h"
+#include "../../Visitor/VisitorForClassName.h"
 
 ListViewSpedizioniItemWidget::ListViewSpedizioniItemWidget(Spedizione *s, QWidget *parent) : QWidget(parent), obj(s){
 
@@ -10,7 +11,9 @@ ListViewSpedizioniItemWidget::ListViewSpedizioniItemWidget(Spedizione *s, QWidge
 
     QLabel* lblSprite = new QLabel();
 
-    lblSprite->setPixmap((new QPixmap(QString::fromStdString("src/Assets/Sprite/"+obj->getTypeName()+".png")))->scaled(60,60));
+    VisitorForClassName* visitorForClassName = new VisitorForClassName();
+    s->Accept(visitorForClassName);
+    lblSprite->setPixmap((new QPixmap(QString::fromStdString("src/Assets/Sprite/"+visitorForClassName->getClassName()+".png")))->scaled(60,60));
     lblSprite->setObjectName("lblSprite");
 
     lblTrackingNumber = new QLabel(QString::number(obj->getTrakingNumber()));

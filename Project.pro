@@ -22,6 +22,7 @@ SOURCES += \
     src/Librerie/FileManagerJSON.cpp \
     src/App/widgets/CustomWidgets/QLabelTitle.cpp \
     src/App/widgets/Visitor/Visitor.cpp \
+    src/App/widgets/Visitor/VisitorForClassName.cpp \
     src/App/widgets/Pages/HierachyPages/HierachyPageInterface.cpp \
     src/App/widgets/Pages/HierachyPages/SpedizionePremiumPage.cpp \
     src/App/widgets/CustomWidgets/ListViewItemCustomWidget/ListViewSpedizioniItemWidget.cpp \
@@ -62,6 +63,7 @@ HEADERS += \
     src/Librerie/FileManagerJSON.h \
     src/App/widgets/CustomWidgets/QLabelTitle.h \
     src/App/widgets/Visitor/Visitor.h \
+    src/App/widgets/Visitor/VisitorForClassName.h \
     src/App/widgets/Pages/HierachyPages/HierachyPageInterface.h \
     src/App/widgets/Pages/HierachyPages/SpedizionePremiumPage.h \
     src/App/widgets/CustomWidgets/ListViewItemCustomWidget/ListViewSpedizioniItemWidget.h \

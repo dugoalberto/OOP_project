@@ -77,20 +77,20 @@ json SpedizionePremium::toSaveFormat(int) const {
     return jsonData;
 }
 
-std::string SpedizionePremium::getTypeName() const {
-    return typeName;
-}
-
 void SpedizionePremium::Accept(Visitor *visitor, bool toEdit) const {
     visitor->visit(this, toEdit);
+}
+
+void SpedizionePremium::Accept(VisitorForClassName *visitor) const {
+    visitor->visit(this);
 }
 
 std::vector<int> SpedizionePremium::getOrario() const {
     return std::vector<int>{arrivo_tm.tm_mday, arrivo_tm.tm_mon, arrivo_tm.tm_year, arrivo_tm.tm_hour, arrivo_tm.tm_min};
 }
 
-void SpedizionePremium::modifica(Spedizione *spe) {
-    Spedizione::modifica(spe);
+void SpedizionePremium::copy(Spedizione *spe) {
+    Spedizione::copy(spe);
     std::vector<int> res = (dynamic_cast<SpedizionePremium*>(spe))->getOrario();
     setOrario(res[2],res[1],res[0],res[3],res[4]);
 }

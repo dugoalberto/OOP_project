@@ -24,11 +24,11 @@ public:
 
     TipologiaTrasporto getTipologiaTrasporto() const;
     float getCosto() const override;
-    void modifica(Spedizione*) override;
+    void copy(Spedizione*) override;
     std::string toSaveFormat() const override;
     json toSaveFormat(int) const override;
-    std::string getTypeName() const override;
     void Accept(Visitor *visitor, bool toEdit) const;
+    void Accept(VisitorForClassName *visitor) const;
 
     ~SpedizioneCargo() = default;
 };

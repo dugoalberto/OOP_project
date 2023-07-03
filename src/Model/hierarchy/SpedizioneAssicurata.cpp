@@ -18,10 +18,6 @@ float SpedizioneAssicurata::getCosto() const {
     return baseCost+assicurazione->getPrezzo()*assicurazione->getNomeAssicurazione().size();
 }
 
-std::string SpedizioneAssicurata::getTypeName() const {
-    return TypeName;
-}
-
 std::string SpedizioneAssicurata::toSaveFormat() const {
     std::string res =   TypeName + SEPARATOR + Spedizione::toSaveFormat() + SEPARATOR +
                         assicurazione->getNomeAssicurazione() + SEPARATOR +
@@ -55,6 +51,10 @@ void SpedizioneAssicurata::Accept(Visitor *visitor, bool toEdit) const{
     visitor->visit(this, toEdit);
 }
 
+void SpedizioneAssicurata::Accept(VisitorForClassName *visitor) const {
+    visitor->visit(this);
+}
+
 Assicurazione* SpedizioneAssicurata::getAssicurazione() const {
     return assicurazione;
 }
@@ -71,8 +71,8 @@ void SpedizioneAssicurata::setAssicurazione(Assicurazione* ass){
     assicurazione = ass;
 }
 
-void SpedizioneAssicurata::modifica(Spedizione *spe) {
-    Spedizione::modifica(spe);
+void SpedizioneAssicurata::copy(Spedizione *spe) {
+    Spedizione::copy(spe);
     setAssicurazione(dynamic_cast<SpedizioneAssicurata*>(spe)->getAssicurazione());
     setServiziAssicurazione(dynamic_cast<SpedizioneAssicurata*>(spe)->getServiziAssicurazione());
 }
