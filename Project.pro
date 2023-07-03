@@ -48,6 +48,7 @@ SOURCES += \
     src/App/widgets/Visitor/VisitorDialog.cpp
 
 HEADERS += \
+    src/Librerie/json.hpp \
     src/Model/hierarchy/Spedizione.h \
     src/Model/SupportClasses/Address.h \
     src/Model/SupportClasses/Package.h \
