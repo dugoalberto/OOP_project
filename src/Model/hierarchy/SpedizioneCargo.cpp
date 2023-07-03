@@ -22,6 +22,15 @@ std::string SpedizioneCargo::toSaveFormat() const {
             SEPARATOR + SpedizioneInternazionale::toSaveFormat() + SEPARATOR + std::to_string(tipoTrasporto);
 }
 
+json SpedizioneCargo::toSaveFormat(int) const {
+    json jsonData = SpedizioneInternazionale::toSaveFormat(1);
+
+    jsonData["TypeName"] =  TypeName + ((tipoTrasporto == TipologiaTrasporto::AEREO)? "A":"B");
+    jsonData["tipo_trasporto"] = static_cast<int>(tipoTrasporto);
+
+    return jsonData;
+}
+
 std::string SpedizioneCargo::getTypeName() const {
     return TypeName + ((tipoTrasporto == TipologiaTrasporto::AEREO)? "A":"B");
 }

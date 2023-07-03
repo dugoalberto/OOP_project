@@ -19,6 +19,7 @@ public:
                         Package *pac, Stato *stato, const string &descrizione);
     float getCosto() const override;
     std::string toSaveFormat() const override;
+    json toSaveFormat(int) const override;
     std::string getTypeName() const override;
     void Accept(Visitor *visitor, bool toEdit) const;
 

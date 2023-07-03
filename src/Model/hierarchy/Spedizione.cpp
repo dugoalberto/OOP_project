@@ -4,6 +4,7 @@
 
 #include "Spedizione.h"
 
+
 int Spedizione::getTrakingNumber() const {
     return trakingNumber;
 }
@@ -93,6 +94,34 @@ std::string Spedizione::toSaveFormat() const{
     stato->getFiliale().getProvincia() + SEPARATOR +
     stato->getFiliale().getNumeroTel() + SEPARATOR +
     descrizione;
+}
+
+json Spedizione::toSaveFormat(int a) const {
+    json jsonData;
+    jsonData["trakingNumber"] = trakingNumber;
+    jsonData["mittente"]["nomeCognome"] = mittente->getNomeCognome();
+    jsonData["mittente"]["indirizzo"] = mittente->getIndirizzo();
+    jsonData["mittente"]["citta"] = mittente->getCitta();
+    jsonData["mittente"]["provincia"] = mittente->getProvincia();
+    jsonData["mittente"]["nazione"] = mittente->getNazione();
+    jsonData["mittente"]["cap"] = mittente->getCap();
+    jsonData["destinatario"]["nomeCognome"] = destinatario->getNomeCognome();
+    jsonData["destinatario"]["indirizzo"] = destinatario->getIndirizzo();
+    jsonData["destinatario"]["citta"] = destinatario->getCitta();
+    jsonData["destinatario"]["provincia"] = destinatario->getProvincia();
+    jsonData["destinatario"]["nazione"] = destinatario->getNazione();
+    jsonData["destinatario"]["cap"] = destinatario->getCap();
+    jsonData["pacco"]["contenuto"] = pacco->getContenuto();
+    jsonData["pacco"]["valore"] = pacco->getValore();
+    jsonData["pacco"]["peso"] = pacco->getPeso();
+    jsonData["pacco"]["volume"] = pacco->getVolume();
+    jsonData["stato"]["descStato"] = stato->getDescStato();
+    jsonData["stato"]["filiale"]["citta"] = stato->getFiliale().getCitta();
+    jsonData["stato"]["filiale"]["provincia"] = stato->getFiliale().getProvincia();
+    jsonData["stato"]["filiale"]["numeroTel"] = stato->getFiliale().getNumeroTel();
+    jsonData["descrizione"] = descrizione;
+
+    return jsonData;
 }
 
 std::vector<std::string> Spedizione::ScomposeAttribute(const std::string &str) {

@@ -7,7 +7,7 @@
 #include <QGroupBox>
 #include <QComboBox>
 #include <QDialog>
-#include "../../../../Librerie/FileManager.h"
+#include "../../../../Librerie/FileManagerJSON.h"
 
 SpedizioneEconomicaPage::SpedizioneEconomicaPage(SpedizioneEconomica *spe, bool toEdit, QWidget *parent) : HierachyPageInterface(spe, parent) {
     QVBoxLayout* lytMain = new QVBoxLayout(this);
@@ -40,7 +40,7 @@ SpedizioneEconomicaPage::SpedizioneEconomicaPage(SpedizioneEconomica *spe, bool 
     QVBoxLayout* lytFiliale = new QVBoxLayout();
     lytFiliale->setAlignment(Qt::AlignCenter);
     possibiliFiliali = new QComboBox();
-    filiali = FileManager::readFiliali();
+    filiali = FileManagerJSON::readFiliali();
     if(spe) possibiliFiliali->addItem(QString::fromStdString(spe->getStato()->getFiliale().getCitta()));
     for(auto it = filiali.begin(); it != filiali.end(); ++it)
         possibiliFiliali->addItem(QString::fromStdString((*it)->getCitta()));

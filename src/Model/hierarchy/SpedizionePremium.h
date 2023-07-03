@@ -40,6 +40,7 @@ public:
     std::string getTypeName() const;
     float getCosto() const override;
     std::string toSaveFormat() const;
+    json toSaveFormat(int) const;
 
     void Accept(Visitor *visitor, bool toEdit) const;
 

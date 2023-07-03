@@ -5,7 +5,7 @@
 #include <QComboBox>
 #include <QTextLine>
 #include "PackageWidgetAssicurata.h"
-#include "../../../../Librerie/FileManager.h"
+#include "../../../../Librerie/FileManagerJSON.h"
 
 PackageWidgetAssicurata::PackageWidgetAssicurata(Package *pkg, Assicurazione* ass, std::vector<std::string>* vec, bool toEdit, QWidget *parent) : PackageWidgetBase(pkg, toEdit, parent), assicurazione(ass), alreadyCheckedService(vec){
     QHBoxLayout* thirdRow = new QHBoxLayout();
@@ -15,7 +15,7 @@ PackageWidgetAssicurata::PackageWidgetAssicurata(Package *pkg, Assicurazione* as
     lytComboBoxAssicurazioni->setAlignment(Qt::AlignCenter);
     cmbAssicurazioniPossibili = new QComboBox();
 
-    lstAssicurazioni = FileManager::readAssicurazioni();
+    lstAssicurazioni = FileManagerJSON::readAssicurazioni();
     for(auto it = lstAssicurazioni.begin(); it != lstAssicurazioni.end(); ++it)
         cmbAssicurazioniPossibili->addItem(QString::fromStdString((*it)->getNomeAssicurazione()));
     cmbAssicurazioniPossibili->setCurrentIndex(0);

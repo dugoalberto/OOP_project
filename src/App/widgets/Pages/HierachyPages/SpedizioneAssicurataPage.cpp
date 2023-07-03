@@ -7,7 +7,7 @@
 #include <QComboBox>
 #include <QDialog>
 #include "SpedizioneAssicurataPage.h"
-#include "../../../../Librerie/FileManager.h"
+#include "../../../../Librerie/FileManagerJSON.h"
 
 SpedizioneAssicurataPage::SpedizioneAssicurataPage(SpedizioneAssicurata *spe, bool toEdit, QWidget *parent): HierachyPageInterface(spe, parent) {
     QVBoxLayout* lytMain = new QVBoxLayout(this);
@@ -40,7 +40,7 @@ SpedizioneAssicurataPage::SpedizioneAssicurataPage(SpedizioneAssicurata *spe, bo
     QVBoxLayout* lytFiliale = new QVBoxLayout();
     lytFiliale->setAlignment(Qt::AlignCenter);
     possibiliFiliali = new QComboBox();
-    filiali = FileManager::readFiliali();
+    filiali = FileManagerJSON::readFiliali();
     if(spe) possibiliFiliali->addItem(QString::fromStdString(spe->getStato()->getFiliale().getCitta()));
     for(auto it = filiali.begin(); it != filiali.end(); ++it)
         possibiliFiliali->addItem(QString::fromStdString((*it)->getCitta()));

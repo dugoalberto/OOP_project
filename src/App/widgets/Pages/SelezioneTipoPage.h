@@ -13,7 +13,7 @@
 #include "HierachyPages/HierachyPageInterface.h"
 #include "../CustomWidgets/QLabelTitle.h"
 #include "../../../Model/SupportClasses/Filiale.h"
-#include "../../../Librerie/FileManager.h"
+#include "../../../Librerie/FileManagerJSON.h"
 #include "../CustomWidgets/ListViewItemCustomWidget/ListViewFilialeItemWidget.h"
 #include "../CustomWidgets/ListViewItemCustomWidget/ListViewAssicurazioneItemWidget.h"
 #include "HierachyPages/SpedizioneAssicurataPage.h"

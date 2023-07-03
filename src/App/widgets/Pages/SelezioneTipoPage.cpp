@@ -59,7 +59,7 @@ SelezioneTipoPage::SelezioneTipoPage(QWidget *parent) : QWidget(parent){
     firstRowFiliali->addWidget(new QLabelTitle("Filiali"));
     firstRowFiliali->addWidget(btnAddFiliale);
 
-    lstFiliali = FileManager::readFiliali();
+    lstFiliali = FileManagerJSON::readFiliali();
     viewFiliali = new QListWidget();
     loadFiliali();
 
@@ -79,7 +79,7 @@ SelezioneTipoPage::SelezioneTipoPage(QWidget *parent) : QWidget(parent){
     firstRowAssicurazioni->addWidget(new QLabelTitle("Assicurazioni"));
     firstRowAssicurazioni->addWidget(btnAddAssicurazione);
 
-    lstAssicurazioni = FileManager::readAssicurazioni();
+    lstAssicurazioni = FileManagerJSON::readAssicurazioni();
     viewAssicurazioni = new QListWidget();
     loadAssicurazioni();
 
@@ -167,12 +167,12 @@ void SelezioneTipoPage::VisualizzaAssicurazioneSlot(Assicurazione* a) {
 }
 
 void SelezioneTipoPage::reloadFilialiSlot() {
-    FileManager::saveFiliali(lstFiliali);
+    FileManagerJSON::saveFiliali(lstFiliali);
     loadFiliali();
 }
 
 void SelezioneTipoPage::reloadAssicurazioneSlot() {
-    FileManager::saveAssicurazioni(lstAssicurazioni);
+    FileManagerJSON::saveAssicurazioni(lstAssicurazioni);
     loadAssicurazioni();
 }
 

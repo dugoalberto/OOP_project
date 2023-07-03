@@ -11,7 +11,8 @@
 #include "../SupportClasses/Package.h"
 #include "../SupportClasses/Stato.h"
 #include "../../App/widgets/Visitor/Visitor.h"
-
+#include "../../Librerie/json.hpp"
+using json = nlohmann::json;
 using namespace std;
 
 class Spedizione {
@@ -61,6 +62,7 @@ public:
 
     virtual std::string getTypeName() const = 0;
     virtual std::string toSaveFormat() const;
+    virtual json toSaveFormat(int) const;
     static std::vector<string> ScomposeAttribute(const std::string&);
     virtual void Accept(Visitor *visitor, bool toEdit) const = 0;
 

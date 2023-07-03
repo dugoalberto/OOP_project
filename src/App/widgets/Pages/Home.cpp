@@ -5,10 +5,7 @@
 #include <iostream>
 #include "Home.h"
 
-Home::Home(FileManager *file, ArrayList<Spedizione *>* lst, QWidget *parents) : QWidget(parents), fm(file), lstElements(lst){
-    /*fm = new FileManager("fileDiProva");
-    lstElements = fm->readSpedizioni();*/
-
+Home::Home(FileManagerJSON *file, ArrayList<Spedizione *>* lst, QWidget *parents) : QWidget(parents), fm(file), lstElements(lst){
     QHBoxLayout* MainLayout = new QHBoxLayout(this);
 
     //LAYOUT PARTE SINISTRA

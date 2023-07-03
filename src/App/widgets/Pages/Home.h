@@ -15,7 +15,7 @@
 #include "../CustomWidgets/QLabelTitle.h"
 #include "../../../Model/hierarchy/Spedizione.h"
 #include "../../../Collection/ArrayList.h"
-#include "../../../Librerie/FileManager.h"
+#include "../../../Librerie/FileManagerJSON.h"
 #include "../CustomWidgets/ListViewItemCustomWidget/ListViewSpedizioniItemWidget.h"
 
 class Home : public QWidget{
@@ -25,10 +25,10 @@ private:
     MyButton *statoSpedizioneButton;
     MyButton *filiere;
 
-    FileManager* fm;
+    FileManagerJSON* fm;
     ArrayList<Spedizione*>* lstElements;
 public:
-    explicit Home(FileManager *file, ArrayList<Spedizione *>* lst, QWidget *parent = nullptr);
+    explicit Home(FileManagerJSON *file, ArrayList<Spedizione *>* lst, QWidget *parent = nullptr);
 
     QLineEdit* txtSearchBar;
     MyButton* btnOrderButton;

@@ -10,7 +10,7 @@
 #include "Pages/Home.h"
 #include "Pages/HierachyPages/SpedizioneAssicurataPage.h"
 #include "Pages/SelezioneTipoPage.h"
-#include "../../Librerie/FileManager.h"
+#include "../../Librerie/FileManagerJSON.h"
 
 class StackTracer : public QStackedWidget{
 private:
@@ -18,11 +18,11 @@ private:
     SelezioneTipoPage* selezioneTipoPage;
 
     ArrayList<Spedizione*>* lstElements;
-    FileManager* fm;
+    FileManagerJSON* fm;
 
 public:
     explicit StackTracer(QWidget *parent = nullptr) : QStackedWidget(parent) {
-            fm = new FileManager("fileDiProva");
+            fm = new FileManagerJSON("JSON_SAVE");
             lstElements = new ArrayList<Spedizione*>(fm->readSpedizioni());
 
             homePage = new Home(fm, lstElements, this);
@@ -56,7 +56,6 @@ public slots:
         connect(nuovaPagina, &HierachyPageInterface::CreaSignal, this, &StackTracer::addNewSpedizioneSlot);
         connect(nuovaPagina, &HierachyPageInterface::ModificaSignal, this, &StackTracer::ModificaSpedizioneSlot);
         connect(nuovaPagina, &HierachyPageInterface::toHomeSignal, this, &StackTracer::switchToHomePage);
-        //TODO FARLO ANCHE PER L'ALTRO PULSANTE DENTRO LE SCHERMATE
         setCurrentWidget(nuovaPagina);
     }
     void addNewSpedizioneSlot(Spedizione* spedizione) {
@@ -69,14 +68,6 @@ public slots:
         homePage->loadListView();
         switchToHomePage();
     }
-
-    /*
-    void switchToSpedizioniTotali() {
-        setCurrentWidget(spedizioniTotali);
-    }
-    void switchToFiliali() {
-        setCurrentWidget(filiali);
-    }*/
 };
 
 

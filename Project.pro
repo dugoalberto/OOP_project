@@ -19,7 +19,7 @@ SOURCES += \
     src/App/widgets/Pages/Home.cpp \
     src/App/widgets/CustomWidgets/MyButton.cpp \
     src/App/widgets/StackTracer.cpp \
-    src/Librerie/FileManager.cpp \
+    src/Librerie/FileManagerJSON.cpp \
     src/App/widgets/CustomWidgets/QLabelTitle.cpp \
     src/App/widgets/Visitor/Visitor.cpp \
     src/App/widgets/Pages/HierachyPages/HierachyPageInterface.cpp \
@@ -58,7 +58,7 @@ HEADERS += \
     src/App/widgets/Pages/Home.h \
     src/App/widgets/CustomWidgets/MyButton.h \
     src/App/widgets/StackTracer.h \
-    src/Librerie/FileManager.h \
+    src/Librerie/FileManagerJSON.h \
     src/App/widgets/CustomWidgets/QLabelTitle.h \
     src/App/widgets/Visitor/Visitor.h \
     src/App/widgets/Pages/HierachyPages/HierachyPageInterface.h \

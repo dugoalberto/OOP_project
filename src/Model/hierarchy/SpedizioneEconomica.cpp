@@ -33,6 +33,14 @@ std::string SpedizioneEconomica::toSaveFormat() const {
     return TypeName + SEPARATOR + Spedizione::toSaveFormat();
 }
 
+json SpedizioneEconomica::toSaveFormat(int) const {
+    json jsonData = Spedizione::toSaveFormat(1);
+
+    jsonData["TypeName"] = TypeName;
+
+    return jsonData;
+}
+
 void SpedizioneEconomica::Accept(Visitor *visitor, bool toEdit) const {
     visitor->visit(this, toEdit);
 }

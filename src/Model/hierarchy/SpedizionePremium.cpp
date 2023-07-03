@@ -54,6 +54,29 @@ std::string SpedizionePremium::toSaveFormat() const {
     return res;
 }
 
+json SpedizionePremium::toSaveFormat(int) const {
+    json jsonData = Spedizione::toSaveFormat(1);
+
+    jsonData["TypeName"] = typeName;
+    jsonData["ordine_data"] = {
+            {"anno", ordine_tm.tm_year},
+            {"mese", ordine_tm.tm_mon},
+            {"giorno", ordine_tm.tm_mday},
+            {"ora", ordine_tm.tm_hour},
+            {"minuti", ordine_tm.tm_min}
+    };
+
+    jsonData["arrivo_data"] = {
+            {"anno", arrivo_tm.tm_year},
+            {"mese", arrivo_tm.tm_mon},
+            {"giorno", arrivo_tm.tm_mday},
+            {"ora", arrivo_tm.tm_hour},
+            {"minuti", arrivo_tm.tm_min}
+    };
+
+    return jsonData;
+}
+
 std::string SpedizionePremium::getTypeName() const {
     return typeName;
 }

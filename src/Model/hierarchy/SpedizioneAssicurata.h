@@ -28,6 +28,7 @@ public:
     void setServiziAssicurazione(vector<string> *serviziAssicurazione);
     void setAssicurazione(Assicurazione* assicurazione);
     std::string toSaveFormat() const override;
+    json toSaveFormat(int) const override;
     void Accept(Visitor *visitor, bool toEdit) const;
 
     ~SpedizioneAssicurata() = default;

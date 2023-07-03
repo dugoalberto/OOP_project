@@ -36,6 +36,21 @@ std::string SpedizioneAssicurata::toSaveFormat() const {
     return res;
 }
 
+json SpedizioneAssicurata::toSaveFormat(int) const {
+    json jsonData = Spedizione::toSaveFormat(1);
+
+    jsonData["TypeName"] = TypeName;
+    jsonData["assicurazione"] = assicurazione->getNomeAssicurazione();
+    jsonData["prezzo_assicurazione"] = assicurazione->getPrezzo();
+    jsonData["num_servizi_assicurazione"] = serviziAssicurazione->size();
+
+    for (unsigned int i = 0; i < serviziAssicurazione->size(); ++i) {
+        jsonData["servizi_assicurazione"][i] = serviziAssicurazione->at(i);
+    }
+
+    return jsonData;
+}
+
 void SpedizioneAssicurata::Accept(Visitor *visitor, bool toEdit) const{
     visitor->visit(this, toEdit);
 }

@@ -23,6 +23,14 @@ std::string SpedizioneInternazionale::toSaveFormat() const {
     return TypeName + SEPARATOR + Spedizione::toSaveFormat();
 }
 
+json SpedizioneInternazionale::toSaveFormat(int) const {
+    json jsonData = Spedizione::toSaveFormat(1);
+
+    jsonData["TypeName"] = TypeName;
+
+    return jsonData;
+}
+
 std::string SpedizioneInternazionale::getTypeName() const {
     return TypeName;
 }
