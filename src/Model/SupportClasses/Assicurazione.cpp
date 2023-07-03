@@ -25,8 +25,11 @@ void Assicurazione::setPrezzo(float prezzo) {
     Assicurazione::prezzo = prezzo;
 }
 
-std::string Assicurazione::toString() const {
-    return nomeAssicurazione + "|" + std::to_string(prezzo);
+json Assicurazione::toJsonFormat() const {
+    json jsonData;
+    jsonData["assicurazione"] = nomeAssicurazione;
+    jsonData["prezzo"] = prezzo;
+    return jsonData;
 }
 
 void Assicurazione::Accept(VisitorDialog * visitor, bool toEdit) const {

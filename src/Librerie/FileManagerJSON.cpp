@@ -34,6 +34,11 @@ void FileManagerJSON::saveData(ArrayList<Spedizione *> &vettore) const {
 }
 
 ArrayList<Spedizione*> FileManagerJSON::readSpedizioni() const {
+    std::ofstream testFile("src/SaveFiles/"+fileName, std::ios::app);
+    if(testFile.tellp() == 0)
+        testFile << "[]";
+    testFile.close();
+
     std::ifstream file("src/SaveFiles/"+fileName);
     json jsonData;
     file >> jsonData;
@@ -143,75 +148,71 @@ ArrayList<Spedizione*> FileManagerJSON::readSpedizioni() const {
 }
 
 std::vector<Assicurazione *> FileManagerJSON::readAssicurazioni() {
-    fstream *fA = new fstream;
-    fA->open("src/SaveFiles/Assicurazioni.txt",std::ios::app);
-    fA->close();
+    std::ofstream *fileAssicurazioniJSON = new ofstream;
+    fileAssicurazioniJSON->open("src/SaveFiles/Assicurazioni.json",std::ios::app);
+    if(fileAssicurazioniJSON->tellp() == 0){ //IL FILE è VUOTO
+        *fileAssicurazioniJSON << "[]";
+    }
+    fileAssicurazioniJSON->close();
 
+    std::ifstream file("src/SaveFiles/Assicurazioni.json");
+    json jsonData;
+    file >> jsonData;
     std::vector<Assicurazione*> res;
 
-    fstream* fileAssicurazioni = new fstream;
-    fileAssicurazioni->open("src/SaveFiles/Assicurazioni.txt", std::ios::in);
-    std::string linea;
-    std::getline(*fileAssicurazioni, linea);
-    while (linea != ""){
-        std::vector<std::string> attAssicurazione;
-        string current = "";
-        for(unsigned int i = 0; i < linea.size(); i++){
-            while(linea[i] != '|' && linea[i] != '\0'){
-                current += linea[i];
-                ++i;
-            }
-            attAssicurazione.push_back(current);
-            current = "";
-        }
-
-        res.push_back(new Assicurazione(attAssicurazione[0], stof(attAssicurazione[1])));
-        std::getline(*fileAssicurazioni, linea);
-    }
+    for(const auto& assicurazione : jsonData)
+        res.push_back(new Assicurazione(assicurazione["assicurazione"], assicurazione["prezzo"]));
 
     return res;
 }
 
 std::vector<Filiale*> FileManagerJSON::readFiliali() {
-    fstream *fL = new fstream;
-    fL->open("src/SaveFiles/Filiali.txt",std::ios::app);
-    fL->close();
+    std::ofstream *fileFilialiJSON = new ofstream;
+    fileFilialiJSON->open("src/SaveFiles/Filiali.json", std::ios::app);
+    if(fileFilialiJSON->tellp() == 0){ //IL FILE è VUOTO
+        *fileFilialiJSON << "[]";
+    }
+    fileFilialiJSON->close();
 
+    std::ifstream file("src/SaveFiles/Filiali.json");
+    json jsonData;
+    file >> jsonData;
     std::vector<Filiale*> res;
 
-    fstream* fileFiliali = new fstream;
-    fileFiliali->open("src/SaveFiles/Filiali.txt", std::ios::in);
-    std::string linea;
-    std::getline(*fileFiliali, linea);
-    while (linea != ""){
-        std::vector<std::string> attFiliale;
-        string current = "";
-        for(unsigned int i = 0; i < linea.size(); i++){
-            while(linea[i] != '|' && linea[i] != '\0'){
-                current += linea[i];
-                ++i;
-            }
-            attFiliale.push_back(current);
-            current = "";
-        }
-
-        res.push_back(new Filiale(attFiliale[0], attFiliale[1], attFiliale[2]));
-        std::getline(*fileFiliali, linea);
-    }
+    for(const auto& filiale : jsonData)
+        res.push_back(new Filiale(filiale["citta"], filiale["provincia"], filiale["numeroTel"]));
 
     return res;
 }
 
 void FileManagerJSON::saveAssicurazioni(std::vector<Assicurazione *> vettore) {
-    std::ofstream file("src/SaveFiles/Assicurazioni.txt", std::ios::out);
-    for(auto it = vettore.begin(); it != vettore.end(); it++)
-        file << (*it)->toString() + "\n";
+    std::ofstream file("src/SaveFiles/Assicurazioni.json", std::ios::out);
+    file << "[";
+    auto it = vettore.begin();
+    if (it != vettore.end()) {
+        file << (*it)->toJsonFormat().dump();
+        ++it;
+    }
+    for (; it != vettore.end(); ++it) {
+        file << ",\n";
+        file << (*it)->toJsonFormat().dump();
+    }
+    file << "]";
     file.close();
 }
 
 void FileManagerJSON::saveFiliali(std::vector<Filiale *> vettore) {
-    std::ofstream file("src/SaveFiles/Filiali.txt", std::ios::out);
-    for(auto it = vettore.begin(); it != vettore.end(); it++)
-        file << (*it)->toString() + "\n";
+    std::ofstream file("src/SaveFiles/Filiali.json", std::ios::out);
+    file << "[";
+    auto it = vettore.begin();
+    if (it != vettore.end()) {
+        file << (*it)->toJsonFormat().dump();
+        ++it;
+    }
+    for (; it != vettore.end(); ++it) {
+        file << ",\n";
+        file << (*it)->toJsonFormat().dump();
+    }
+    file << "]";
     file.close();
 }

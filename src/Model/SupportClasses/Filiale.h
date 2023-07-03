@@ -8,6 +8,9 @@
 #include <string>
 #include <ostream>
 #include "../../App/widgets/Visitor/VisitorDialog.h"
+#include "../../Librerie/json.hpp"
+
+using json = nlohmann::json;
 
 class Filiale {
 
@@ -37,7 +40,7 @@ public:
 
     friend std::ostream &operator<<(std::ostream &os, const Filiale &filiale);
 
-    std::string toString() const;
+    json toJsonFormat() const;
 
     void Accept(VisitorDialog*, bool = false) const;
 

@@ -37,8 +37,12 @@ std::ostream &operator<<(std::ostream &os, const Filiale &filiale) {
     return os;
 }
 
-std::string Filiale::toString() const {
-    return citta + "|" + provincia + "|" + numeroTel;
+json Filiale::toJsonFormat() const {
+    json jsonData;
+    jsonData["citta"] = citta;
+    jsonData["provincia"] = provincia;
+    jsonData["numeroTel"] = numeroTel;
+    return jsonData;
 }
 
 void Filiale::Accept(VisitorDialog* visitor, bool toEdit) const {

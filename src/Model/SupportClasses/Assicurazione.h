@@ -7,6 +7,9 @@
 #include <iostream>
 #include <vector>
 #include "../../App/widgets/Visitor/VisitorDialog.h"
+#include "../../Librerie/json.hpp"
+
+using json = nlohmann::json;
 
 class Assicurazione {
 private:
@@ -14,7 +17,7 @@ private:
     float prezzo;
 public:
     Assicurazione(const std::string &nomeAssicurazione, float prezzo);
-    std::string toString() const;
+    json toJsonFormat() const;
     const std::string &getNomeAssicurazione() const;
     void setNomeAssicurazione(const std::string &nomeAssicurazione);
     float getPrezzo() const;
