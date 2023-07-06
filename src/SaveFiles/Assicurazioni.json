@@ -1,1 +1,3 @@
-[{"assicurazione":"Sueper Agenzia","prezzo":5.0}][][][][][]
+[{"assicurazione":"Sueper Agenzia","prezzo":5.0},
+  {"assicurazione":"Ass. Costosa SRL","prezzo":10.0},
+  {"assicurazione":"Agenzia 2","prezzo":7.5}]

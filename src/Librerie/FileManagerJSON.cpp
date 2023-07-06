@@ -34,10 +34,12 @@ void FileManagerJSON::saveData(ArrayList<Spedizione *> &vettore) const {
 }
 
 ArrayList<Spedizione*> FileManagerJSON::readSpedizioni() const {
-    std::ofstream testFile("src/SaveFiles/"+fileName, std::ios::app);
-    if(testFile.tellp() == 0)
-        testFile << "[]";
-    testFile.close();
+    std::fstream *testFile = new fstream;
+    testFile->open("src/SaveFiles/"+fileName, std::ios::app);
+    testFile->seekp(0, std::ios::end);
+    if(testFile->tellp() == 0)
+        *testFile << "[]";
+    testFile->close();
 
     std::ifstream file("src/SaveFiles/"+fileName);
     json jsonData;
@@ -148,8 +150,9 @@ ArrayList<Spedizione*> FileManagerJSON::readSpedizioni() const {
 }
 
 std::vector<Assicurazione *> FileManagerJSON::readAssicurazioni() {
-    std::ofstream *fileAssicurazioniJSON = new ofstream;
+    std::fstream *fileAssicurazioniJSON = new fstream;
     fileAssicurazioniJSON->open("src/SaveFiles/Assicurazioni.json",std::ios::app);
+    fileAssicurazioniJSON->seekp(0, std::ios::end);
     if(fileAssicurazioniJSON->tellp() == 0){ //IL FILE è VUOTO
         *fileAssicurazioniJSON << "[]";
     }
@@ -167,8 +170,9 @@ std::vector<Assicurazione *> FileManagerJSON::readAssicurazioni() {
 }
 
 std::vector<Filiale*> FileManagerJSON::readFiliali() {
-    std::ofstream *fileFilialiJSON = new ofstream;
+    std::fstream *fileFilialiJSON = new fstream;
     fileFilialiJSON->open("src/SaveFiles/Filiali.json", std::ios::app);
+    fileFilialiJSON->seekp(0, std::ios::end);
     if(fileFilialiJSON->tellp() == 0){ //IL FILE è VUOTO
         *fileFilialiJSON << "[]";
     }
